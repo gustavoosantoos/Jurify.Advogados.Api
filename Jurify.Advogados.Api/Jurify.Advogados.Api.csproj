@@ -12,13 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Application\Abstractions\" />
+    <Folder Include="Application\Services\" />
     <Folder Include="Domain\Entities\" />
     <Folder Include="Domain\Enums\" />
     <Folder Include="Domain\Base\" />
     <Folder Include="Domain\Repositories\" />
     <Folder Include="Domain\Services\" />
     <Folder Include="Domain\ValueObjects\" />
-    <Folder Include="Application\" />
     <Folder Include="Infrastructure\MessageQueue\" />
     <Folder Include="Infrastructure\Logging\" />
     <Folder Include="Infrastructure\Repositories\" />
