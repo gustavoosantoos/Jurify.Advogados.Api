@@ -16,12 +16,13 @@ namespace Jurify.Advogados.Api.Domain.Base
 
         public bool Equals(Entity other)
         {
-            return this.Id == other.Id;
+            return this.GetType() == other.GetType() &&
+                this.Id == other.Id;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(GetType().GetHashCode(), Id);
+            return HashCode.Combine(GetType(), Id);
         }
     }
 }
