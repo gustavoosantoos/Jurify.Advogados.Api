@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0E4770EE-D
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jurify.Advogados.Tests", "Jurify.Advogados.Tests\Jurify.Advogados.Tests.csproj", "{5B569A65-EB93-451F-B18F-6C9AFDD39040}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{8A932145-37E9-4734-A358-398896348621}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A932145-37E9-4734-A358-398896348621}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A932145-37E9-4734-A358-398896348621}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B569A65-EB93-451F-B18F-6C9AFDD39040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B569A65-EB93-451F-B18F-6C9AFDD39040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B569A65-EB93-451F-B18F-6C9AFDD39040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B569A65-EB93-451F-B18F-6C9AFDD39040}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
