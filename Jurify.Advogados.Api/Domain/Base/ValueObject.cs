@@ -27,10 +27,12 @@ namespace Jurify.Advogados.Api.Domain.Base
             unchecked
             {
                 int hash = 19;
+
                 foreach (var item in this.GetEqualityComponents())
                 {
-                    hash = hash * 31 + item.GetHashCode();
+                    hash = HashCode.Combine(hash, item) * 31;
                 }
+
                 return hash;
             }
         }
