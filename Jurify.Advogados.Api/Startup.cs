@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using static IdentityModel.OidcConstants;
 
 namespace Jurify.Advogados.Api
@@ -23,7 +24,7 @@ namespace Jurify.Advogados.Api
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = Configuration["Authentication:Authority"];
-                    options.RequireHttpsMetadata = false;
+                    options.RequireHttpsMetadata = Convert.ToBoolean(Configuration["Authentication:RequireHttps"]);
                     options.ApiName = Configuration["Authentication:ResourceName"];
                 });
 
