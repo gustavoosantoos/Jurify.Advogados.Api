@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSwag;
 using NSwag.SwaggerGeneration.Processors.Security;
+using System;
 using System.Linq;
 using static IdentityModel.OidcConstants;
 
