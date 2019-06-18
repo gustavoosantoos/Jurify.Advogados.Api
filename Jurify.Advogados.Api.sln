@@ -13,6 +13,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jurify.Advogados.Tests", "Jurify.Advogados.Tests\Jurify.Advogados.Tests.csproj", "{5B569A65-EB93-451F-B18F-6C9AFDD39040}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{FCC1589A-A67A-41FB-8C88-EB25BC6384DE}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\Database\jurify-advogados-ddl.sql = Docs\Database\jurify-advogados-ddl.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
