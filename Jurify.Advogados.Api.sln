@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0E4770EE-D
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jurify.Advogados.Tests", "Jurify.Advogados.Tests\Jurify.Advogados.Tests.csproj", "{5B569A65-EB93-451F-B18F-6C9AFDD39040}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jurify.Advogados.Tests", "Jurify.Advogados.Tests\Jurify.Advogados.Tests.csproj", "{5B569A65-EB93-451F-B18F-6C9AFDD39040}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{FCC1589A-A67A-41FB-8C88-EB25BC6384DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FCC1589A-A67A-41FB-8C88-EB25BC6384DE} = {0E4770EE-DF1C-44B3-AA22-87D48246E38A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {89406E1E-5745-4A05-8D96-2A4E9D903677}

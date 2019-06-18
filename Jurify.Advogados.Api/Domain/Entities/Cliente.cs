@@ -2,13 +2,14 @@
 using Jurify.Advogados.Api.Domain.Enums;
 using Jurify.Advogados.Api.Domain.ValueObjects;
 using System;
+using System.Collections.Generic;
 
 namespace Jurify.Advogados.Api.Domain.Entities
 {
     public class Cliente : Entity
     {
         public InformacoesPessoaisCliente InformacoesPessoais { get; private set; }
-        public EnderecosCliente Enderecos { get; private set; }
+        public List<EnderecoCliente> Enderecos { get; private set; }
 
         public void AtualizarNome(string nome, string sobrenome)
         {
@@ -22,12 +23,12 @@ namespace Jurify.Advogados.Api.Domain.Entities
 
         public void AdicionarEndereco(string endereco, TipoEndereco tipo)
         {
-            Enderecos = new EnderecosCliente(Enderecos.Enderecos.Add((endereco, tipo)));
+            Enderecos.Add(new EnderecoCliente(endereco, string.Empty, tipo));
         }
 
         public void RemoverEndereco(string endereco, TipoEndereco tipo)
         {
-            Enderecos = new EnderecosCliente(Enderecos.Enderecos.Remove((endereco, tipo)));
+            Enderecos.Remove(new EnderecoCliente(endereco, string.Empty, tipo));
         }
     }
 }
