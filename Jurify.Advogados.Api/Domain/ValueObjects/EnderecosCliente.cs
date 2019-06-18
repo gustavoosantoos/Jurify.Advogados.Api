@@ -1,28 +1,22 @@
-﻿using Jurify.Advogados.Api.Domain.Enums;
+﻿using Jurify.Advogados.Api.Domain.Base;
+using Jurify.Advogados.Api.Domain.Enums;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace Jurify.Advogados.Api.Domain.ValueObjects
 {
-    public class EnderecosCliente
+    public class EnderecosCliente : ValueObject
     {
-        protected HashSet<(string, TipoEndereco)> Enderecos { get; private set; }
+        public ImmutableHashSet<(string, TipoEndereco)> Enderecos { get; private set; }
 
-        public EnderecosCliente()
+        public EnderecosCliente(ImmutableHashSet<(string, TipoEndereco)> enderecos)
         {
-            Enderecos = new HashSet<(string, TipoEndereco)>();
+            Enderecos = enderecos;
         }
 
-        public void AdicionarEndereco(string endereco, TipoEndereco tipo)
+        protected override IEnumerable<object> GetEqualityComponents()
         {
-            Enderecos.Add((endereco, tipo));
+            yield return Enderecos;
         }
-
-        public void RemoverEndereco(string endereco, TipoEndereco tipo)
-        {
-            Enderecos.Remove((endereco, tipo));
-        }
-
-        public ImmutableHashSet<(string, TipoEndereco)> Lista() => Enderecos.ToImmutableHashSet();
     }
 }
