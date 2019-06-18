@@ -5,6 +5,7 @@ namespace Jurify.Advogados.Api.Domain.Entities
 {
     public class Cliente : Entity
     {
-        public InformacoesPessoaisCliente InformacoesPessoais { get; set; }
+        public InformacoesPessoaisCliente InformacoesPessoais { get; private set; }
+        public EnderecosCliente Enderecos { get; private set; }
     }
 }
