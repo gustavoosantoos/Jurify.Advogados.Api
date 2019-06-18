@@ -4,7 +4,18 @@ namespace Jurify.Advogados.Api.Domain.Base
 {
     public abstract class Entity : IEquatable<Entity>
     {
-        protected int Id { get; set; }
+        protected Guid IdEscritorio { get; set; }
+        protected Guid Id { get; set; }
+
+        protected Entity()
+        {
+        }
+
+        protected Entity(Guid idEscritorio, Guid id)
+        {
+            IdEscritorio = idEscritorio;
+            Id = id;
+        }
 
         public override bool Equals(object obj)
         {
@@ -16,13 +27,15 @@ namespace Jurify.Advogados.Api.Domain.Base
 
         public bool Equals(Entity other)
         {
-            return this.GetType() == other.GetType() &&
-                this.Id == other.Id;
+            return
+                GetType() == other.GetType() &&
+                IdEscritorio == other.IdEscritorio &&
+                Id == other.Id;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(GetType(), Id);
+            return HashCode.Combine(GetType(), IdEscritorio, Id);
         }
     }
 }
