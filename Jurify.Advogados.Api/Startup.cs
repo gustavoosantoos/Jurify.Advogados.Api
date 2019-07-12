@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Jurify.Advogados.Api.Infrastructure.Authentication;
+using Jurify.Advogados.Api.Infrastructure.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -45,7 +47,13 @@ namespace Jurify.Advogados.Api
                      }
                 );
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddApplicationServices();
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ProvedorUsuarioAtualFilter));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

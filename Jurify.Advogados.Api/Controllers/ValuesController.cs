@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Jurify.Advogados.Api.Infrastructure.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -9,11 +10,18 @@ namespace Jurify.Advogados.Api.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly ProvedorUsuarioAtual _provedor;
+
+        public ValuesController(ProvedorUsuarioAtual provedor)
+        {
+            _provedor = provedor;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_provedor.Usuario);
         }
 
         // GET api/values/5
