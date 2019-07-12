@@ -4,8 +4,13 @@ namespace Jurify.Advogados.Api.Domain.Base
 {
     public abstract class Entity : IEquatable<Entity>
     {
-        protected Guid IdEscritorio { get; set; }
-        protected Guid Id { get; set; }
+        public Guid IdEscritorio { get; protected set; }
+        public Guid Id { get; protected set; }
+
+        public DateTime Criacao { get; protected set; }
+        public DateTime? UltimaAlteracao { get; protected set; }
+        public Guid? CodigoUsuarioUltimaAlteracao { get; protected set; }
+        public bool Apagado { get; protected set; }
 
         protected Entity()
         {
@@ -15,6 +20,7 @@ namespace Jurify.Advogados.Api.Domain.Base
         {
             IdEscritorio = idEscritorio;
             Id = id;
+            Criacao = DateTime.UtcNow;
         }
 
         public override bool Equals(object obj)
