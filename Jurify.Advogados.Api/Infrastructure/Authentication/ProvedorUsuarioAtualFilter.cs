@@ -29,7 +29,6 @@ namespace Jurify.Advogados.Api.Infrastructure.Authentication
             );
 
             _provedor.AtualizarUsuario(usuario);
-            _provedor.AtualizarUsuario(usuario);
         }
 
         public void OnActionExecuted(ActionExecutedContext context)
