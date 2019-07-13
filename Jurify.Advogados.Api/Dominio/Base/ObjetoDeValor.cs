@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Jurify.Advogados.Api.Domain.Base
 {
-    public abstract class ValueObject : IEquatable<ValueObject>
+    public abstract class ObjetoDeValor : IEquatable<ObjetoDeValor>
     {
         protected abstract IEnumerable<object> GetEqualityComponents();
 
-        public bool Equals(ValueObject other)
+        public bool Equals(ObjetoDeValor other)
         {
             return this.GetType() == other.GetType() &&
                 this.GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
@@ -17,9 +17,9 @@ namespace Jurify.Advogados.Api.Domain.Base
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
-            if (!(obj is ValueObject)) return false;
+            if (!(obj is ObjetoDeValor)) return false;
 
-            return this.Equals(obj as ValueObject);
+            return this.Equals(obj as ObjetoDeValor);
         }
 
         public override int GetHashCode()

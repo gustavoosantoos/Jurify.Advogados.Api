@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jurify.Advogados.Api.Infrastructure.Authentication
+namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
 {
     public class ProvedorUsuarioAtual
     {

@@ -1,4 +1,4 @@
-﻿using Jurify.Advogados.Api.Infrastructure.Authentication;
+﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

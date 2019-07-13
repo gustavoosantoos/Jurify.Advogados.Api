@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace Jurify.Advogados.Api.Domain.ValueObjects
+namespace Jurify.Advogados.Api.Domain.ObjetosDeValor
 {
-    public class InformacoesPessoaisCliente : ValueObject
+    public class InformacoesPessoaisCliente : ObjetoDeValor
     {
         public string Nome { get; private set; }
         public string Sobrenome { get; private set; }

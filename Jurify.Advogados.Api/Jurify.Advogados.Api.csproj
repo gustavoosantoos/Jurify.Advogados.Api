@@ -7,20 +7,22 @@
 
   <ItemGroup>
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
-    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="NSwag.AspNetCore" Version="12.3.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Abstractions\" />
-    <Folder Include="Application\Services\" />
-    <Folder Include="Domain\Repositories\" />
-    <Folder Include="Domain\Services\" />
-    <Folder Include="Infrastructure\MessageQueue\" />
-    <Folder Include="Infrastructure\Logging\" />
-    <Folder Include="Infrastructure\Repositories\" />
+    <Folder Include="Aplicacao\CasosJuridicos\" />
+    <Folder Include="Aplicacao\Clientes\ListarClientes\" />
+    <Folder Include="Aplicacao\Clientes\AtualizarCliente\" />
+    <Folder Include="Aplicacao\Clientes\RemoverCliente\" />
+    <Folder Include="Infraestrutura\Mensageria\" />
+    <Folder Include="Infraestrutura\Logging\" />
+    <Folder Include="Infraestrutura\Persistencia\" />
+    <Folder Include="Infraestrutura\CasosDeUso\Pipeline\" />
   </ItemGroup>
 
 </Project>

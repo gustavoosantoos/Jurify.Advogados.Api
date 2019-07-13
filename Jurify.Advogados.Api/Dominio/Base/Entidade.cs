@@ -2,46 +2,46 @@
 
 namespace Jurify.Advogados.Api.Domain.Base
 {
-    public abstract class Entity : IEquatable<Entity>
+    public abstract class Entidade : IEquatable<Entidade>
     {
-        public Guid IdEscritorio { get; protected set; }
-        public Guid Id { get; protected set; }
+        public Guid CodigoEscritorio { get; protected set; }
+        public Guid Codigo { get; protected set; }
 
         public DateTime Criacao { get; protected set; }
         public DateTime? UltimaAlteracao { get; protected set; }
         public Guid? CodigoUsuarioUltimaAlteracao { get; protected set; }
         public bool Apagado { get; protected set; }
 
-        protected Entity()
+        protected Entidade()
         {
         }
 
-        protected Entity(Guid idEscritorio, Guid id)
+        protected Entidade(Guid codigoEscritorio, Guid codigo)
         {
-            IdEscritorio = idEscritorio;
-            Id = id;
+            CodigoEscritorio = codigoEscritorio;
+            Codigo = codigo;
             Criacao = DateTime.UtcNow;
         }
 
         public override bool Equals(object obj)
         {
             if (obj is null) return false;
-            if (!(obj is Entity)) return false;
+            if (!(obj is Entidade)) return false;
 
-            return Equals(obj as Entity);
+            return Equals(obj as Entidade);
         }
 
-        public bool Equals(Entity other)
+        public bool Equals(Entidade other)
         {
             return
                 GetType() == other.GetType() &&
-                IdEscritorio == other.IdEscritorio &&
-                Id == other.Id;
+                CodigoEscritorio == other.CodigoEscritorio &&
+                Codigo == other.Codigo;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(GetType(), IdEscritorio, Id);
+            return HashCode.Combine(GetType(), CodigoEscritorio, Codigo);
         }
     }
 }

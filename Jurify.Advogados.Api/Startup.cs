@@ -1,5 +1,5 @@
-﻿using Jurify.Advogados.Api.Infrastructure.Authentication;
-using Jurify.Advogados.Api.Infrastructure.DependencyInjection;
+﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
+using Jurify.Advogados.Api.Infraestrutura.InjecaoDependencias;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -48,7 +48,7 @@ namespace Jurify.Advogados.Api
                 );
             });
 
-            services.AddApplicationServices();
+            services.AdicionarServicosDaAplicacao();
 
             services.AddMvc(options =>
             {

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Jurify.Advogados.Api.Infrastructure.Authentication
+namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
 {
     public class ProvedorUsuarioAtualFilter : IActionFilter
     {
@@ -17,7 +15,7 @@ namespace Jurify.Advogados.Api.Infrastructure.Authentication
         public void OnActionExecuting(ActionExecutingContext context)
         {
             var claims = context.HttpContext.User;
-           
+
             var usuario = new UsuarioAtual(
                 Guid.Parse(claims.FindFirst("user_id").Value),
                 claims.FindFirst("user_first_name").Value,

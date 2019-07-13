@@ -2,9 +2,9 @@
 using Jurify.Advogados.Api.Domain.Enums;
 using System.Collections.Generic;
 
-namespace Jurify.Advogados.Api.Domain.ValueObjects
+namespace Jurify.Advogados.Api.Domain.ObjetosDeValor
 {
-    public class EnderecoCliente : ValueObject
+    public class EnderecoCliente : ObjetoDeValor
     {
         public string Endereco { get; private set; }
         public string Observacoes { get; private set; }
