@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Flunt.Notifications;
+using System;
 
 namespace Jurify.Advogados.Api.Domain.Base
 {
-    public abstract class Entidade : IEquatable<Entidade>
+    public abstract class Entidade : Notifiable, IEquatable<Entidade>
     {
         public Guid CodigoEscritorio { get; protected set; }
         public Guid Codigo { get; protected set; }
