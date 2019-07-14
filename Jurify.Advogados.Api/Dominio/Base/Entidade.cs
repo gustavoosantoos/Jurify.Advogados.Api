@@ -8,8 +8,8 @@ namespace Jurify.Advogados.Api.Domain.Base
         public Guid CodigoEscritorio { get; protected set; }
         public Guid Codigo { get; protected set; }
 
-        public DateTime Criacao { get; protected set; }
-        public DateTime? UltimaAlteracao { get; protected set; }
+        public DateTime DataCriacao { get; protected set; }
+        public DateTime? DataUltimaAlteracao { get; protected set; }
         public Guid? CodigoUsuarioUltimaAlteracao { get; protected set; }
         public bool Apagado { get; protected set; }
 
@@ -21,7 +21,7 @@ namespace Jurify.Advogados.Api.Domain.Base
         {
             CodigoEscritorio = codigoEscritorio;
             Codigo = codigo;
-            Criacao = DateTime.UtcNow;
+            DataCriacao = DateTime.UtcNow;
         }
 
         public override bool Equals(object obj)
