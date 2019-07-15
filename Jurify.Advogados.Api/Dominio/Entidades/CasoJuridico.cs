@@ -1,13 +1,24 @@
 ﻿using Jurify.Advogados.Api.Domain.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Jurify.Advogados.Api.Domain.Entidades
 {
     public class CasoJuridico : Entidade
     {
+        private readonly ICollection<EventoCasoJuridico> _eventos;
+
         public Guid IdAdvogadoResponsavel { get; private set; }
+        public Guid IdCliente { get; private set; }
+
         public Cliente Cliente { get; private set; }
-        public IReadOnlyCollection<EventoCasoJuridico> Eventos { get; private set; }
+        public IReadOnlyCollection<EventoCasoJuridico> Eventos => _eventos.ToArray();
+
+        public CasoJuridico(Guid idAdvogadoResponsavel, Guid idCliente)
+        {
+            IdAdvogadoResponsavel = idAdvogadoResponsavel;
+            IdCliente = idCliente;
+        }
     }
 }
