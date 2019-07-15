@@ -12,7 +12,7 @@ namespace Jurify.Advogados.Api.Domain.ObjetosDeValor
             Value = value;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object> ObterComponentesIgualdade()
         {
             yield return Value;
         }

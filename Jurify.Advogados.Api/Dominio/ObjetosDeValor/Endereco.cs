@@ -36,7 +36,7 @@ namespace Jurify.Advogados.Api.Domain.ObjetosDeValor
         public TipoEndereco Tipo { get; private set; }
 
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object> ObterComponentesIgualdade()
         {
             yield return Rua;
             yield return Numero;

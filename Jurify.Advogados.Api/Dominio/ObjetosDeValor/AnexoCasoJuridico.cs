@@ -14,7 +14,7 @@ namespace Jurify.Advogados.Api.Domain.ObjetosDeValor
             FileUrl = fileUrl;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object> ObterComponentesIgualdade()
         {
             yield return FileName;
             yield return FileUrl;
