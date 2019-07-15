@@ -1,23 +1,29 @@
 ﻿using System.Collections.Generic;
+using Flunt.Validations;
 using Jurify.Advogados.Api.Domain.Base;
 
 namespace Jurify.Advogados.Api.Domain.ObjetosDeValor
 {
     public class AnexoCasoJuridico : ObjetoDeValor
     {
-        public string FileName { get; private set; }
-        public string FileUrl { get; private set; }
+        public string NomeArquivo { get; private set; }
+        public string Url { get; private set; }
 
-        public AnexoCasoJuridico(string fileName, string fileUrl)
+        public AnexoCasoJuridico(string nomeArquivo, string url)
         {
-            FileName = fileName;
-            FileUrl = fileUrl;
+            NomeArquivo = nomeArquivo;
+            Url = url;
+
+            AddNotifications(new Contract()
+                .IsNotNullOrEmpty(NomeArquivo, "AnexoCasoJuridico.NomeArquivo", "Nome do arquivo não deve ser vazio")
+                .IsUrl(Url, "AnexoCasoJuridico.NomeArquivo", "Url do arquivo inválida")
+            );
         }
 
         protected override IEnumerable<object> ObterComponentesIgualdade()
         {
-            yield return FileName;
-            yield return FileUrl;
+            yield return NomeArquivo;
+            yield return Url;
         }
     }
 }

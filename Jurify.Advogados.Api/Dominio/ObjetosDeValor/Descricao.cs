@@ -1,20 +1,25 @@
 ﻿using System.Collections.Generic;
+using Flunt.Validations;
 using Jurify.Advogados.Api.Domain.Base;
 
 namespace Jurify.Advogados.Api.Domain.ObjetosDeValor
 {
     public class Descricao : ObjetoDeValor
     {
-        public string Value { get; private set; }
+        public string Valor { get; private set; }
 
-        public Descricao(string value)
+        public Descricao(string valor)
         {
-            Value = value;
+            Valor = valor;
+
+            AddNotifications(new Contract()
+                .IsNotNullOrWhiteSpace(Valor, "Descricao", "A descrição não deve ser vazia")
+            );
         }
 
         protected override IEnumerable<object> ObterComponentesIgualdade()
         {
-            yield return Value;
+            yield return Valor;
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Flunt.Notifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Jurify.Advogados.Api.Domain.Base
 {
-    public abstract class ObjetoDeValor : IEquatable<ObjetoDeValor>
+    public abstract class ObjetoDeValor : Notifiable, IEquatable<ObjetoDeValor>
     {
         protected abstract IEnumerable<object> ObterComponentesIgualdade();
 
