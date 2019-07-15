@@ -9,19 +9,21 @@ namespace Jurify.Advogados.Api.Domain.Base
         public Guid Codigo { get; protected set; }
 
         public DateTime DataCriacao { get; protected set; }
-        public DateTime? DataUltimaAlteracao { get; protected set; }
-        public Guid? CodigoUsuarioUltimaAlteracao { get; protected set; }
+        public DateTime DataUltimaAlteracao { get; protected set; }
+        public Guid CodigoUsuarioUltimaAlteracao { get; protected set; }
         public bool Apagado { get; protected set; }
 
         protected Entidade()
         {
         }
 
-        protected Entidade(Guid codigoEscritorio, Guid codigo)
+        protected Entidade(Guid codigoEscritorio, Guid codigoUsuario, Guid codigo)
         {
             CodigoEscritorio = codigoEscritorio;
             Codigo = codigo;
             DataCriacao = DateTime.UtcNow;
+            DataUltimaAlteracao = DataCriacao;
+            CodigoUsuarioUltimaAlteracao = codigoUsuario;
         }
 
         public override bool Equals(object obj)
