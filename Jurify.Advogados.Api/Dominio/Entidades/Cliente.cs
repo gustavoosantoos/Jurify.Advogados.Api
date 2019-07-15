@@ -9,15 +9,15 @@ namespace Jurify.Advogados.Api.Domain.Entidades
 {
     public class Cliente : Entidade
     {
-        private readonly ICollection<EnderecoCliente> _enderecos;
+        private readonly ICollection<Endereco> _enderecos;
 
         public InformacoesPessoaisCliente InformacoesPessoais { get; private set; }
-        public IReadOnlyCollection<EnderecoCliente> Enderecos => _enderecos.ToArray();
+        public IReadOnlyCollection<Endereco> Enderecos => _enderecos.ToArray();
 
         public Cliente(InformacoesPessoaisCliente informacoesPessoais)
         {
             InformacoesPessoais = informacoesPessoais;
-            _enderecos = new List<EnderecoCliente>();
+            _enderecos = new List<Endereco>();
         }
 
         public void AtualizarNome(string nome, string sobrenome)
@@ -30,14 +30,14 @@ namespace Jurify.Advogados.Api.Domain.Entidades
             InformacoesPessoais = new InformacoesPessoaisCliente(InformacoesPessoais.Nome, InformacoesPessoais.Sobrenome, dataNascimento);
         }
 
-        public void AdicionarEndereco(string endereco, TipoEndereco tipo)
+        public void AdicionarEndereco(Endereco endereco)
         {
-            _enderecos.Add(new EnderecoCliente(endereco, string.Empty, tipo));
+            _enderecos.Add(endereco);
         }
 
-        public void RemoverEndereco(string endereco, TipoEndereco tipo)
+        public void RemoverEndereco(Endereco endereco)
         {
-            _enderecos.Remove(new EnderecoCliente(endereco, string.Empty, tipo));
+            _enderecos.Remove(endereco);
         }
     }
 }

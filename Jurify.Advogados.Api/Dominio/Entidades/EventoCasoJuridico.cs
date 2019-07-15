@@ -10,11 +10,12 @@ namespace Jurify.Advogados.Api.Domain.Entidades
         private readonly ICollection<AnexoCasoJuridico> _anexos;
 
         public CasoJuridico CasoJuridico { get; private set; }
-        public DescricaoCasoJuridico Descricao { get; private set; }
+        public Descricao Descricao { get; private set; }
         public IReadOnlyCollection<AnexoCasoJuridico> Anexos => _anexos.ToArray();
 
-        public EventoCasoJuridico(DescricaoCasoJuridico descricao)
+        public EventoCasoJuridico(Descricao descricao)
         {
+            Descricao = descricao;
             _anexos = new List<AnexoCasoJuridico>();
         }
     }
