@@ -15,12 +15,13 @@ namespace Jurify.Advogados.Api.Dominio.Base
 
         protected Entidade()
         {
+            Codigo = Guid.NewGuid();
         }
 
-        protected Entidade(Guid codigoEscritorio, Guid codigoUsuario, Guid codigo)
+        protected Entidade(Guid codigoEscritorio, Guid codigoUsuario)
         {
+            Codigo = Guid.NewGuid();
             CodigoEscritorio = codigoEscritorio;
-            Codigo = codigo;
             DataCriacao = DateTime.UtcNow;
             DataUltimaAlteracao = DataCriacao;
             CodigoUsuarioUltimaAlteracao = codigoUsuario;

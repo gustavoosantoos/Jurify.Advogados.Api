@@ -34,18 +34,5 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public string Cep { get; private set; }
         public string Observacoes { get; private set; }
         public TipoEndereco Tipo { get; private set; }
-
-
-        protected override IEnumerable<object> ObterComponentesIgualdade()
-        {
-            yield return Rua;
-            yield return Numero;
-            yield return Cidade;
-            yield return Estado;
-            yield return Pais;
-            yield return Cep;
-            yield return Tipo;
-            yield return Observacoes;
-        }
     }
 }
