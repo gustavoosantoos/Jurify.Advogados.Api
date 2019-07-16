@@ -23,7 +23,6 @@
     <Folder Include="Aplicacao\Clientes\RemoverCliente\" />
     <Folder Include="Infraestrutura\Mensageria\" />
     <Folder Include="Infraestrutura\Logging\" />
-    <Folder Include="Infraestrutura\Persistencia\" />
     <Folder Include="Infraestrutura\CasosDeUso\Pipeline\" />
   </ItemGroup>
 
