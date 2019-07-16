@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Jurify.Advogados.Api.Infraestrutura.InjecaoDependencias
 {
@@ -7,7 +6,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.InjecaoDependencias
     {
         public static void AdicionarServicosDaAplicacao(this IServiceCollection services)
         {
-            services.AddMediatR(typeof(Startup).Assembly);
+
         }
     }
 }
