@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Jurify.Advogados.Api.Domain.Base;
+using Jurify.Advogados.Api.Dominio.Base;
 
 namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
 {

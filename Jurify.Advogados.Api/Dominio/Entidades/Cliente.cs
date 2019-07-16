@@ -1,6 +1,7 @@
-﻿using Jurify.Advogados.Api.Domain.Base;
-using Jurify.Advogados.Api.Domain.Enums;
+﻿using Jurify.Advogados.Api.Domain.Enums;
 using Jurify.Advogados.Api.Domain.ObjetosDeValor;
+using Jurify.Advogados.Api.Dominio.Base;
+using Jurify.Advogados.Api.Dominio.Entidades;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;

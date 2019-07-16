@@ -1,4 +1,4 @@
-﻿using Jurify.Advogados.Api.Domain.Base;
+﻿using Jurify.Advogados.Api.Dominio.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +19,8 @@ namespace Jurify.Advogados.Api.Domain.Entidades
         {
             IdAdvogadoResponsavel = idAdvogadoResponsavel;
             IdCliente = idCliente;
+
+            _eventos = new List<EventoCasoJuridico>();
         }
     }
 }

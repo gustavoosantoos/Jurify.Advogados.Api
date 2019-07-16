@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.60.6" />
     <PackageReference Include="Flunt" Version="1.0.3" />
     <PackageReference Include="Flunt.Br" Version="1.1.3" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
@@ -13,6 +14,8 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Npgsql" Version="4.0.7" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
     <PackageReference Include="NSwag.AspNetCore" Version="12.3.1" />
   </ItemGroup>
 
@@ -24,6 +27,7 @@
     <Folder Include="Infraestrutura\Mensageria\" />
     <Folder Include="Infraestrutura\Logging\" />
     <Folder Include="Infraestrutura\CasosDeUso\Pipeline\" />
+    <Folder Include="Infraestrutura\Persistencia\Mapeamento\" />
   </ItemGroup>
 
 </Project>

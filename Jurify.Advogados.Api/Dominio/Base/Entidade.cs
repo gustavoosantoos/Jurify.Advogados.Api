@@ -1,7 +1,7 @@
 ﻿using Flunt.Notifications;
 using System;
 
-namespace Jurify.Advogados.Api.Domain.Base
+namespace Jurify.Advogados.Api.Dominio.Base
 {
     public abstract class Entidade : Notifiable, IEquatable<Entidade>
     {

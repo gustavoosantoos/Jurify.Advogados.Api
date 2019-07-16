@@ -1,10 +1,10 @@
-﻿using Jurify.Advogados.Api.Domain.Base;
-using Jurify.Advogados.Api.Domain.Enums;
+﻿using Jurify.Advogados.Api.Domain.Enums;
+using Jurify.Advogados.Api.Dominio.Base;
 using System.Collections.Generic;
 
-namespace Jurify.Advogados.Api.Domain.ObjetosDeValor
+namespace Jurify.Advogados.Api.Dominio.Entidades
 {
-    public class Endereco : ObjetoDeValor
+    public class Endereco : Entidade
     {
         public Endereco(
             string rua,
