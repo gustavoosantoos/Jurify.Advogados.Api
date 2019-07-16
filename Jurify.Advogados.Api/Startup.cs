@@ -23,6 +23,7 @@ namespace Jurify.Advogados.Api
             services.AdicionarAutenticacao(Configuration);
             services.AdicionarHealthChecks();
             services.AdicionarDocumentacaoSwagger();
+            services.AdicionarServicosDeInfraestrutura();
             services.AdicionarServicosDaAplicacao();
 
             services.AddMvc(options =>
