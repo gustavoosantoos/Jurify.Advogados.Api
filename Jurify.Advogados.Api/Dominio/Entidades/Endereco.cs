@@ -13,6 +13,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             string estado,
             string pais,
             string cep,
+            string complemento,
             string observacoes,
             TipoEndereco tipo)
         {
@@ -22,6 +23,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             Estado = estado;
             Pais = pais;
             Cep = cep;
+            Complemento = complemento;
             Observacoes = observacoes;
             Tipo = tipo;
         }
@@ -32,6 +34,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public string Estado { get; private set; }
         public string Pais { get; private set; }
         public string Cep { get; private set; }
+        public string Complemento { get; private set; }
         public string Observacoes { get; private set; }
         public TipoEndereco Tipo { get; private set; }
     }
