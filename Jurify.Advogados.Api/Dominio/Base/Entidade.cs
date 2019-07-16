@@ -18,15 +18,6 @@ namespace Jurify.Advogados.Api.Dominio.Base
             Codigo = Guid.NewGuid();
         }
 
-        protected Entidade(Guid codigoEscritorio, Guid codigoUsuario)
-        {
-            Codigo = Guid.NewGuid();
-            CodigoEscritorio = codigoEscritorio;
-            DataCriacao = DateTime.UtcNow;
-            DataUltimaAlteracao = DataCriacao;
-            CodigoUsuarioUltimaAlteracao = codigoUsuario;
-        }
-
         public override bool Equals(object obj)
         {
             if (obj is null) return false;
