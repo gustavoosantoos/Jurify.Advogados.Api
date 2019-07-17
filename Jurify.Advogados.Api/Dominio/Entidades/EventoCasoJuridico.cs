@@ -1,9 +1,9 @@
-﻿using Jurify.Advogados.Api.Domain.ObjetosDeValor;
-using Jurify.Advogados.Api.Dominio.Base;
+﻿using Jurify.Advogados.Api.Dominio.Base;
+using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Jurify.Advogados.Api.Domain.Entidades
+namespace Jurify.Advogados.Api.Dominio.Entidades
 {
     public class EventoCasoJuridico : Entidade
     {

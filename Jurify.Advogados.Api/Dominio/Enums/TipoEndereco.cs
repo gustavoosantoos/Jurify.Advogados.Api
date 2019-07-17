@@ -1,4 +1,4 @@
-﻿namespace Jurify.Advogados.Api.Domain.Enums
+﻿namespace Jurify.Advogados.Api.Dominio.Enums
 {
     public enum TipoEndereco
     {

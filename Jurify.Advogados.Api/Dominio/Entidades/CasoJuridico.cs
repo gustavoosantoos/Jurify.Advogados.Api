@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Jurify.Advogados.Api.Domain.Entidades
+namespace Jurify.Advogados.Api.Dominio.Entidades
 {
     public class CasoJuridico : Entidade
     {

@@ -2,7 +2,7 @@
 using Flunt.Validations;
 using Jurify.Advogados.Api.Dominio.Base;
 
-namespace Jurify.Advogados.Api.Domain.ObjetosDeValor
+namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
 {
     public class Descricao : ObjetoDeValor
     {

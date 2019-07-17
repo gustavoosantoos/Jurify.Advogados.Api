@@ -1,4 +1,4 @@
-﻿using Jurify.Advogados.Api.Domain.Enums;
+﻿using Jurify.Advogados.Api.Dominio.Enums;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
 using System;

@@ -28,7 +28,6 @@
     <Folder Include="Infraestrutura\Mensageria\" />
     <Folder Include="Infraestrutura\Logging\" />
     <Folder Include="Infraestrutura\CasosDeUso\Pipeline\" />
-    <Folder Include="Infraestrutura\Persistencia\Mapeamento\" />
   </ItemGroup>
 
 </Project>

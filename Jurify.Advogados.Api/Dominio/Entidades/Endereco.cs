@@ -1,11 +1,15 @@
-﻿using Jurify.Advogados.Api.Domain.Enums;
-using Jurify.Advogados.Api.Dominio.Base;
-using System.Collections.Generic;
+﻿using Jurify.Advogados.Api.Dominio.Base;
+using Jurify.Advogados.Api.Dominio.Enums;
+using System;
 
 namespace Jurify.Advogados.Api.Dominio.Entidades
 {
     public class Endereco : Entidade
     {
+        protected Endereco()
+        {
+        }
+
         public Endereco(
             string rua,
             string numero,
@@ -37,5 +41,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public string Complemento { get; private set; }
         public string Observacoes { get; private set; }
         public TipoEndereco Tipo { get; private set; }
+
+        public Guid CodigoCliente { get; private set; }
     }
 }

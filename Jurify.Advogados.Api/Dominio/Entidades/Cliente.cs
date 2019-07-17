@@ -1,13 +1,10 @@
-﻿using Jurify.Advogados.Api.Domain.Enums;
-using Jurify.Advogados.Api.Domain.ObjetosDeValor;
-using Jurify.Advogados.Api.Dominio.Base;
-using Jurify.Advogados.Api.Dominio.Entidades;
+﻿using Jurify.Advogados.Api.Dominio.Base;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Jurify.Advogados.Api.Domain.Entidades
+namespace Jurify.Advogados.Api.Dominio.Entidades
 {
     public class Cliente : Entidade
     {
@@ -15,6 +12,11 @@ namespace Jurify.Advogados.Api.Domain.Entidades
 
         public InformacoesPessoaisCliente InformacoesPessoais { get; private set; }
         public IReadOnlyCollection<Endereco> Enderecos => _enderecos.ToArray();
+
+        protected Cliente()
+        {
+            _enderecos = new List<Endereco>();
+        }
 
         public Cliente(InformacoesPessoaisCliente informacoesPessoais)
         {

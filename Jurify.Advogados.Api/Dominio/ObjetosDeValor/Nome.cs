@@ -8,6 +8,11 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
         public string PrimeiroNome { get; private set; }
         public string Sobrenome { get; private set; }
 
+        protected Nome()
+        {
+
+        }
+
         public Nome(string primeiroNome, string ultimoNome)
         {
             PrimeiroNome = primeiroNome;
