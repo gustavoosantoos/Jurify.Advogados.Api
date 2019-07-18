@@ -19,14 +19,15 @@ namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
             var usuario = new UsuarioAtual(
                 Guid.Parse(claims.FindFirst("user_id").Value),
                 claims.FindFirst("user_first_name").Value,
-                claims.FindFirst("user_last_name").Value,
-                new EscritorioAtual(
-                    Guid.Parse(claims.FindFirst("office_id").Value),
-                    claims.FindFirst("office_name").Value
-                )
+                claims.FindFirst("user_last_name").Value
             );
 
-            _provedor.AtualizarUsuario(usuario);
+            var escritorio = new EscritorioAtual(
+                Guid.Parse(claims.FindFirst("office_id").Value),
+                claims.FindFirst("office_name").Value
+            );
+
+            _provedor.AtualizarUsuario(usuario, escritorio);
         }
 
         public void OnActionExecuted(ActionExecutedContext context)

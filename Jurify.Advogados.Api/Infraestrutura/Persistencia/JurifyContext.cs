@@ -55,7 +55,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
         private void ManutenirEstadoDasEntradas()
         {
             var codigoUsuarioAtual = _provedor.Usuario.Codigo;
-            var codigoEscritorioAtual = _provedor.Usuario.Escritorio.Codigo;
+            var codigoEscritorioAtual = _provedor.Escritorio.Codigo;
 
             foreach (var entrada in ChangeTracker.Entries())
             {
