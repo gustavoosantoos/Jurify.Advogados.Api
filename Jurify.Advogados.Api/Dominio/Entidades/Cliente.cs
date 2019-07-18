@@ -18,10 +18,10 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             _enderecos = new List<Endereco>();
         }
 
-        public Cliente(InformacoesPessoaisCliente informacoesPessoais)
+        public Cliente(InformacoesPessoaisCliente informacoesPessoais, IEnumerable<Endereco> enderecos)
         {
             InformacoesPessoais = informacoesPessoais;
-            _enderecos = new List<Endereco>();
+            _enderecos = enderecos.ToList();
         }
 
         public void AtualizarNome(Nome nome)

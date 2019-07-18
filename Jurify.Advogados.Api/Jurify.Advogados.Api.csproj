@@ -22,8 +22,8 @@
 
   <ItemGroup>
     <Folder Include="Aplicacao\CasosJuridicos\" />
-    <Folder Include="Aplicacao\Clientes\ListarClientes\" />
     <Folder Include="Aplicacao\Clientes\AtualizarCliente\" />
+    <Folder Include="Aplicacao\Clientes\ObterCliente\" />
     <Folder Include="Aplicacao\Clientes\RemoverCliente\" />
     <Folder Include="Infraestrutura\Mensageria\" />
     <Folder Include="Infraestrutura\Logging\" />

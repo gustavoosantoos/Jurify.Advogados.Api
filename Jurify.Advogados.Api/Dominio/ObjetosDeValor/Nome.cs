@@ -19,6 +19,11 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
             Sobrenome = ultimoNome;
         }
 
+        public string ObterNomeCompleto()
+        {
+            return $"{PrimeiroNome} {Sobrenome}";
+        }
+
         protected override IEnumerable<object> ObterComponentesIgualdade()
         {
             yield return PrimeiroNome;

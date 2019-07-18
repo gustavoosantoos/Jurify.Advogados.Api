@@ -1,51 +1,40 @@
-﻿using Jurify.Advogados.Api.Dominio.Entidades;
+﻿using Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente;
+using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes;
+using Jurify.Advogados.Api.Dominio.Entidades;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
+using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Controllers
 {
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class ClientesController : ControllerBase
+    public class ClientesController : BaseController
     {
-        private readonly JurifyContext _context;
+        private readonly IMediator _mediator;
 
-        public ClientesController(JurifyContext context)
+        public ClientesController(IMediator mediator)
         {
-            _context = context;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            return Ok(_context.Clientes.ToList());
+            return RespostaCasoDeUso(await _mediator.Send(new ListarClientesQuery()));
         }
 
         [HttpPost]
-        public ActionResult Post()
+        public async Task<ActionResult> Post(CadastrarClienteCommand command)
         {
-            var cliente = new Cliente(new InformacoesPessoaisCliente(new Nome("Anna", "Kida"), Convert.ToDateTime("1998-12-07")));
-            cliente.AdicionarEndereco(new Endereco(
-                "Rua Padre Victor Dewor",
-                "222",
-                "Curitiba",
-                "PR",
-                "Brasil",
-                "80280100",
-                "",
-                "",
-                Dominio.Enums.TipoEndereco.Residencial
-            ));
-
-            _context.Clientes.Add(cliente);
-            _context.SaveChanges();
-
-            return Ok(cliente);
+            return RespostaCasoDeUso(await _mediator.Send(command));
         }
     }
 }

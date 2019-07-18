@@ -6,7 +6,7 @@ create table clientes(
 
 	nome varchar(100) not null,
 	sobrenome varchar(200) not null,
-	data_nascimento timestamp not null,
+	data_nascimento timestamp,
 	
 	data_criacao timestamp not null default now(),
 	data_ultima_alteracao timestamp not null default now(),
