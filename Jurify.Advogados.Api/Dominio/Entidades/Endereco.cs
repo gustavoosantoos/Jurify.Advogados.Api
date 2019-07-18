@@ -1,4 +1,5 @@
-﻿using Jurify.Advogados.Api.Dominio.Base;
+﻿
+using Jurify.Advogados.Api.Dominio.Base;
 using Jurify.Advogados.Api.Dominio.Enums;
 using System;
 

@@ -6,18 +6,22 @@ using Jurify.Advogados.Api.Dominio.Entidades;
 using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
 {
     public class JurifyContext : DbContext
     {
         private readonly IConfiguration _configuracoes;
-        private ProvedorUsuarioAtual _provedor;
-        
-        public JurifyContext(ProvedorUsuarioAtual provedorUsuario, IConfiguration configuracoes)
+        private readonly ProvedorUsuarioAtual _provedor;
+        private readonly ILoggerFactory _loggerFactory;
+
+        public JurifyContext(ProvedorUsuarioAtual provedorUsuario, ILoggerFactory loggerFactory, IConfiguration configuracoes)
         {
             _configuracoes = configuracoes;
             _provedor = provedorUsuario;
+            _loggerFactory = loggerFactory;
         }
 
         public DbSet<Cliente> Clientes { get; private set; }
@@ -26,6 +30,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseLoggerFactory(_loggerFactory);
             optionsBuilder.UseNpgsql(_configuracoes.GetConnectionString("Default"));
         }
 

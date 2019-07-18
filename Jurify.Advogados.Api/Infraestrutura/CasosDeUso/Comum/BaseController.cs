@@ -6,6 +6,11 @@ namespace Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum
     {
         protected ActionResult RespostaCasoDeUso(RespostaCasoDeUso resposta)
         {
+            if (resposta.StatusCode.HasValue)
+            {
+                return StatusCode((int) resposta.StatusCode.Value, resposta.Dados);
+            }
+
             return resposta.Sucesso ? Ok(resposta.Dados) : BadRequest(resposta.Erros) as ActionResult;
         }
     }

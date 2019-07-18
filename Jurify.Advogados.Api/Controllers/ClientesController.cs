@@ -1,5 +1,6 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente;
 using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes;
+using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente;
 using Jurify.Advogados.Api.Dominio.Entidades;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
@@ -35,6 +36,12 @@ namespace Jurify.Advogados.Api.Controllers
         public async Task<ActionResult> Post(CadastrarClienteCommand command)
         {
             return RespostaCasoDeUso(await _mediator.Send(command));
+        }
+
+        [HttpDelete("codigo:guid")]
+        public async Task<ActionResult> Delete(Guid codigo)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new RemoverClienteCommand(codigo)));
         }
     }
 }
