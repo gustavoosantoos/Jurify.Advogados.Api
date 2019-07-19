@@ -23,14 +23,14 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
 
             builder.Property(e => e.DataNascimento).HasColumnName("data_nascimento");
 
-            builder.HasMany<Endereco>("_enderecos").WithOne().HasForeignKey(e => e.CodigoCliente);
+            builder.HasMany(e => e.Enderecos).WithOne().HasForeignKey(e => e.CodigoCliente);
+            builder.Metadata.FindNavigation(nameof(Cliente.Enderecos)).SetPropertyAccessMode(PropertyAccessMode.Field);
 
             builder.Property(e => e.DataCriacao).HasColumnName("data_criacao");
             builder.Property(e => e.DataUltimaAlteracao).HasColumnName("data_ultima_alteracao");
             builder.Property(e => e.CodigoUsuarioUltimaAlteracao).HasColumnName("codigo_usuario_ultima_alteracao");
             builder.Property(e => e.Apagado).HasColumnName("apagado");
 
-            builder.Ignore(e => e.Enderecos);
             builder.Ignore(e => e.Notifications);
         }
     }

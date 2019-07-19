@@ -1,21 +1,19 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Jurify.Advogados.Api.Dominio.Entidades;
+﻿using Jurify.Advogados.Api.Dominio.Entidades;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
+using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
 {
-    public class CadastrarClienteCommandHandler : IRequestHandler<CadastrarClienteCommand, RespostaCasoDeUso>
+    public class CadastrarClienteCommandHandler : BaseHandler, IRequestHandler<CadastrarClienteCommand, RespostaCasoDeUso>
     {
-        private readonly JurifyContext _context;
-
-        public CadastrarClienteCommandHandler(JurifyContext context)
+        public CadastrarClienteCommandHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
         {
-            _context = context;
         }
 
         public async Task<RespostaCasoDeUso> Handle(CadastrarClienteCommand request, CancellationToken cancellationToken)
@@ -33,10 +31,10 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
                 e.Tipo
             ));
 
-            var cliente = new Cliente(nome, request.DataNascimento, enderecos);
+            var cliente = new Cliente(nome, request.DataNascimento, enderecos.ToList());
 
-            await _context.Clientes.AddAsync(cliente, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
+            await Context.Clientes.AddAsync(cliente, cancellationToken);
+            await Context.SaveChangesAsync(cancellationToken);
 
             return RespostaCasoDeUso.ComSucesso(cliente.Codigo);
         }

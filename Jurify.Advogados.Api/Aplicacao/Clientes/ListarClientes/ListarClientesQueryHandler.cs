@@ -9,22 +9,17 @@ using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes
 {
-    public class ListarClientesQueryHandler : IRequestHandler<ListarClientesQuery, RespostaCasoDeUso>
+    public class ListarClientesQueryHandler : BaseHandler, IRequestHandler<ListarClientesQuery, RespostaCasoDeUso>
     {
-        private readonly JurifyContext _context;
-        private readonly ProvedorUsuarioAtual _provedor;
-
-        public ListarClientesQueryHandler(JurifyContext context, ProvedorUsuarioAtual provedor)
+        public ListarClientesQueryHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
         {
-            _context = context;
-            _provedor = provedor;
         }
 
         public async Task<RespostaCasoDeUso> Handle(ListarClientesQuery request, CancellationToken cancellationToken)
         {
-            var clientes = await _context
-                .Clientes
-                .Where(c => c.CodigoEscritorio == _provedor.Escritorio.Codigo && !c.Apagado)
+            var clientes = await Context.Clientes
+                .AsNoTracking()
+                .Where(c => c.CodigoEscritorio == Provedor.Escritorio.Codigo && !c.Apagado)
                 .Select(c => new ClientePreview()
                     {
                         Codigo = c.Codigo,

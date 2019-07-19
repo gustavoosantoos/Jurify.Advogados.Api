@@ -26,6 +26,7 @@ namespace Jurify.Advogados.Api
             services.AdicionarServicosDeInfraestrutura();
             services.AdicionarServicosDaAplicacao();
 
+            services.AddRouting(config => config.LowercaseUrls = true);
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(ProvedorUsuarioAtualFilter));

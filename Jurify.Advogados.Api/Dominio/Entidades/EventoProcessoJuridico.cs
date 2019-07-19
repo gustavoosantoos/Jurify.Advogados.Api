@@ -7,11 +7,11 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 {
     public class EventoProcessoJuridico : Entidade
     {
-        private readonly ICollection<AnexoProcessoJuridico> _anexos;
+        private List<AnexoProcessoJuridico> _anexos;
 
         public ProcessoJuridico CasoJuridico { get; private set; }
         public Descricao Descricao { get; private set; }
-        public IReadOnlyCollection<AnexoProcessoJuridico> Anexos => _anexos.ToArray();
+        public IReadOnlyCollection<AnexoProcessoJuridico> Anexos => _anexos;
 
         public EventoProcessoJuridico(Descricao descricao)
         {

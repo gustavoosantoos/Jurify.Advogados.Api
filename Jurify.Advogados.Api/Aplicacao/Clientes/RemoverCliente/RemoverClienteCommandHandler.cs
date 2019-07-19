@@ -11,30 +11,24 @@ using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente
 {
-    public class RemoverClienteCommandHandler : IRequestHandler<RemoverClienteCommand, RespostaCasoDeUso>
+    public class RemoverClienteCommandHandler : BaseHandler, IRequestHandler<RemoverClienteCommand, RespostaCasoDeUso>
     {
-        private readonly JurifyContext _context;
-        private readonly ProvedorUsuarioAtual _provedor;
-
-        public RemoverClienteCommandHandler(JurifyContext context, ProvedorUsuarioAtual provedor)
+        public RemoverClienteCommandHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
         {
-            _context = context;
-            _provedor = provedor;
         }
 
         public async Task<RespostaCasoDeUso> Handle(RemoverClienteCommand request, CancellationToken cancellationToken)
         {
-            var cliente = await _context
-                .Clientes
+            var cliente = await Context.Clientes
                 .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
-                                          c.CodigoEscritorio == _provedor.Escritorio.Codigo &&
+                                          c.CodigoEscritorio == Provedor.Escritorio.Codigo &&
                                           !c.Apagado);
 
             if (cliente == null)
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
 
-            _context.Clientes.Remove(cliente);
-            await _context.SaveChangesAsync();
+            Context.Clientes.Remove(cliente);
+            await Context.SaveChangesAsync();
 
             return RespostaCasoDeUso.ComSucesso();
         }

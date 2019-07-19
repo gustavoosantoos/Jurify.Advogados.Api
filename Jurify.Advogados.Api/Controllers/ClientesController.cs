@@ -1,5 +1,6 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente;
 using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes;
+using Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente;
 using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente;
 using Jurify.Advogados.Api.Dominio.Entidades;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
@@ -30,6 +31,12 @@ namespace Jurify.Advogados.Api.Controllers
         public async Task<ActionResult> Get()
         {
             return RespostaCasoDeUso(await _mediator.Send(new ListarClientesQuery()));
+        }
+
+        [HttpGet("{codigo:guid}")]
+        public async Task<ActionResult> Get(Guid codigo)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new ObterClienteQuery(codigo)));
         }
 
         [HttpPost]
