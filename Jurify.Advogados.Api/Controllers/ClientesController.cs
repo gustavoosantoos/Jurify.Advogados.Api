@@ -38,7 +38,7 @@ namespace Jurify.Advogados.Api.Controllers
             return RespostaCasoDeUso(await _mediator.Send(command));
         }
 
-        [HttpDelete("codigo:guid")]
+        [HttpDelete("{codigo:guid}")]
         public async Task<ActionResult> Delete(Guid codigo)
         {
             return RespostaCasoDeUso(await _mediator.Send(new RemoverClienteCommand(codigo)));
