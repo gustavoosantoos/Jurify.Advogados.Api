@@ -7,7 +7,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 {
     public class ProcessoJuridico : Entidade
     {
-        private List<EventoProcessoJuridico> _eventos;
+        private readonly List<EventoProcessoJuridico> _eventos;
 
         public Guid IdAdvogadoResponsavel { get; private set; }
         public Guid IdCliente { get; private set; }

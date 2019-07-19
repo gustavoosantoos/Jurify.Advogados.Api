@@ -1,13 +1,12 @@
 ﻿using Jurify.Advogados.Api.Dominio.Base;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Jurify.Advogados.Api.Dominio.Entidades
 {
     public class EventoProcessoJuridico : Entidade
     {
-        private List<AnexoProcessoJuridico> _anexos;
+        private readonly List<AnexoProcessoJuridico> _anexos;
 
         public ProcessoJuridico CasoJuridico { get; private set; }
         public Descricao Descricao { get; private set; }
