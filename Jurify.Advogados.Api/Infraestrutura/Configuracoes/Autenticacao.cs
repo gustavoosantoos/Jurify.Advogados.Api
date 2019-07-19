@@ -12,11 +12,11 @@ namespace Jurify.Advogados.Api.Infraestrutura.Configuracoes
         {
             services
                 .AddAuthentication(AuthenticationSchemes.AuthorizationHeaderBearer)
-                .AddIdentityServerAuthentication(options =>
+                .AddJwtBearer(options =>
                 {
+                    options.Audience = configuration["Authentication:ResourceName"];
+                    options.RequireHttpsMetadata = false;
                     options.Authority = configuration["Authentication:Authority"];
-                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["Authentication:RequireHttps"]);
-                    options.ApiName = configuration["Authentication:ResourceName"];
                 });
         }
 
