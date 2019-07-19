@@ -35,7 +35,7 @@ create table enderecos(
 	apagado boolean not null default false
 );
 
-create table casos_juridicos(
+create table processos_juridicos(
 	codigo uuid primary key not null default gen_random_uuid(),
 	codigo_escritorio uuid not null,
 	codigo_advogado_responsavel uuid not null,
@@ -51,10 +51,10 @@ create table casos_juridicos(
 );
 
 
-create table casos_juridicos_eventos(
+create table processos_juridicos_eventos(
 	codigo uuid primary key not null default gen_random_uuid(),
 	codigo_escritorio uuid not null,
-	codigo_caso_juridico uuid not null references casos_juridicos(codigo),
+	codigo_processo_juridico uuid not null references processos_juridicos(codigo),
 
 	descricao varchar(3000) not null,
 
@@ -64,10 +64,10 @@ create table casos_juridicos_eventos(
 	apagado boolean not null default false
 );
 
-create table casos_juridicos_eventos_anexos(
+create table processos_juridicos_eventos_anexos(
 	codigo uuid primary key not null default gen_random_uuid(),
 	codigo_escritorio uuid not null,
-	codigo_evento uuid not null references casos_juridicos_eventos(codigo),
+	codigo_evento uuid not null references processos_juridicos_eventos(codigo),
 
 	nome varchar(200) not null,
 	url varchar(500) not null,

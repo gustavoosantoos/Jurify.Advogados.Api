@@ -28,9 +28,9 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes
                 .Select(c => new ClientePreview()
                     {
                         Codigo = c.Codigo,
-                        Nome = c.InformacoesPessoais.Nome.PrimeiroNome,
-                        Sobrenome = c.InformacoesPessoais.Nome.Sobrenome,
-                        DataNascimento = c.InformacoesPessoais.DataNascimento
+                        Nome = c.Nome.PrimeiroNome,
+                        Sobrenome = c.Nome.Sobrenome,
+                        DataNascimento = c.DataNascimento
                     })
                 .ToListAsync();
 

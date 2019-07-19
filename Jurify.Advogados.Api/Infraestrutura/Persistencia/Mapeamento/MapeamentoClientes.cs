@@ -14,18 +14,14 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
 
             builder.Property(e => e.CodigoEscritorio).HasColumnName("codigo_escritorio");
 
-            builder.OwnsOne(e => e.InformacoesPessoais, informacoesPessoais =>
+            builder.OwnsOne(e => e.Nome, nome =>
             {
-                informacoesPessoais.OwnsOne(e => e.Nome, nome =>
-                {
-                    nome.Property(n => n.PrimeiroNome).HasColumnName("nome");
-                    nome.Property(n => n.Sobrenome).HasColumnName("sobrenome");
-                    nome.Ignore(n => n.Notifications);
-                });
-
-                informacoesPessoais.Property(e => e.DataNascimento).HasColumnName("data_nascimento");
-                informacoesPessoais.Ignore(e => e.Notifications);
+                nome.Property(n => n.PrimeiroNome).HasColumnName("nome");
+                nome.Property(n => n.Sobrenome).HasColumnName("sobrenome");
+                nome.Ignore(n => n.Notifications);
             });
+
+            builder.Property(e => e.DataNascimento).HasColumnName("data_nascimento");
 
             builder.HasMany<Endereco>("_enderecos").WithOne().HasForeignKey(e => e.CodigoCliente);
 

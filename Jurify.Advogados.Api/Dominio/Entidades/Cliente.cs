@@ -10,7 +10,9 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
     {
         private readonly ICollection<Endereco> _enderecos;
 
-        public InformacoesPessoaisCliente InformacoesPessoais { get; private set; }
+        public Nome Nome { get; private set; }
+        public DateTime? DataNascimento { get; private set; }
+
         public IReadOnlyCollection<Endereco> Enderecos => _enderecos.ToArray();
 
         protected Cliente()
@@ -18,30 +20,11 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             _enderecos = new List<Endereco>();
         }
 
-        public Cliente(InformacoesPessoaisCliente informacoesPessoais, IEnumerable<Endereco> enderecos)
+        public Cliente(Nome nome, DateTime? dataNascimento, IEnumerable<Endereco> enderecos)
         {
-            InformacoesPessoais = informacoesPessoais;
+            Nome = nome;
+            DataNascimento = dataNascimento;
             _enderecos = enderecos.ToList();
-        }
-
-        public void AtualizarNome(Nome nome)
-        {
-            InformacoesPessoais = new InformacoesPessoaisCliente(nome, InformacoesPessoais.DataNascimento);
-        }
-
-        public void AtualizarDataNascimento(DateTime? dataNascimento)
-        {
-            InformacoesPessoais = new InformacoesPessoaisCliente(InformacoesPessoais.Nome, dataNascimento);
-        }
-
-        public void AdicionarEndereco(Endereco endereco)
-        {
-            _enderecos.Add(endereco);
-        }
-
-        public void RemoverEndereco(Endereco endereco)
-        {
-            _enderecos.Remove(endereco);
         }
     }
 }

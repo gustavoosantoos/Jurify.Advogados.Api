@@ -5,22 +5,22 @@ using System.Linq;
 
 namespace Jurify.Advogados.Api.Dominio.Entidades
 {
-    public class CasoJuridico : Entidade
+    public class ProcessoJuridico : Entidade
     {
-        private readonly ICollection<EventoCasoJuridico> _eventos;
+        private readonly ICollection<EventoProcessoJuridico> _eventos;
 
         public Guid IdAdvogadoResponsavel { get; private set; }
         public Guid IdCliente { get; private set; }
 
         public Cliente Cliente { get; private set; }
-        public IReadOnlyCollection<EventoCasoJuridico> Eventos => _eventos.ToArray();
+        public IReadOnlyCollection<EventoProcessoJuridico> Eventos => _eventos.ToArray();
 
-        public CasoJuridico(Guid idAdvogadoResponsavel, Guid idCliente)
+        public ProcessoJuridico(Guid idAdvogadoResponsavel, Guid idCliente)
         {
             IdAdvogadoResponsavel = idAdvogadoResponsavel;
             IdCliente = idCliente;
 
-            _eventos = new List<EventoCasoJuridico>();
+            _eventos = new List<EventoProcessoJuridico>();
         }
     }
 }

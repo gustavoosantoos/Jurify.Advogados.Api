@@ -21,7 +21,6 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
         public async Task<RespostaCasoDeUso> Handle(CadastrarClienteCommand request, CancellationToken cancellationToken)
         {
             var nome = new Nome(request.Nome, request.Sobrenome);
-            var informacoesPessoais = new InformacoesPessoaisCliente(nome, request.DataNascimento);
             var enderecos = request.Enderecos.Select(e => new Endereco(
                 e.Rua,
                 e.Numero,
@@ -34,7 +33,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
                 e.Tipo
             ));
 
-            var cliente = new Cliente(informacoesPessoais, enderecos);
+            var cliente = new Cliente(nome, request.DataNascimento, enderecos);
 
             await _context.Clientes.AddAsync(cliente, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
