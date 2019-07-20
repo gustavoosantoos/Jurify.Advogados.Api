@@ -12,6 +12,8 @@ namespace Jurify.Advogados.Api.Infraestrutura.Configuracoes
         {
             services.AddSwaggerDocument(config =>
             {
+                config.Title = "Jurify.Advogados.Api";
+                config.Description = "Backend do CRM para advogados Jurify.";
                 config.OperationProcessors.Add(new OperationSecurityScopeProcessor("JWT"));
                 config.AddSecurity("JWT", Enumerable.Empty<string>(),
                      new SwaggerSecurityScheme()
