@@ -18,20 +18,12 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
 
         public async Task<RespostaCasoDeUso> Handle(CadastrarClienteCommand request, CancellationToken cancellationToken)
         {
-            var nome = new Nome(request.Nome, request.Sobrenome);
-            var enderecos = request.Enderecos.Select(e => new Endereco(
-                e.Rua,
-                e.Numero,
-                e.Cidade,
-                e.Estado,
-                e.Pais,
-                e.Cidade,
-                e.Complemento,
-                e.Observacoes,
-                e.Tipo
-            ));
+            var cliente = request.AsEntity();
 
-            var cliente = new Cliente(nome, request.DataNascimento, enderecos.ToList());
+            if (cliente.Invalid)
+            {
+                return RespostaCasoDeUso.ComFalha(cliente.Notifications);
+            }
 
             await Context.Clientes.AddAsync(cliente, cancellationToken);
             await Context.SaveChangesAsync(cancellationToken);

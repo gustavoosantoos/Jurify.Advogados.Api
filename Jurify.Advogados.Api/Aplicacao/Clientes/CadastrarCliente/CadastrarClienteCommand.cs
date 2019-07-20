@@ -1,28 +1,39 @@
-﻿using Jurify.Advogados.Api.Dominio.Enums;
+﻿using Jurify.Advogados.Api.Dominio.Entidades;
+using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
 using System;
+using System.Linq;
 
 namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
 {
-    public class CadastrarClienteCommand : IRequest<RespostaCasoDeUso>
+    public partial class CadastrarClienteCommand : IRequest<RespostaCasoDeUso>
     {
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
+        public string RG { get; set; }
+        public string CPF { get; set; }
         public DateTime? DataNascimento { get; set; }
         public EnderecoCliente[] Enderecos { get; set; } = new EnderecoCliente[0];
 
-        public class EnderecoCliente
+        public Cliente AsEntity()
         {
-            public string Rua { get; set; }
-            public string Numero { get; set; }
-            public string Complemento { get; set; }
-            public string Cidade { get; set; }
-            public string Estado { get; set; }
-            public string Pais { get; set; }
-            public string Cep { get; set; }
-            public string Observacoes { get; set; }
-            public TipoEndereco Tipo { get; set; }
+            var nome = new Nome(Nome, Sobrenome);
+            var rg = new RG(RG);
+            var cpf = new CPF(CPF);
+            var enderecos = Enderecos.Select(e => new Endereco(
+                e.Rua,
+                e.Numero,
+                e.Cidade,
+                e.Estado,
+                e.Pais,
+                e.Cep,
+                e.Complemento,
+                e.Observacoes,
+                e.Tipo
+            ));
+
+            return new Cliente(nome, rg, cpf, DataNascimento, enderecos.ToList());
         }
     }
 }

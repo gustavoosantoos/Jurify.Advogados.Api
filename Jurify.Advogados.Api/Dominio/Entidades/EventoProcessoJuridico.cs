@@ -17,5 +17,10 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             Descricao = descricao;
             _anexos = new List<AnexoProcessoJuridico>();
         }
+
+        protected override void Validar()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

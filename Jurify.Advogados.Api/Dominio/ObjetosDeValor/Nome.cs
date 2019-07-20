@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Flunt.Validations;
 using Jurify.Advogados.Api.Dominio.Base;
 
 namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
@@ -17,6 +18,13 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
         {
             PrimeiroNome = primeiroNome;
             Sobrenome = ultimoNome;
+
+            AddNotifications(new Contract()
+                .IsNotNullOrWhiteSpace(PrimeiroNome, "Nome.PrimeiroNome", "O nome não deve ser vazio")
+                    .HasMaxLen(PrimeiroNome, 100, "Nome.PrimeiroNome", "O nome deve ter ao máximo 100 caracteres")
+                .IsNotNullOrWhiteSpace(Sobrenome, "Nome.Sobrenome", "O sobrenome não deve ser vazio")
+                    .HasMaxLen(Sobrenome, 200, "Nome.Sobrenome", "O sobrenome deve ter ao máximo 200 caracteres")
+            );
         }
 
         public string ObterNomeCompleto()

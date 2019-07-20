@@ -21,6 +21,18 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
                 nome.Ignore(n => n.Notifications);
             });
 
+            builder.OwnsOne(e => e.RG, rg =>
+            {
+                rg.Property(r => r.Numero).HasColumnName("rg");
+                rg.Ignore(r => r.Notifications);
+            });
+
+            builder.OwnsOne(e => e.CPF, cpf =>
+            {
+                cpf.Property(c => c.Numero).HasColumnName("cpf");
+                cpf.Ignore(c => c.Notifications);
+            });
+
             builder.Property(e => e.DataNascimento).HasColumnName("data_nascimento");
 
             builder.HasMany(e => e.Enderecos).WithOne().HasForeignKey(e => e.CodigoCliente);

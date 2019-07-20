@@ -1,20 +1,23 @@
-﻿using System.Net;
+﻿using Flunt.Notifications;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 
 namespace Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum
 {
     public class RespostaCasoDeUso
     {
         public bool Sucesso { get; private set; }
-        public string[] Erros { get; private set; }
+        public Notification[] Erros { get; private set; }
         public object Dados { get; private set; }
         public HttpStatusCode? StatusCode { get; private set; }
 
-        public static RespostaCasoDeUso ComFalha(params string[] erros)
+        public static RespostaCasoDeUso ComFalha(IEnumerable<Notification> erros)
         {
             return new RespostaCasoDeUso
             {
                 Sucesso = false,
-                Erros = erros
+                Erros = erros.ToArray()
             };
         }
 

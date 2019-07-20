@@ -38,5 +38,7 @@ namespace Jurify.Advogados.Api.Dominio.Base
         {
             return HashCode.Combine(GetType(), CodigoEscritorio, Codigo);
         }
+
+        protected abstract void Validar();
     }
 }

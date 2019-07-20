@@ -22,5 +22,10 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
             _eventos = new List<EventoProcessoJuridico>();
         }
+
+        protected override void Validar()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

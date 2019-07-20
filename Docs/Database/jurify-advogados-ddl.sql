@@ -1,11 +1,20 @@
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
+drop table if exists processos_juridicos_eventos_anexos;
+drop table if exists processos_juridicos_eventos;
+drop table if exists processos_juridicos;
+drop table if exists enderecos;
+drop table if exists clientes;
+
 create table clientes(
 	codigo uuid primary key not null default gen_random_uuid(),
 	codigo_escritorio uuid not null,
 
 	nome varchar(100) not null,
 	sobrenome varchar(200) not null,
+	rg varchar(15) null,
+	cpf varchar(11) null,
+	email varchar(256) null,
 	data_nascimento timestamp,
 	
 	data_criacao timestamp not null default now(),
@@ -22,11 +31,11 @@ create table enderecos(
 	rua varchar(300) not null,
 	numero varchar(5) not null,
 	cidade varchar(100) not null,
-	estado varchar(5) not null,
+	estado varchar(50) not null,
 	pais varchar(50) not null,
 	cep char(8) not null,
-	complemento varchar(100) not null,
-	observacoes varchar(1000) not null,
+	complemento varchar(100) null,
+	observacoes varchar(1000) null,
 	tipo numeric(2) not null,
 
 	data_criacao timestamp not null default now(),

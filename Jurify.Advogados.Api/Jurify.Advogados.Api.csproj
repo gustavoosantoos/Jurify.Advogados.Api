@@ -30,9 +30,9 @@
     <Folder Include="Aplicacao\CasosJuridicos\" />
     <Folder Include="Aplicacao\Clientes\AtualizarCliente\" />
     <Folder Include="Aplicacao\Clientes\RemoverCliente\" />
+    <Folder Include="Dominio\Validadores\" />
     <Folder Include="Infraestrutura\Mensageria\" />
     <Folder Include="Infraestrutura\Logging\" />
-    <Folder Include="Infraestrutura\CasosDeUso\Pipeline\" />
   </ItemGroup>
 
 </Project>

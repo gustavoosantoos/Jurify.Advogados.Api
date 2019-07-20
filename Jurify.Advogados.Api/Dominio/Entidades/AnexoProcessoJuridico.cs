@@ -19,5 +19,10 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
                 .IsUrl(Url, "AnexoCasoJuridico.NomeArquivo", "Url do arquivo inválida")
             );
         }
+
+        protected override void Validar()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
