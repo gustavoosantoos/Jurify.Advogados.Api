@@ -28,6 +28,10 @@ namespace Jurify.Advogados.Api.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Retorna uma listagem de clientes com poucos dados.
+        /// </summary>
+        /// <response code="200">Listagem de clientes.</response>
         [HttpGet]
         [ProducesResponseType(typeof(ClientePreview[]), StatusCodes.Status200OK)]
         public async Task<ActionResult> Get()
@@ -35,14 +39,26 @@ namespace Jurify.Advogados.Api.Controllers
             return RespostaCasoDeUso(await _mediator.Send(new ListarClientesQuery()));
         }
 
+        /// <summary>
+        /// Retorna um cliente específico com todos os campos
+        /// </summary>
+        /// <param name="codigo">Código do cliente</param>
+        /// <response code="200">Dados do cliente</response>
+        /// <response code="404">Cliente não encontrado</response>
         [HttpGet("{codigo:guid}")]
         [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Get(Guid codigo)
         {
             return RespostaCasoDeUso(await _mediator.Send(new ObterClienteQuery(codigo)));
         }
 
+        /// <summary>
+        /// Cadastra um novo cliente
+        /// </summary>
+        /// <param name="command">Dados do cliente</param>
+        /// <response code="200">Cliente criado</response>
+        /// <response code="400">Dados inválidos</response>
         [HttpPost]
         [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
@@ -51,9 +67,15 @@ namespace Jurify.Advogados.Api.Controllers
             return RespostaCasoDeUso(await _mediator.Send(command));
         }
 
+        /// <summary>
+        /// Remove um cliente
+        /// </summary>
+        /// <param name="codigo">Código do cliente</param>
+        /// <response code="204">Cliente removido</response>
+        /// <response code="404">Cliente não encontrado</response>
         [HttpDelete("{codigo:guid}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Delete(Guid codigo)
         {
             return RespostaCasoDeUso(await _mediator.Send(new RemoverClienteCommand(codigo)));
