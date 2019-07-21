@@ -13,7 +13,8 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public Nome Nome { get; private set; }
         public RG RG { get; private set; }
         public CPF CPF { get; private set; }
-        public DateTime? DataNascimento { get; private set; }
+        public DataNascimento DataNascimento { get; private set; }
+        public Email Email { get; private set; }
 
         public IReadOnlyCollection<Endereco> Enderecos => _enderecos;
 
@@ -22,12 +23,13 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             _enderecos = new List<Endereco>();
         }
 
-        public Cliente(Nome nome, RG rg, CPF cpf, DateTime? dataNascimento, List<Endereco> enderecos)
+        public Cliente(Nome nome, RG rg, CPF cpf, DataNascimento dataNascimento, Email email, List<Endereco> enderecos)
         {
             Nome = nome;
             RG = rg;
             CPF = cpf;
             DataNascimento = dataNascimento;
+            Email = email;
             _enderecos = enderecos;
 
             Validar();
@@ -35,13 +37,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         protected override void Validar()
         {
-            AddNotifications(Nome, CPF, RG);
-
-            AddNotifications(new Contract()
-                .IsTrue(DataNascimento < DateTime.Now, "DataNascimento", "A data de nascimento deve estar no passado")
-                .IsTrue(DataNascimento != default, "DataNascimento", "A data de nascimento deve possuir um valor")   
-            );
-
+            AddNotifications(Nome, CPF, RG, DataNascimento, Email);
             AddNotifications(_enderecos.ToArray());
         }
     }

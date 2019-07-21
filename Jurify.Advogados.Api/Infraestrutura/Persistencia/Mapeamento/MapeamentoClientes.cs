@@ -33,7 +33,17 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
                 cpf.Ignore(c => c.Notifications);
             });
 
-            builder.Property(e => e.DataNascimento).HasColumnName("data_nascimento");
+            builder.OwnsOne(e => e.DataNascimento, data =>
+            {
+                data.Property(d => d.Data).HasColumnName("data_nascimento");
+                data.Ignore(d => d.Notifications);
+            });
+
+            builder.OwnsOne(e => e.Email, email =>
+            {
+                email.Property(e => e.Endereco).HasColumnName("email");
+                email.Ignore(e => e.Notifications);
+            });
 
             builder.HasMany(e => e.Enderecos).WithOne().HasForeignKey(e => e.CodigoCliente);
             builder.Metadata.FindNavigation(nameof(Cliente.Enderecos)).SetPropertyAccessMode(PropertyAccessMode.Field);

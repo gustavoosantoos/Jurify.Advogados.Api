@@ -13,6 +13,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
         public string Sobrenome { get; set; }
         public string RG { get; set; }
         public string CPF { get; set; }
+        public string Email { get; set; }
         public DateTime? DataNascimento { get; set; }
         public EnderecoCliente[] Enderecos { get; set; } = new EnderecoCliente[0];
 
@@ -21,6 +22,8 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
             var nome = new Nome(Nome, Sobrenome);
             var rg = new RG(RG);
             var cpf = new CPF(CPF);
+            var dataNascimento = new DataNascimento(DataNascimento);
+            var email = new Email(Email);
             var enderecos = Enderecos.Select(e => new Endereco(
                 e.Rua,
                 e.Numero,
@@ -33,7 +36,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
                 e.Tipo
             ));
 
-            return new Cliente(nome, rg, cpf, DataNascimento, enderecos.ToList());
+            return new Cliente(nome, rg, cpf, dataNascimento, email, enderecos.ToList());
         }
     }
 }
