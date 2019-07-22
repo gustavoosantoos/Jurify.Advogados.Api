@@ -1,7 +1,9 @@
-﻿using Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente;
+﻿using Jurify.Advogados.Api.Aplicacao.Clientes.AdicionarEndereco;
+using Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente;
 using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes;
 using Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente;
 using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente;
+using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverEndereco;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -75,6 +77,39 @@ namespace Jurify.Advogados.Api.Controllers
         public async Task<ActionResult> Delete(Guid codigo)
         {
             return RespostaCasoDeUso(await _mediator.Send(new RemoverClienteCommand(codigo)));
+        }
+
+        /// <summary>
+        /// Adiciona um endereço ao cliente
+        /// </summary>
+        /// <param name="codigo">Código do cliente</param>
+        /// <param name="command">Novo endereço</param>
+        /// <response code="200">Endereço adicionado</response>
+        /// <response code="400">Endereço inválido</response>
+        /// <response code="404">Cliente não encontrado</response>
+        [HttpPost("{codigo:guid}/enderecos")]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> PostEndereco([FromRoute] Guid codigo, AdicionarEnderecoCommand command)
+        {
+            command.CodigoCliente = codigo;
+            return RespostaCasoDeUso(await _mediator.Send(command));
+        }
+
+        /// <summary>
+        /// Remove um endereço do cliente
+        /// </summary>
+        /// <param name="codigo">Código do cliente</param>
+        /// <param name="codigoEndereco">Código do endereço</param>
+        /// <response code="204">Endereço removido</response>
+        /// <response code="404">Endereço ou cliente não encontrado</response>
+        [HttpDelete("{codigo:guid}/enderecos/{codigoEndereco:guid}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> DeleteEndereco(Guid codigo, Guid codigoEndereco)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new RemoverEnderecoCommand(codigoEndereco, codigo)));
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.RemoverEndereco
         {
             var endereco = await Context.Enderecos
                 .FirstOrDefaultAsync(e => e.Codigo == request.Codigo &&
+                                          e.CodigoCliente == request.CodigoCliente &&
                                           e.CodigoEscritorio == Provedor.Escritorio.Codigo &&
                                           !e.Apagado);
 

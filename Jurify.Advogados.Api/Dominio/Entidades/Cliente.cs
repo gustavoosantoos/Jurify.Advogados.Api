@@ -1,4 +1,5 @@
 ﻿using Jurify.Advogados.Api.Dominio.Base;
+using Jurify.Advogados.Api.Dominio.Exceptions;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System.Collections.Generic;
 
@@ -31,6 +32,17 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             _enderecos = enderecos;
 
             Validar();
+        }
+
+        public void AdicionarEndereco(Endereco endereco)
+        {
+            if (Invalid)
+                throw new DomainException(this);
+
+            if (endereco.Invalid)
+                throw new DomainException(endereco);
+
+            _enderecos.Add(endereco);
         }
 
         protected override void Validar()

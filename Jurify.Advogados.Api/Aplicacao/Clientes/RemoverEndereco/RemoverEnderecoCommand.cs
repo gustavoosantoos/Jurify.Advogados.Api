@@ -10,11 +10,13 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.RemoverEndereco
         {
         }
 
-        public RemoverEnderecoCommand(Guid codigo)
+        public RemoverEnderecoCommand(Guid codigo, Guid codigoCliente)
         {
             Codigo = codigo;
+            CodigoCliente = codigoCliente;
         }
 
         public Guid Codigo { get; set; }
+        public Guid CodigoCliente { get; set; }
     }
 }

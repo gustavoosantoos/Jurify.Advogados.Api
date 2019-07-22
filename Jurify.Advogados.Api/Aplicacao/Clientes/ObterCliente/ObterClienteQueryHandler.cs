@@ -3,9 +3,11 @@ using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Z.EntityFramework.Plus;
 
 namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
 {
@@ -18,8 +20,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
         public async Task<RespostaCasoDeUso> Handle(ObterClienteQuery request, CancellationToken cancellationToken)
         {
             var cliente = await Context.Clientes
-                .AsNoTracking()
-                .Include(c => c.Enderecos)
+                .IncludeFilter(c => c.Enderecos.Where(e => !e.Apagado))
                 .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
                                      c.CodigoEscritorio == Provedor.Escritorio.Codigo &&
                                      !c.Apagado);
