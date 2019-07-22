@@ -28,7 +28,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
             if (cliente == null)
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
 
-            return RespostaCasoDeUso.ComSucesso(cliente);
+            return RespostaCasoDeUso.ComSucesso(ClienteCompleto.FromEntity(cliente));
         }
     }
 }

@@ -2,16 +2,12 @@
 using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes;
 using Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente;
 using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente;
-using Jurify.Advogados.Api.Dominio.Entidades;
-using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
-using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Controllers
@@ -46,7 +42,7 @@ namespace Jurify.Advogados.Api.Controllers
         /// <response code="200">Dados do cliente</response>
         /// <response code="404">Cliente não encontrado</response>
         [HttpGet("{codigo:guid}")]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ClienteCompleto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Get(Guid codigo)
         {

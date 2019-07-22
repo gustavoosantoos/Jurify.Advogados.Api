@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="Dapper" Version="1.60.6" />
     <PackageReference Include="Flunt" Version="1.0.3" />
     <PackageReference Include="Flunt.Br" Version="1.1.3" />
