@@ -22,7 +22,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             string cep,
             string complemento,
             string observacoes,
-            TipoEndereco tipo)
+            ETipoEndereco tipo)
         {
             Rua = rua;
             Numero = numero;
@@ -45,7 +45,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public string Cep { get; private set; }
         public string Complemento { get; private set; }
         public string Observacoes { get; private set; }
-        public TipoEndereco Tipo { get; private set; }
+        public ETipoEndereco Tipo { get; private set; }
 
         public Guid CodigoCliente { get; private set; }
 

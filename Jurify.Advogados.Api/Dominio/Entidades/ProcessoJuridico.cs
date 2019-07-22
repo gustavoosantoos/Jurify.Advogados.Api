@@ -1,7 +1,6 @@
 ﻿using Jurify.Advogados.Api.Dominio.Base;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Jurify.Advogados.Api.Dominio.Entidades
 {

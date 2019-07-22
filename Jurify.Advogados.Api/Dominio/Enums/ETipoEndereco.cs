@@ -1,6 +1,6 @@
 ﻿namespace Jurify.Advogados.Api.Dominio.Enums
 {
-    public enum TipoEndereco
+    public enum ETipoEndereco
     {
         Residencial,
         Comercial,

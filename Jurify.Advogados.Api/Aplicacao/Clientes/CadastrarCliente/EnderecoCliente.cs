@@ -14,7 +14,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
             public string Pais { get; set; }
             public string Cep { get; set; }
             public string Observacoes { get; set; }
-            public TipoEndereco Tipo { get; set; }
+            public ETipoEndereco Tipo { get; set; }
         }
     }
 }

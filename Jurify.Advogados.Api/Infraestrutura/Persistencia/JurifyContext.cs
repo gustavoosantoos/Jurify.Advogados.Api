@@ -1,13 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Jurify.Advogados.Api.Dominio.Base;
+﻿using Jurify.Advogados.Api.Dominio.Base;
 using Jurify.Advogados.Api.Dominio.Entidades;
 using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
 {
@@ -25,6 +24,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
         }
 
         public DbSet<Cliente> Clientes { get; private set; }
+        public DbSet<Endereco> Enderecos { get; private set; }
         //public DbSet<CasoJuridico> CasosJuridicos { get; private set; }
         //public DbSet<EventoCasoJuridico> EventosCasoJuridico { get; private set; }
 

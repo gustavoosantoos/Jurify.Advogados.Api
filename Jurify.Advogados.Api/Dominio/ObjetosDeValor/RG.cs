@@ -1,6 +1,5 @@
 ﻿using Flunt.Validations;
 using Jurify.Advogados.Api.Dominio.Base;
-using System;
 using System.Collections.Generic;
 
 namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
