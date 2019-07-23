@@ -4,6 +4,7 @@ using Jurify.Advogados.Api.Infraestrutura.InjecaoDependencias;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +21,7 @@ namespace Jurify.Advogados.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AdicionarCors();
             services.AdicionarAutenticacao(Configuration);
             services.AdicionarHealthChecks();
             services.AdicionarDocumentacaoSwagger();
@@ -29,6 +31,7 @@ namespace Jurify.Advogados.Api
             services.AddRouting(config => config.LowercaseUrls = true);
             services.AddMvc(options =>
             {
+                options.Filters.Add(new CorsAuthorizationFilterFactory(Cors.POLICY_NAME));
                 options.Filters.Add(typeof(ProvedorUsuarioAtualFilter));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -40,6 +43,7 @@ namespace Jurify.Advogados.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UsarCors();
             app.UsarAutenticacao();
             app.UsarHealthChecks();
             app.UsarDocumentacaoSwagger();

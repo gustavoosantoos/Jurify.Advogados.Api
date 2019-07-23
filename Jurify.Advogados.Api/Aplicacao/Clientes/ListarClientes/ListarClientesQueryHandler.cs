@@ -25,7 +25,8 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes
                         Codigo = c.Codigo,
                         Nome = c.Nome.PrimeiroNome,
                         Sobrenome = c.Nome.Sobrenome,
-                        DataNascimento = c.DataNascimento.Data
+                        DataNascimento = c.DataNascimento.Data,
+                        Email = c.Email.Endereco
                     })
                 .ToListAsync();
 
