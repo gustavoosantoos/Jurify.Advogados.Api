@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Dominio\Entidades\" />
-    <Folder Include="Dominio\Exceptions\" />
     <Folder Include="Dominio\ObjetosDeValor\" />
   </ItemGroup>
 
