@@ -11,4 +11,14 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dominio\Entidades\" />
+    <Folder Include="Dominio\Exceptions\" />
+    <Folder Include="Dominio\ObjetosDeValor\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jurify.Advogados.Api\Jurify.Advogados.Api.csproj" />
+  </ItemGroup>
+
 </Project>

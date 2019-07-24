@@ -16,6 +16,7 @@ namespace Jurify.Advogados.Api.Dominio.Base
         protected Entidade()
         {
             Codigo = Guid.NewGuid();
+            DataCriacao = DateTime.Now;
         }
 
         public override bool Equals(object obj)
