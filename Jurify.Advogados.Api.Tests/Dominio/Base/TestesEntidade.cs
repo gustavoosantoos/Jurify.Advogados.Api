@@ -11,9 +11,16 @@ namespace Jurify.Advogados.Api.Tests.Dominio.Base
         [Fact]
         public void EntidadeDeveCriarCodigoNovo()
         {
-            Entidade entidade = ConstruirEntidade();
+            var entidade = ConstruirEntidade();
 
             Assert.NotEqual(default, entidade.Codigo);
+        }
+
+        [Fact]
+        public void EntidadeNaoDeveGerarCodigoEscritorio()
+        {
+            var entidade = ConstruirEntidade();
+            Assert.Equal(default, entidade.CodigoEscritorio);
         }
 
         [Fact]
