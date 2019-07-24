@@ -94,6 +94,7 @@ namespace Jurify.Advogados.Api.Tests.Dominio.Base
             Assert.True(entidade == entidade);
             Assert.True(entidade.Equals(entidade));
             Assert.True(entidade.Equals((object)entidade));
+            Assert.False(entidade != entidade); 
         }
 
         [Fact]
@@ -106,6 +107,7 @@ namespace Jurify.Advogados.Api.Tests.Dominio.Base
             Assert.False(entidadeA == entidadeB);
             Assert.False(entidadeA.Equals(entidadeB));
             Assert.False(entidadeA.Equals((object)entidadeB));
+            Assert.True(entidadeA != entidadeB);
         }
 
         private Entidade ConstruirEntidade()

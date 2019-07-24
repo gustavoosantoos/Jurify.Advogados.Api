@@ -14,6 +14,7 @@ namespace Jurify.Advogados.Api.Tests.Dominio.Base
             Assert.True(nomeA == nomeA);
             Assert.True(nomeA.Equals(nomeA));
             Assert.True(nomeA.Equals(nomeA));
+            Assert.False(nomeA != nomeA);
         }
 
         [Fact]
@@ -26,6 +27,7 @@ namespace Jurify.Advogados.Api.Tests.Dominio.Base
             Assert.True(nomeA == nomeB);
             Assert.True(nomeA.Equals(nomeB));
             Assert.True(nomeB.Equals(nomeA));
+            Assert.False(nomeA != nomeB);
         }
 
         [Fact]
@@ -38,6 +40,7 @@ namespace Jurify.Advogados.Api.Tests.Dominio.Base
             Assert.False(nomeA == nomeB);
             Assert.False(nomeA.Equals(nomeB));
             Assert.False(nomeB.Equals(nomeA));
+            Assert.True(nomeA != nomeB);
         }
 
         [Fact]
