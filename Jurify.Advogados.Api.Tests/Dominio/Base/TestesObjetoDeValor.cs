@@ -11,10 +11,8 @@ namespace Jurify.Advogados.Api.Tests.Dominio.Base
             var nomeA = new Nome("teste", "sobrenome teste");
 
             Assert.Equal(nomeA, nomeA);
-            Assert.True(nomeA == nomeA);
             Assert.True(nomeA.Equals(nomeA));
             Assert.True(nomeA.Equals(nomeA));
-            Assert.False(nomeA != nomeA);
         }
 
         [Fact]
