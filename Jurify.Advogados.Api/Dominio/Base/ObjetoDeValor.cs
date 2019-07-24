@@ -11,8 +11,7 @@ namespace Jurify.Advogados.Api.Dominio.Base
 
         public bool Equals(ObjetoDeValor other)
         {
-            return GetType() == other.GetType() &&
-                ObterComponentesIgualdade().SequenceEqual(other.ObterComponentesIgualdade());
+            return this == other;
         }
 
         public override bool Equals(object obj)
@@ -20,7 +19,24 @@ namespace Jurify.Advogados.Api.Dominio.Base
             if (obj == null) return false;
             if (!(obj is ObjetoDeValor)) return false;
 
-            return Equals(obj as ObjetoDeValor);
+            return this == (obj as ObjetoDeValor);
+        }
+
+        public static bool operator ==(ObjetoDeValor objetoA, ObjetoDeValor objetoB)
+        {
+            if (ReferenceEquals(objetoA, objetoB))
+                return true;
+
+            if (objetoA is null || objetoB is null)
+                return false;
+
+            return objetoA.GetType() == objetoB.GetType() &&
+                objetoA.ObterComponentesIgualdade().SequenceEqual(objetoB.ObterComponentesIgualdade());
+        }
+
+        public static bool operator !=(ObjetoDeValor objetoA, ObjetoDeValor objetoB)
+        {
+            return !(objetoA == objetoB);
         }
 
         public override int GetHashCode()

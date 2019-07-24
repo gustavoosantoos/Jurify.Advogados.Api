@@ -96,6 +96,18 @@ namespace Jurify.Advogados.Api.Tests.Dominio.Base
             Assert.True(entidade.Equals((object)entidade));
         }
 
+        [Fact]
+        public void EntidadesComCodigosDiferentesDevemSerDiferentes()
+        {
+            var entidadeA = ConstruirEntidade();
+            var entidadeB = ConstruirEntidade();
+
+            Assert.NotEqual(entidadeA, entidadeB);
+            Assert.False(entidadeA == entidadeB);
+            Assert.False(entidadeA.Equals(entidadeB));
+            Assert.False(entidadeA.Equals((object)entidadeB));
+        }
+
         private Entidade ConstruirEntidade()
         {
             return new Endereco(null, null, null, null, null, null, null, null, ETipoEndereco.Residencial);
