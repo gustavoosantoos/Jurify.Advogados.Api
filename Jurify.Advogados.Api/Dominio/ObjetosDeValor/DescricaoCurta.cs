@@ -4,17 +4,17 @@ using System.Collections.Generic;
 
 namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
 {
-    public class Descricao : ObjetoDeValor
+    public class DescricaoCurta : ObjetoDeValor
     {
         public string Valor { get; private set; }
 
-        public Descricao(string valor)
+        public DescricaoCurta(string valor)
         {
             Valor = valor;
 
             AddNotifications(new Contract()
                 .IsNotNullOrWhiteSpace(Valor, "Descricao", "A descrição não deve ser vazia")
-                .HasMaxLen(Valor, 3000, "Descricao", "A descrição deve ter ao máximo 3000 caracteres")
+                .HasMaxLen(Valor, 100, "Descricao", "A descrição deve ter ao máximo 100 caracteres")
             );
         }
 

@@ -50,8 +50,11 @@ create table processos_juridicos(
 	codigo_advogado_responsavel uuid not null,
 	codigo_cliente uuid not null references clientes(codigo),
 
+	numero varchar(30) null,
 	descricao_curta varchar(100) not null,
-	descricao varchar(3000) not null,
+	descricao varchar(3000) null,
+	tipo_papel numeric(2) not null,
+	status numeric(2) not null,
 
 	data_criacao timestamp not null default now(),
 	data_ultima_alteracao timestamp not null default now(),

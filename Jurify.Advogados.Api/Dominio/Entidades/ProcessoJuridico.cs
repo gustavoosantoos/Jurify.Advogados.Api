@@ -15,6 +15,8 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         public NumeroProcessoJuridico Numero { get; private set; }
         public Cliente Cliente { get; private set; }
+        public DescricaoCurta Titulo { get; private set; }
+        public Descricao Descricao { get; private set; }
         public EStatusProcessoJuridico Status { get; private set; }
         public ETipoDePapelProcessoJuridico TipoDePapel { get; private set; }
         public IReadOnlyCollection<EventoProcessoJuridico> Eventos => _eventos;
@@ -31,7 +33,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         protected override void Validar()
         {
-
+            AddNotifications(Numero, Titulo, Descricao);
         }
     }
 }
