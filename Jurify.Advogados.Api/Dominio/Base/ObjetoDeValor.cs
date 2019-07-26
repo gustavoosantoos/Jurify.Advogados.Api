@@ -16,7 +16,7 @@ namespace Jurify.Advogados.Api.Dominio.Base
 
         public override bool Equals(object obj)
         {
-            if (obj == null) return false;
+            if (obj is null) return false;
             if (!(obj is ObjetoDeValor)) return false;
 
             return this == (obj as ObjetoDeValor);
