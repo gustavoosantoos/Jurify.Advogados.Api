@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jurify.Advogados.Api", "Jur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0E4770EE-DF1C-44B3-AA22-87D48246E38A}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{FCC1589A-A67A-41FB-8C88-EB25BC6384DE}"
@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{FC
 		Docs\Database\jurify-advogados-ddl.sql = Docs\Database\jurify-advogados-ddl.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jurify.Advogados.Api.Tests", "Jurify.Advogados.Api.Tests\Jurify.Advogados.Api.Tests.csproj", "{56F9CAD4-DF45-4436-915C-4048D25737BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jurify.Advogados.Api.Tests", "Jurify.Advogados.Api.Tests\Jurify.Advogados.Api.Tests.csproj", "{56F9CAD4-DF45-4436-915C-4048D25737BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
