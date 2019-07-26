@@ -10,8 +10,8 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
     {
         private readonly List<EventoProcessoJuridico> _eventos;
 
-        public Guid IdAdvogadoResponsavel { get; private set; }
-        public Guid IdCliente { get; private set; }
+        public Guid CodigoAdvogadoResponsavel { get; private set; }
+        public Guid CodigoCliente { get; private set; }
 
         public NumeroProcessoJuridico Numero { get; private set; }
         public Cliente Cliente { get; private set; }
@@ -23,8 +23,8 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         public ProcessoJuridico(Guid idAdvogadoResponsavel, Guid idCliente, EStatusProcessoJuridico status, ETipoDePapelProcessoJuridico tipoDePapel)
         {
-            IdAdvogadoResponsavel = idAdvogadoResponsavel;
-            IdCliente = idCliente;
+            CodigoAdvogadoResponsavel = idAdvogadoResponsavel;
+            CodigoCliente = idCliente;
             Status = status;
             TipoDePapel = tipoDePapel;
 

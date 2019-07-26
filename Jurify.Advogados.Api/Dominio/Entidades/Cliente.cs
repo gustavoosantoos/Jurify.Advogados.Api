@@ -8,6 +8,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
     public class Cliente : Entidade
     {
         private readonly List<Endereco> _enderecos;
+        private readonly List<ProcessoJuridico> _processos;
 
         public Nome Nome { get; private set; }
         public RG RG { get; private set; }
@@ -16,10 +17,12 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public Email Email { get; private set; }
 
         public IReadOnlyCollection<Endereco> Enderecos => _enderecos;
+        public IReadOnlyCollection<ProcessoJuridico> Processos => _processos;
 
         protected Cliente()
         {
             _enderecos = new List<Endereco>();
+            _processos = new List<ProcessoJuridico>();
         }
 
         public Cliente(Nome nome, RG rg, CPF cpf, DataNascimento dataNascimento, Email email, List<Endereco> enderecos)
