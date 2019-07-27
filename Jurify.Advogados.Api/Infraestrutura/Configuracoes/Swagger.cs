@@ -15,6 +15,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Configuracoes
                 config.Title = "Jurify.Advogados.Api";
                 config.Description = "Backend do CRM para advogados Jurify.";
                 config.OperationProcessors.Add(new OperationSecurityScopeProcessor("JWT"));
+                config.GenerateEnumMappingDescription = true;
                 config.AddSecurity("JWT", Enumerable.Empty<string>(),
                      new SwaggerSecurityScheme()
                      {
