@@ -21,6 +21,11 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public ETipoDePapelProcessoJuridico TipoDePapel { get; private set; }
         public IReadOnlyCollection<EventoProcessoJuridico> Eventos => _eventos;
 
+        protected ProcessoJuridico()
+        {
+            _eventos = new List<EventoProcessoJuridico>();
+        }
+
         public ProcessoJuridico(Guid idAdvogadoResponsavel, Guid idCliente, EStatusProcessoJuridico status, ETipoDePapelProcessoJuridico tipoDePapel)
         {
             CodigoAdvogadoResponsavel = idAdvogadoResponsavel;

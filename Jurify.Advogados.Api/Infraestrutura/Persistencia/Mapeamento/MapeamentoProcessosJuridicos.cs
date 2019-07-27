@@ -37,6 +37,8 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
             builder.Property(e => e.Status).HasColumnName("status");
             builder.Property(e => e.TipoDePapel).HasColumnName("tipo_papel");
 
+            builder.HasMany(e => e.Eventos).WithOne(e => e.Processo).HasForeignKey(e => e.CodigoProcesso);
+
             builder.Property(e => e.DataCriacao).HasColumnName("data_criacao");
             builder.Property(e => e.DataUltimaAlteracao).HasColumnName("data_ultima_alteracao");
             builder.Property(e => e.CodigoUsuarioUltimaAlteracao).HasColumnName("codigo_usuario_ultima_alteracao");
