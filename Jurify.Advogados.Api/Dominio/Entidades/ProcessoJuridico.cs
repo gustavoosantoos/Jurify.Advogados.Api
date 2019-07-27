@@ -47,7 +47,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         protected override void Validar()
         {
             AddNotifications(Numero, Titulo, Descricao);
-            //TODO: Adicionar validação de Código Cliente e Código Advogado responsável
+
         }
     }
 }

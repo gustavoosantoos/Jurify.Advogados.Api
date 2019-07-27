@@ -21,6 +21,11 @@ namespace Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum
             };
         }
 
+        public static RespostaCasoDeUso ComFalha(params string[] erros)
+        {
+            return ComFalha(erros.Select(e => new Notification("", e)));
+        }
+
         public static RespostaCasoDeUso ComSucesso(object dados = null)
         {
             return new RespostaCasoDeUso
