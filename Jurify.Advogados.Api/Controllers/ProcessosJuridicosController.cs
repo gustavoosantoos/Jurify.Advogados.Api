@@ -1,4 +1,5 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJuridico;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ListarProcessosJuridicos;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -19,6 +20,17 @@ namespace Jurify.Advogados.Api.Controllers
         public ProcessosJuridicosController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        /// <summary>
+        /// Retorna uma listagem de processos com poucos dados.
+        /// </summary>
+        /// <response code="200">Listagem de processos jurídicos.</response>
+        [HttpGet]
+        [ProducesResponseType(typeof(ProcessoJuridicoPreview[]), StatusCodes.Status200OK)]
+        public async Task<ActionResult> Get()
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new ListarProcessosJuridicosQuery()));
         }
 
         /// <summary>
