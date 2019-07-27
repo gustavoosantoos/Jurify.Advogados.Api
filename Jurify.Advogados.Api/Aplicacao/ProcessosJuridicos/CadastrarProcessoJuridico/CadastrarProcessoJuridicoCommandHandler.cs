@@ -27,7 +27,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJur
                                !c.Apagado);
 
             if (!clienteExiste)
-                return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound, "Cliente não encontrado");
+                return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
 
             var processoExiste = await Context.ProcessosJuridicos
                 .AnyAsync(p => p.Numero.Numero == request.NumeroProcesso &&

@@ -28,6 +28,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         public ProcessoJuridico(Guid? idAdvogadoResponsavel,
                                 Guid idCliente,
+                                NumeroProcessoJuridico numero,
                                 DescricaoCurta titulo,
                                 Descricao descricao,
                                 EStatusProcessoJuridico status,
@@ -35,6 +36,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         {
             CodigoAdvogadoResponsavel = idAdvogadoResponsavel;
             CodigoCliente = idCliente;
+            Numero = numero;
             Titulo = titulo;
             Descricao = descricao;
             Status = status;

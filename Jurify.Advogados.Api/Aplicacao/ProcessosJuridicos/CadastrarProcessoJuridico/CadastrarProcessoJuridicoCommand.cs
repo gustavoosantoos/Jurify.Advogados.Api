@@ -22,6 +22,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJur
             return new ProcessoJuridico(
                 CodigoAdvogadoResponsavel,
                 CodigoCliente,
+                new NumeroProcessoJuridico(NumeroProcesso),
                 new DescricaoCurta(Titulo),
                 new Descricao(Descricao),
                 Status,

@@ -1,12 +1,38 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJuridico;
+using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Controllers
 {
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class ProcessosJuridicosController : ControllerBase
+    public class ProcessosJuridicosController : BaseController
     {
+        private readonly IMediator _mediator;
+
+        public ProcessosJuridicosController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        /// <summary>
+        /// Cadastra um novo processo jurídico
+        /// </summary>
+        /// <param name="command">Dados do novo processo</param>
+        /// <response code="200">Processo criado</response>
+        /// <response code="400">Dados inválidos</response>
+        [HttpPost]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> Post(CadastrarProcessoJuridicoCommand command)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(command));
+        }
     }
 }
