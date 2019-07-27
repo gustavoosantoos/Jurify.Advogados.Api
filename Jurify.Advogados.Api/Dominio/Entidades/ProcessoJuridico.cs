@@ -10,7 +10,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
     {
         private readonly List<EventoProcessoJuridico> _eventos;
 
-        public Guid CodigoAdvogadoResponsavel { get; private set; }
+        public Guid? CodigoAdvogadoResponsavel { get; private set; }
         public Guid CodigoCliente { get; private set; }
 
         public NumeroProcessoJuridico Numero { get; private set; }
@@ -26,19 +26,28 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             _eventos = new List<EventoProcessoJuridico>();
         }
 
-        public ProcessoJuridico(Guid idAdvogadoResponsavel, Guid idCliente, EStatusProcessoJuridico status, ETipoDePapelProcessoJuridico tipoDePapel)
+        public ProcessoJuridico(Guid? idAdvogadoResponsavel,
+                                Guid idCliente,
+                                DescricaoCurta titulo,
+                                Descricao descricao,
+                                EStatusProcessoJuridico status,
+                                ETipoDePapelProcessoJuridico tipoDePapel)
         {
             CodigoAdvogadoResponsavel = idAdvogadoResponsavel;
             CodigoCliente = idCliente;
+            Titulo = titulo;
+            Descricao = descricao;
             Status = status;
             TipoDePapel = tipoDePapel;
 
             _eventos = new List<EventoProcessoJuridico>();
+            Validar();
         }
 
         protected override void Validar()
         {
             AddNotifications(Numero, Titulo, Descricao);
+            //TODO: Adicionar validação de Código Cliente e Código Advogado responsável
         }
     }
 }
