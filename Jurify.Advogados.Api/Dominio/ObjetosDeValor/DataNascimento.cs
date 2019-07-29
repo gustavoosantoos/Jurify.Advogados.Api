@@ -20,17 +20,21 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
             );
         }
 
-        public int ObterIdade()
+        public int? ObterIdade()
         {
             if (Invalid)
             {
                 throw new DomainException(this);
             }
 
-            var hoje = DateTime.Today;
-            var idade = hoje.Year - hoje.Year;
+            if (!Data.HasValue)
+                return null;
 
-            if (Data?.Date > hoje.AddYears(-idade))
+            var hoje = DateTime.Today;
+            var data = Data.Value;
+            var idade = hoje.Year - data.Year;
+
+            if (data.Date > hoje.AddYears(-idade))
                 idade--;
 
             return idade;

@@ -1,5 +1,7 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJuridico;
 using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ListarProcessosJuridicos;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridico;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridico.Models;
 using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.RemoverProcessoJuridico;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
@@ -32,6 +34,20 @@ namespace Jurify.Advogados.Api.Controllers
         public async Task<ActionResult> Get()
         {
             return RespostaCasoDeUso(await _mediator.Send(new ListarProcessosJuridicosQuery()));
+        }
+
+        /// <summary>
+        /// Retorna um processo específico com todos os campos
+        /// </summary>
+        /// <param name="codigo">Código do processo</param>
+        /// <response code="200">Dados do processo</response>
+        /// <response code="404">Processo não encontrado</response>
+        [HttpGet("{codigo:guid}")]
+        [ProducesResponseType(typeof(ProcessoJuridico), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Get(Guid codigo)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new ObterProcessoJuridicoQuery(codigo)));
         }
 
         /// <summary>
