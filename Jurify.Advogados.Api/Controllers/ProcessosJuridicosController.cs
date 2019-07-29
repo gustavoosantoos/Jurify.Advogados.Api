@@ -1,5 +1,6 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJuridico;
 using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ListarProcessosJuridicos;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.RemoverProcessoJuridico;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -45,6 +46,20 @@ namespace Jurify.Advogados.Api.Controllers
         public async Task<ActionResult> Post(CadastrarProcessoJuridicoCommand command)
         {
             return RespostaCasoDeUso(await _mediator.Send(command));
+        }
+
+        /// <summary>
+        /// Remove um processo jurídico
+        /// </summary>
+        /// <param name="codigo">Código do processo</param>
+        /// <response code="204">Processo removido</response>
+        /// <response code="404">Processo não encontrado</response>
+        [HttpDelete("{codigo:guid}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Delete(Guid codigo)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new RemoverProcessoJuridicoCommand(codigo)));
         }
     }
 }
