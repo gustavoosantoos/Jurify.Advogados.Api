@@ -2,13 +2,18 @@
 {
     public enum EStatusProcessoJuridico
     {
-        Conhecimento,
-        PeticaoInicial,
-        Replica,
-        FaseProbatoria,
-        Sentenciado,
-        Recursos,
+        Aberto,
+        AguardandoDistribuicao,
+        AguardandoCitacao,
+        AguardandoCumprimentoDaCartaPrecatoria,
+        AguardandoJulgamentoEmbargoDeTerceiros,
+        AguardandoSentenca,
+        AguardandoTransitoEmJulgado,
+        AguardandoIntimacaoDaSentenca,
+        AguardandoJulgamentoDeApelacao,
+        AguardandoJulgamentoDeRecursoEspecial,
         CumprimentoDeSentenca,
+        AguardandoBaixaDoDistribuidor,
         Finalizado
     }
 }

@@ -1,11 +1,10 @@
-﻿using Jurify.Advogados.Api.Dominio.Entidades;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
+namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models
 {
-    public class ClienteCompleto
+    public class Cliente
     {
         public Guid Codigo { get; set; }
         public string PrimeiroNome { get; set; }
@@ -14,15 +13,15 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
         public string Email { get; set; }
         public string RG { get; set; }
         public string CPF { get; set; }
-        public IEnumerable<EnderecoCliente> Enderecos { get; set; }
+        public IEnumerable<Endereco> Enderecos { get; set; }
 
         public DateTime DataCriacao { get; set; }
         public DateTime DataUltimaAlteracao { get; set; }
         public string NomeUsuarioUltimaAlteracao { get; set; }
 
-        public static ClienteCompleto FromEntity(Cliente entidade)
+        public static Cliente FromEntity(Dominio.Entidades.Cliente entidade)
         {
-            var enderecos = entidade.Enderecos.Select(e => new EnderecoCliente
+            var enderecos = entidade.Enderecos.Select(e => new Endereco
             {
                 Codigo = e.Codigo,
                 Rua = e.Rua,
@@ -33,13 +32,13 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
                 Pais = e.Pais,
                 Cep = e.Cep,
                 Observacoes = e.Observacoes,
-                Tipo = e.Tipo, 
+                Tipo = e.Tipo,
                 DataCriacao = e.DataCriacao,
                 DataUltimaAlteracao = e.DataUltimaAlteracao,
                 NomeUsuarioUltimaAlteracao = "Indisponível"
             });
 
-            return new ClienteCompleto
+            return new Cliente
             {
                 Codigo = entidade.Codigo,
                 PrimeiroNome = entidade.Nome.PrimeiroNome,

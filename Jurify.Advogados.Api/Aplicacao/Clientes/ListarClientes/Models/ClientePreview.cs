@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes
+namespace Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes.Models
 {
     public class ClientePreview
     {

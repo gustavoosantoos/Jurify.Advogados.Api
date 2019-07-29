@@ -1,4 +1,5 @@
-﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
+﻿using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes.Models;
+using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;

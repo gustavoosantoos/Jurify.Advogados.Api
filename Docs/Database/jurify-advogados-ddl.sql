@@ -47,7 +47,7 @@ create table enderecos(
 create table processos_juridicos(
 	codigo uuid primary key not null default gen_random_uuid(),
 	codigo_escritorio uuid not null,
-	codigo_advogado_responsavel uuid not null,
+	codigo_advogado_responsavel uuid null,
 	codigo_cliente uuid not null references clientes(codigo),
 
 	numero varchar(30) null,

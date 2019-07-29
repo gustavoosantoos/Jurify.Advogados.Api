@@ -22,8 +22,8 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
                 return RespostaCasoDeUso.ComFalha(cliente.Notifications);
             }
 
-            await Context.Clientes.AddAsync(cliente, cancellationToken);
-            await Context.SaveChangesAsync(cancellationToken);
+            await Context.Clientes.AddAsync(cliente);
+            await Context.SaveChangesAsync();
 
             return RespostaCasoDeUso.ComSucesso(cliente.Codigo);
         }

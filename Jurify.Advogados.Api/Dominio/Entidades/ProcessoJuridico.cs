@@ -10,8 +10,8 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
     {
         private readonly List<EventoProcessoJuridico> _eventos;
 
-        public Guid IdAdvogadoResponsavel { get; private set; }
-        public Guid IdCliente { get; private set; }
+        public Guid? CodigoAdvogadoResponsavel { get; private set; }
+        public Guid CodigoCliente { get; private set; }
 
         public NumeroProcessoJuridico Numero { get; private set; }
         public Cliente Cliente { get; private set; }
@@ -21,19 +21,35 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public ETipoDePapelProcessoJuridico TipoDePapel { get; private set; }
         public IReadOnlyCollection<EventoProcessoJuridico> Eventos => _eventos;
 
-        public ProcessoJuridico(Guid idAdvogadoResponsavel, Guid idCliente, EStatusProcessoJuridico status, ETipoDePapelProcessoJuridico tipoDePapel)
+        protected ProcessoJuridico()
         {
-            IdAdvogadoResponsavel = idAdvogadoResponsavel;
-            IdCliente = idCliente;
+            _eventos = new List<EventoProcessoJuridico>();
+        }
+
+        public ProcessoJuridico(Guid? idAdvogadoResponsavel,
+                                Guid idCliente,
+                                NumeroProcessoJuridico numero,
+                                DescricaoCurta titulo,
+                                Descricao descricao,
+                                EStatusProcessoJuridico status,
+                                ETipoDePapelProcessoJuridico tipoDePapel)
+        {
+            CodigoAdvogadoResponsavel = idAdvogadoResponsavel;
+            CodigoCliente = idCliente;
+            Numero = numero;
+            Titulo = titulo;
+            Descricao = descricao;
             Status = status;
             TipoDePapel = tipoDePapel;
 
             _eventos = new List<EventoProcessoJuridico>();
+            Validar();
         }
 
         protected override void Validar()
         {
             AddNotifications(Numero, Titulo, Descricao);
+
         }
     }
 }
