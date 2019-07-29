@@ -1,9 +1,9 @@
 ﻿using Jurify.Advogados.Api.Dominio.Enums;
 using System;
 
-namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
+namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models
 {
-    public class EnderecoCliente
+    public class Endereco
     {
         public Guid Codigo { get; set; }
         public string Rua { get; set; }

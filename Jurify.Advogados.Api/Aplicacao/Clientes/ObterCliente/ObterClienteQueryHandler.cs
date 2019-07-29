@@ -1,4 +1,5 @@
-﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
+﻿using Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models;
+using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
@@ -28,7 +29,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
             if (cliente == null)
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
 
-            return RespostaCasoDeUso.ComSucesso(ClienteCompleto.FromEntity(cliente));
+            return RespostaCasoDeUso.ComSucesso(Cliente.FromEntity(cliente));
         }
     }
 }

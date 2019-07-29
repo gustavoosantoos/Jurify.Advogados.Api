@@ -1,7 +1,9 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.Clientes.AdicionarEndereco;
 using Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente;
 using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes;
+using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes.Models;
 using Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente;
+using Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models;
 using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente;
 using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverEndereco;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
@@ -44,7 +46,7 @@ namespace Jurify.Advogados.Api.Controllers
         /// <response code="200">Dados do cliente</response>
         /// <response code="404">Cliente não encontrado</response>
         [HttpGet("{codigo:guid}")]
-        [ProducesResponseType(typeof(ClienteCompleto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Get(Guid codigo)
         {
