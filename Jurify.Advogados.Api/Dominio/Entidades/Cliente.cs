@@ -1,4 +1,4 @@
-﻿ using Jurify.Advogados.Api.Dominio.Base;
+﻿using Jurify.Advogados.Api.Dominio.Base;
 using Jurify.Advogados.Api.Dominio.Exceptions;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System.Collections.Generic;
