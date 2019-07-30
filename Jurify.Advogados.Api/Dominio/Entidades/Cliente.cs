@@ -39,11 +39,10 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         public void AdicionarEndereco(Endereco endereco)
         {
+            AddNotifications(endereco);
+
             if (Invalid)
                 throw new DomainException(this);
-
-            if (endereco.Invalid)
-                throw new DomainException(endereco);
 
             _enderecos.Add(endereco);
         }
