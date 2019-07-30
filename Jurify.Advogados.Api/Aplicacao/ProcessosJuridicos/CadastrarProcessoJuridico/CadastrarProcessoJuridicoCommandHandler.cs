@@ -23,7 +23,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJur
 
             var clienteExiste = await Context.Clientes
                 .AnyAsync(c => c.Codigo == request.CodigoCliente &&
-                               c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
+                               c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
                                !c.Apagado);
 
             if (!clienteExiste)
@@ -31,7 +31,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJur
 
             var processoExiste = await Context.ProcessosJuridicos
                 .AnyAsync(p => p.Numero.Numero == request.NumeroProcesso &&
-                               p.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
+                               p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
                                !p.Apagado);
 
             if (processoExiste)

@@ -33,9 +33,9 @@ namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
             EscritorioAtual = escritorio;
         }
 
-        public async Task<Usuario> ObterInformacoesDeUsuario(Guid codigoEscritorio, Guid codigoUsuario)
+        public async Task<Usuario> ObterInformacoesDeUsuario(Guid codigoUsuario)
         {
-            var url = $"Account/UserInfo/{codigoEscritorio}/{codigoUsuario}";
+            var url = $"Account/UserInfo/{EscritorioAtual.Codigo}/{codigoUsuario}";
             var response = await _clientFactory.CreateClient("AUTENTICADOR_API").GetStringAsync(url);
             var dados = JsonConvert.DeserializeObject<ModeloAutenticador.Usuario>(response);
 

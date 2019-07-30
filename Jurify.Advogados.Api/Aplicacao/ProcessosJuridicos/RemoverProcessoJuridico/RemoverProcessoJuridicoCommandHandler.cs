@@ -19,7 +19,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.RemoverProcessoJurid
         {
             var processo = await Context.ProcessosJuridicos
                .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
-                                         c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
+                                         c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
                                          !c.Apagado);
 
             if (processo == null)

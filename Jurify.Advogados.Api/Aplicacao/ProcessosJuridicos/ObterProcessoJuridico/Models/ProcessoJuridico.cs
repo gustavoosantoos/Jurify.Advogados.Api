@@ -8,6 +8,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridic
     public class ProcessoJuridico
     {
         public Guid Codigo { get; set; }
+        public Guid? CodigoAdvogadoResponsavel { get; set; }
+        public string NomeAdvogadoResponsavel { get; set; }
         public string Numero { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
@@ -19,23 +21,20 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridic
 
         public Cliente Cliente { get; set; }
 
-        public async static Task<ProcessoJuridico> FromEntity(Dominio.Entidades.ProcessoJuridico entidade, ServicoUsuarios servico)
+        public static ProcessoJuridico FromEntity(Dominio.Entidades.ProcessoJuridico entidade)
         {
-            var usuarioUltimaAlteracao = await servico
-                .ObterInformacoesDeUsuario(servico.EscritorioAtual.Codigo, entidade.CodigoUsuarioUltimaAlteracao);
-
             var cliente = new Cliente
             {
                 Codigo = entidade.Cliente.Codigo,
                 NomeCompleto = entidade.Cliente.Nome.ObterNomeCompleto(),
                 CPF = entidade.Cliente.CPF.Numero,
-                Idade = entidade.Cliente.DataNascimento.ObterIdade(),
-                
+                Idade = entidade.Cliente.DataNascimento.ObterIdade()
             };
 
             return new ProcessoJuridico
             {
                 Codigo = entidade.Codigo,
+                CodigoAdvogadoResponsavel = entidade.CodigoAdvogadoResponsavel,
                 Numero = entidade.Numero.Numero,
                 Titulo = entidade.Titulo.Valor,
                 Descricao = entidade.Descricao.Valor,
@@ -43,8 +42,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridic
                 Status = entidade.Status,
                 TipoDePapel = entidade.TipoDePapel,
                 DataCriacao = entidade.DataCriacao,
-                DataUltimaAlteracao = entidade.DataUltimaAlteracao,
-                NomeUsuarioUltimaAlteracao = usuarioUltimaAlteracao.ObterNomeCompleto()
+                DataUltimaAlteracao = entidade.DataUltimaAlteracao
             };
         }
     }

@@ -23,8 +23,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models
 
         public async static Task<Cliente> FromEntity(Dominio.Entidades.Cliente entidade, ServicoUsuarios servico)
         {
-            var usuarioUltimaAlteracao = await servico
-                .ObterInformacoesDeUsuario(servico.EscritorioAtual.Codigo, entidade.CodigoUsuarioUltimaAlteracao);
+            var usuarioUltimaAlteracao = await servico.ObterInformacoesDeUsuario(entidade.CodigoUsuarioUltimaAlteracao);
 
             var enderecos = entidade.Enderecos.Select(e => new Endereco
             {

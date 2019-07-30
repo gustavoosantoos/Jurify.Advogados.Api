@@ -8,10 +8,10 @@ namespace Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum
         public BaseHandler(JurifyContext context, ServicoUsuarios provedor)
         {
             Context = context;
-            Provedor = provedor;
+            ServicoUsuarios = provedor;
         }
 
         protected JurifyContext Context { get; }
-        protected ServicoUsuarios Provedor { get; }
+        protected ServicoUsuarios ServicoUsuarios { get; }
     }
 }

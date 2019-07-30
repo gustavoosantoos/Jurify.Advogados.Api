@@ -19,7 +19,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente
         {
             var cliente = await Context.Clientes
                 .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
-                                          c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
+                                          c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
                                           !c.Apagado);
 
             if (cliente == null)

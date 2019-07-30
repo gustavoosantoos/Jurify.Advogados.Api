@@ -20,7 +20,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes
         {
             var clientes = await Context.Clientes
                 .AsNoTracking()
-                .Where(c => c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo && !c.Apagado)
+                .Where(c => c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo && !c.Apagado)
                 .Select(c => new ClientePreview()
                     {
                         Codigo = c.Codigo,

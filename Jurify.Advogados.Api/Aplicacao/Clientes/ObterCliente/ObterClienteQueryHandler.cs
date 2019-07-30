@@ -23,13 +23,13 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
             var cliente = await Context.Clientes
                 .IncludeFilter(c => c.Enderecos.Where(e => !e.Apagado))
                 .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
-                                     c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
+                                     c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
                                      !c.Apagado);
 
             if (cliente == null)
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
 
-            return RespostaCasoDeUso.ComSucesso(await Cliente.FromEntity(cliente, Provedor));
+            return RespostaCasoDeUso.ComSucesso(await Cliente.FromEntity(cliente, ServicoUsuarios));
         }
     }
 }

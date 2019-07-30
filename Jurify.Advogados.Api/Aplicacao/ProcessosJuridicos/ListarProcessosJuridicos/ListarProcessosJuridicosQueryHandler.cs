@@ -18,7 +18,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ListarProcessosJurid
         public async Task<RespostaCasoDeUso> Handle(ListarProcessosJuridicosQuery request, CancellationToken cancellationToken)
         {
             var processos = await Context.ProcessosJuridicos
-                .Where(p => p.CodigoEscritorio == Provedor.EscritorioAtual.Codigo && !p.Apagado)
+                .Where(p => p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo && !p.Apagado)
                 .Select(p => new ProcessoJuridicoPreview
                 {
                     Codigo = p.Codigo,
@@ -31,6 +31,16 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ListarProcessosJurid
                     DataUltimaAtualizacao = p.DataUltimaAlteracao
                 })
                 .ToListAsync();
+
+            Task.WaitAll(processos.Select(async processo =>
+            {
+                if (!processo.CodigoAdvogadoResponsavel.HasValue)
+                    return;
+
+                processo.NomeAdvogadoResponsavel = (await ServicoUsuarios
+                                                   .ObterInformacoesDeUsuario(processo.CodigoAdvogadoResponsavel.Value))
+                                                   .ObterNomeCompleto();
+            }).ToArray());
 
             return RespostaCasoDeUso.ComSucesso(processos);
         }

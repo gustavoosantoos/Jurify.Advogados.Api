@@ -22,13 +22,23 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridic
             var processo = await Context.ProcessosJuridicos
                 .Include(p => p.Cliente)
                 .FirstOrDefaultAsync(p => p.Codigo == request.Codigo &&
-                                     p.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
+                                     p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
                                      !p.Apagado);
 
             if (processo == null)
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
 
-            return RespostaCasoDeUso.ComSucesso(await ProcessoJuridico.FromEntity(processo, Provedor));
+            var usuarioUltimaAlteracao = await ServicoUsuarios.ObterInformacoesDeUsuario(processo.CodigoUsuarioUltimaAlteracao);
+            var processoDto = ProcessoJuridico.FromEntity(processo);
+            processoDto.NomeUsuarioUltimaAlteracao = usuarioUltimaAlteracao.ObterNomeCompleto();
+
+            if (processoDto.CodigoAdvogadoResponsavel.HasValue)
+            {
+                var usuarioAdvogadoResponsavel = await ServicoUsuarios.ObterInformacoesDeUsuario(processoDto.CodigoAdvogadoResponsavel.Value);
+                processoDto.NomeAdvogadoResponsavel = usuarioUltimaAlteracao.ObterNomeCompleto();
+            }
+
+            return RespostaCasoDeUso.ComSucesso(processoDto);
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ListarProcessosJurid
     {
         public Guid Codigo { get; set; }
         public Guid? CodigoAdvogadoResponsavel { get; set; }
+        public string NomeAdvogadoResponsavel { get; set; }
         public string NumeroProcesso { get; set; }
         public string Titulo { get; set; }
         public DateTime DataCriacao { get; set; }
