@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
+namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao.Modelo
 {
-    public class EscritorioAtual
+    public class Escritorio
     {
-        public EscritorioAtual(Guid codigo, string nome)
+        public Escritorio(Guid codigo, string nome)
         {
             Codigo = codigo;
             Nome = nome;

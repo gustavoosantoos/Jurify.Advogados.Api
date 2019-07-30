@@ -13,10 +13,10 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
     public class JurifyContext : DbContext
     {
         private readonly IConfiguration _configuracoes;
-        private readonly ProvedorUsuarioAtual _provedor;
+        private readonly ServicoUsuarios _provedor;
         private readonly ILoggerFactory _loggerFactory;
 
-        public JurifyContext(ProvedorUsuarioAtual provedorUsuario, ILoggerFactory loggerFactory, IConfiguration configuracoes)
+        public JurifyContext(ServicoUsuarios provedorUsuario, ILoggerFactory loggerFactory, IConfiguration configuracoes)
         {
             _configuracoes = configuracoes;
             _provedor = provedorUsuario;
@@ -54,8 +54,8 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
 
         private void ManutenirEstadoDasEntradas()
         {
-            var codigoUsuarioAtual = _provedor.Usuario.Codigo;
-            var codigoEscritorioAtual = _provedor.Escritorio.Codigo;
+            var codigoUsuarioAtual = _provedor.UsuarioAtual.Codigo;
+            var codigoEscritorioAtual = _provedor.EscritorioAtual.Codigo;
 
             foreach (var entrada in ChangeTracker.Entries())
             {

@@ -11,7 +11,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.RemoverProcessoJurid
 {
     public class RemoverProcessoJuridicoCommandHandler : BaseHandler, IRequestHandler<RemoverProcessoJuridicoCommand, RespostaCasoDeUso>
     {
-        public RemoverProcessoJuridicoCommandHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public RemoverProcessoJuridicoCommandHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 
@@ -19,7 +19,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.RemoverProcessoJurid
         {
             var processo = await Context.ProcessosJuridicos
                .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
-                                         c.CodigoEscritorio == Provedor.Escritorio.Codigo &&
+                                         c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
                                          !c.Apagado);
 
             if (processo == null)

@@ -11,7 +11,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.AdicionarEndereco
 {
     public class AdicionarEnderecoCommandHandler : BaseHandler, IRequestHandler<AdicionarEnderecoCommand, RespostaCasoDeUso>
     {
-        public AdicionarEnderecoCommandHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public AdicionarEnderecoCommandHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 

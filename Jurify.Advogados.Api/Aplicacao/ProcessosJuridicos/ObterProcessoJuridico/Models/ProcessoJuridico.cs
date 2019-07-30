@@ -1,5 +1,7 @@
 ﻿using Jurify.Advogados.Api.Dominio.Enums;
+using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using System;
+using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridico.Models
 {
@@ -13,17 +15,22 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridic
         public ETipoDePapelProcessoJuridico TipoDePapel { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime DataUltimaAlteracao { get; set; }
+        public string NomeUsuarioUltimaAlteracao { get; set; }
 
         public Cliente Cliente { get; set; }
 
-        public static ProcessoJuridico FromEntity(Dominio.Entidades.ProcessoJuridico entidade)
+        public async static Task<ProcessoJuridico> FromEntity(Dominio.Entidades.ProcessoJuridico entidade, ServicoUsuarios servico)
         {
+            var usuarioUltimaAlteracao = await servico
+                .ObterInformacoesDeUsuario(entidade.CodigoEscritorio, entidade.CodigoUsuarioUltimaAlteracao);
+
             var cliente = new Cliente
             {
                 Codigo = entidade.Cliente.Codigo,
                 NomeCompleto = entidade.Cliente.Nome.ObterNomeCompleto(),
                 CPF = entidade.Cliente.CPF.Numero,
-                Idade = entidade.Cliente.DataNascimento.ObterIdade()
+                Idade = entidade.Cliente.DataNascimento.ObterIdade(),
+                
             };
 
             return new ProcessoJuridico
@@ -36,7 +43,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridic
                 Status = entidade.Status,
                 TipoDePapel = entidade.TipoDePapel,
                 DataCriacao = entidade.DataCriacao,
-                DataUltimaAlteracao = entidade.DataUltimaAlteracao
+                DataUltimaAlteracao = entidade.DataUltimaAlteracao,
+                NomeUsuarioUltimaAlteracao = usuarioUltimaAlteracao.ObterNomeCompleto()
             };
         }
     }

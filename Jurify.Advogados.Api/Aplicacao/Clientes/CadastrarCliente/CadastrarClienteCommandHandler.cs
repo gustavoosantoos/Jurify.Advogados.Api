@@ -9,7 +9,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente
 {
     public class CadastrarClienteCommandHandler : BaseHandler, IRequestHandler<CadastrarClienteCommand, RespostaCasoDeUso>
     {
-        public CadastrarClienteCommandHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public CadastrarClienteCommandHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 

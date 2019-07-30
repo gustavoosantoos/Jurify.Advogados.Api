@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao.Modelo;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 
 namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
 {
-    public class ProvedorUsuarioAtualFilter : IActionFilter
+    public class UsuarioAtualFilter : IActionFilter
     {
-        private readonly ProvedorUsuarioAtual _provedor;
+        private readonly ServicoUsuarios _provedor;
 
-        public ProvedorUsuarioAtualFilter(ProvedorUsuarioAtual provedor)
+        public UsuarioAtualFilter(ServicoUsuarios provedor)
         {
             _provedor = provedor;
         }
@@ -16,13 +17,13 @@ namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
         {
             var claims = context.HttpContext.User;
 
-            var usuario = new UsuarioAtual(
+            var usuario = new Usuario(
                 Guid.Parse(claims.FindFirst("user_id").Value),
                 claims.FindFirst("user_first_name").Value,
                 claims.FindFirst("user_last_name").Value
             );
 
-            var escritorio = new EscritorioAtual(
+            var escritorio = new Escritorio(
                 Guid.Parse(claims.FindFirst("office_id").Value),
                 claims.FindFirst("office_name").Value
             );

@@ -11,7 +11,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente
 {
     public class RemoverClienteCommandHandler : BaseHandler, IRequestHandler<RemoverClienteCommand, RespostaCasoDeUso>
     {
-        public RemoverClienteCommandHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public RemoverClienteCommandHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 
@@ -19,7 +19,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente
         {
             var cliente = await Context.Clientes
                 .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
-                                          c.CodigoEscritorio == Provedor.Escritorio.Codigo &&
+                                          c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
                                           !c.Apagado);
 
             if (cliente == null)

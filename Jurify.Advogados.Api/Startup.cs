@@ -25,14 +25,14 @@ namespace Jurify.Advogados.Api
             services.AdicionarAutenticacao(Configuration);
             services.AdicionarHealthChecks();
             services.AdicionarDocumentacaoSwagger();
-            services.AdicionarServicosDeInfraestrutura();
+            services.AdicionarServicosDeInfraestrutura(Configuration);
             services.AdicionarServicosDaAplicacao();
 
             services.AddRouting(config => config.LowercaseUrls = true);
             services.AddMvc(options =>
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory(Cors.POLICY_NAME));
-                options.Filters.Add(typeof(ProvedorUsuarioAtualFilter));
+                options.Filters.Add(typeof(UsuarioAtualFilter));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

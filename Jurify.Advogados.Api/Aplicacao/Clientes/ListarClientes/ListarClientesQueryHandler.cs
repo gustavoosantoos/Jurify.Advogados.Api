@@ -12,7 +12,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes
 {
     public class ListarClientesQueryHandler : BaseHandler, IRequestHandler<ListarClientesQuery, RespostaCasoDeUso>
     {
-        public ListarClientesQueryHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public ListarClientesQueryHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 
@@ -20,7 +20,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes
         {
             var clientes = await Context.Clientes
                 .AsNoTracking()
-                .Where(c => c.CodigoEscritorio == Provedor.Escritorio.Codigo && !c.Apagado)
+                .Where(c => c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo && !c.Apagado)
                 .Select(c => new ClientePreview()
                     {
                         Codigo = c.Codigo,

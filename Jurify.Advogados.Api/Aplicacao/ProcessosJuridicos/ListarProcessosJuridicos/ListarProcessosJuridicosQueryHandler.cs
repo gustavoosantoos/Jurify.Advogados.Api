@@ -11,14 +11,14 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ListarProcessosJurid
 {
     public class ListarProcessosJuridicosQueryHandler : BaseHandler, IRequestHandler<ListarProcessosJuridicosQuery, RespostaCasoDeUso>
     {
-        public ListarProcessosJuridicosQueryHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public ListarProcessosJuridicosQueryHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 
         public async Task<RespostaCasoDeUso> Handle(ListarProcessosJuridicosQuery request, CancellationToken cancellationToken)
         {
             var processos = await Context.ProcessosJuridicos
-                .Where(p => p.CodigoEscritorio == Provedor.Escritorio.Codigo && !p.Apagado)
+                .Where(p => p.CodigoEscritorio == Provedor.EscritorioAtual.Codigo && !p.Apagado)
                 .Select(p => new ProcessoJuridicoPreview
                 {
                     Codigo = p.Codigo,

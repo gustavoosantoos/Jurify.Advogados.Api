@@ -11,7 +11,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJur
 {
     public class CadastrarProcessoJuridicoCommandHandler : BaseHandler, IRequestHandler<CadastrarProcessoJuridicoCommand, RespostaCasoDeUso>
     {
-        public CadastrarProcessoJuridicoCommandHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public CadastrarProcessoJuridicoCommandHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 
@@ -23,7 +23,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJur
 
             var clienteExiste = await Context.Clientes
                 .AnyAsync(c => c.Codigo == request.CodigoCliente &&
-                               c.CodigoEscritorio == Provedor.Escritorio.Codigo &&
+                               c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
                                !c.Apagado);
 
             if (!clienteExiste)
@@ -31,7 +31,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJur
 
             var processoExiste = await Context.ProcessosJuridicos
                 .AnyAsync(p => p.Numero.Numero == request.NumeroProcesso &&
-                               p.CodigoEscritorio == Provedor.Escritorio.Codigo &&
+                               p.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
                                !p.Apagado);
 
             if (processoExiste)

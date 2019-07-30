@@ -1,14 +1,16 @@
 ﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace Jurify.Advogados.Api.Infraestrutura.InjecaoDependencias
 {
     public static class Infraestrutura
     {
-        public static void AdicionarServicosDeInfraestrutura(this IServiceCollection services)
+        public static void AdicionarServicosDeInfraestrutura(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddLogging(config =>
             {
@@ -17,7 +19,13 @@ namespace Jurify.Advogados.Api.Infraestrutura.InjecaoDependencias
             });
 
             services.AddDbContext<JurifyContext>();
-            services.AddScoped<ProvedorUsuarioAtual>();
+
+            services.AddHttpClient("AUTENTICADOR_API", config =>
+            {
+                config.BaseAddress = new Uri($"{configuration["Authentication:Authority"]}/api/lawyers/");
+            });
+
+            services.AddScoped<ServicoUsuarios>();
             services.AddMediatR(typeof(Startup).Assembly);
         }
     }

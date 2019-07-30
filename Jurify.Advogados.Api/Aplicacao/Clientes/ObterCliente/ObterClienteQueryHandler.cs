@@ -14,7 +14,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
 {
     public class ObterClienteQueryHandler : BaseHandler, IRequestHandler<ObterClienteQuery, RespostaCasoDeUso>
     {
-        public ObterClienteQueryHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public ObterClienteQueryHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 
@@ -23,13 +23,13 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente
             var cliente = await Context.Clientes
                 .IncludeFilter(c => c.Enderecos.Where(e => !e.Apagado))
                 .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
-                                     c.CodigoEscritorio == Provedor.Escritorio.Codigo &&
+                                     c.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
                                      !c.Apagado);
 
             if (cliente == null)
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
 
-            return RespostaCasoDeUso.ComSucesso(Cliente.FromEntity(cliente));
+            return RespostaCasoDeUso.ComSucesso(await Cliente.FromEntity(cliente, Provedor));
         }
     }
 }

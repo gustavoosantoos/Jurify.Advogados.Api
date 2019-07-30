@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models
 {
@@ -19,8 +21,11 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models
         public DateTime DataUltimaAlteracao { get; set; }
         public string NomeUsuarioUltimaAlteracao { get; set; }
 
-        public static Cliente FromEntity(Dominio.Entidades.Cliente entidade)
+        public async static Task<Cliente> FromEntity(Dominio.Entidades.Cliente entidade, ServicoUsuarios servicoUsuarios)
         {
+            var usuarioUltimaAlteracao = await servicoUsuarios
+                .ObterInformacoesDeUsuario(entidade.CodigoEscritorio, entidade.CodigoUsuarioUltimaAlteracao);
+
             var enderecos = entidade.Enderecos.Select(e => new Endereco
             {
                 Codigo = e.Codigo,
@@ -34,8 +39,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models
                 Observacoes = e.Observacoes,
                 Tipo = e.Tipo,
                 DataCriacao = e.DataCriacao,
-                DataUltimaAlteracao = e.DataUltimaAlteracao,
-                NomeUsuarioUltimaAlteracao = "Indisponível"
+                DataUltimaAlteracao = e.DataUltimaAlteracao
             });
 
             return new Cliente
@@ -50,7 +54,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models
                 Enderecos = enderecos,
                 DataCriacao = entidade.DataCriacao,
                 DataUltimaAlteracao = entidade.DataUltimaAlteracao,
-                NomeUsuarioUltimaAlteracao = "Indisponível"
+                NomeUsuarioUltimaAlteracao = usuarioUltimaAlteracao.ObterNomeCompleto()
             };
         }
     }

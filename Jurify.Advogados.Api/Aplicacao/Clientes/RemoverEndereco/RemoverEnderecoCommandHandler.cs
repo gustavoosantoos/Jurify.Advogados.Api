@@ -12,7 +12,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.RemoverEndereco
 {
     public class RemoverEnderecoCommandHandler : BaseHandler, IRequestHandler<RemoverEnderecoCommand, RespostaCasoDeUso>
     {
-        public RemoverEnderecoCommandHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public RemoverEnderecoCommandHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 
@@ -21,7 +21,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.RemoverEndereco
             var endereco = await Context.Enderecos
                 .FirstOrDefaultAsync(e => e.Codigo == request.Codigo &&
                                           e.CodigoCliente == request.CodigoCliente &&
-                                          e.CodigoEscritorio == Provedor.Escritorio.Codigo &&
+                                          e.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
                                           !e.Apagado);
 
             if (endereco == null)

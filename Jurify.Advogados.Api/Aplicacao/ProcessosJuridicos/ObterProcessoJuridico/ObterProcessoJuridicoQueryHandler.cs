@@ -13,7 +13,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridic
 {
     public class ObterProcessoJuridicoQueryHandler : BaseHandler, IRequestHandler<ObterProcessoJuridicoQuery, RespostaCasoDeUso>
     {
-        public ObterProcessoJuridicoQueryHandler(JurifyContext context, ProvedorUsuarioAtual provedor) : base(context, provedor)
+        public ObterProcessoJuridicoQueryHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 
@@ -22,13 +22,13 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridic
             var processo = await Context.ProcessosJuridicos
                 .Include(p => p.Cliente)
                 .FirstOrDefaultAsync(p => p.Codigo == request.Codigo &&
-                                     p.CodigoEscritorio == Provedor.Escritorio.Codigo &&
+                                     p.CodigoEscritorio == Provedor.EscritorioAtual.Codigo &&
                                      !p.Apagado);
 
             if (processo == null)
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
 
-            return RespostaCasoDeUso.ComSucesso(ProcessoJuridico.FromEntity(processo));
+            return RespostaCasoDeUso.ComSucesso(await ProcessoJuridico.FromEntity(processo, Provedor));
         }
     }
 }
