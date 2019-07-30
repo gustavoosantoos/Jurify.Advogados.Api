@@ -22,7 +22,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridic
         public async static Task<ProcessoJuridico> FromEntity(Dominio.Entidades.ProcessoJuridico entidade, ServicoUsuarios servico)
         {
             var usuarioUltimaAlteracao = await servico
-                .ObterInformacoesDeUsuario(entidade.CodigoEscritorio, entidade.CodigoUsuarioUltimaAlteracao);
+                .ObterInformacoesDeUsuario(servico.EscritorioAtual.Codigo, entidade.CodigoUsuarioUltimaAlteracao);
 
             var cliente = new Cliente
             {
