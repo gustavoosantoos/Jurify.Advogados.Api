@@ -89,3 +89,9 @@ create table processos_juridicos_eventos_anexos(
 	codigo_usuario_ultima_alteracao uuid not null,
 	apagado boolean not null default false
 );
+
+create index idx_clientes_multitenancy on clientes(codigo, codigo_escritorio, apagado); 
+create index idx_enderecos_multitenancy on enderecos(codigo, codigo_escritorio, apagado);
+create index idx_processosjuridicos_multitenancy on processos_juridicos(codigo, codigo_escritorio, apagado);
+create index idx_processosjuridicoseventos_multitenancy on processos_juridicos_eventos(codigo, codigo_escritorio, apagado);
+create index idx_processosjuridicoseventosanexos_multitenancy on processos_juridicos_eventos_anexos(codigo, codigo_escritorio, apagado);
