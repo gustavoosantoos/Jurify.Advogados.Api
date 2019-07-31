@@ -16,7 +16,8 @@ namespace Jurify.Advogados.Api.Infraestrutura.Configuracoes
                     policy.AllowAnyOrigin()
                           .AllowCredentials()
                           .AllowAnyMethod()
-                          .AllowAnyHeader();
+                          .AllowAnyHeader()
+                          .WithExposedHeaders("WWW-Authenticate", "www-authenticate");
                 });
             });
         }
