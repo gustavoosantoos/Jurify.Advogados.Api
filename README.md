@@ -1,6 +1,6 @@
 # Jurify.Advogados.Api
 
-API RESTFUL que fornece dados referentes ao CRM Jurift para o [front-end](https://github.com/gustavoosantoos/Jurify.Advogados.Web).
+API RESTFUL que fornece dados referentes ao CRM Jurify para o [front-end](https://github.com/gustavoosantoos/Jurify.Advogados.Web).
 
 ### Tecnologias:
 - .NET Core 2.2
