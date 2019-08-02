@@ -29,8 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aplicacao\Clientes\AtualizarCliente\" />
-    <Folder Include="Aplicacao\Clientes\RemoverCliente\" />
+    <Folder Include="Aplicacao\Clientes\Atualizar\" />
+    <Folder Include="Aplicacao\Clientes\Remover\" />
     <Folder Include="Infraestrutura\Mensageria\" />
     <Folder Include="Infraestrutura\Logging\" />
   </ItemGroup>

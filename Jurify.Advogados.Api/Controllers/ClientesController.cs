@@ -1,10 +1,10 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.Clientes.AdicionarEndereco;
-using Jurify.Advogados.Api.Aplicacao.Clientes.CadastrarCliente;
-using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes;
-using Jurify.Advogados.Api.Aplicacao.Clientes.ListarClientes.Models;
-using Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente;
-using Jurify.Advogados.Api.Aplicacao.Clientes.ObterCliente.Models;
-using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverCliente;
+using Jurify.Advogados.Api.Aplicacao.Clientes.Cadastrar;
+using Jurify.Advogados.Api.Aplicacao.Clientes.Listar;
+using Jurify.Advogados.Api.Aplicacao.Clientes.Listar.Models;
+using Jurify.Advogados.Api.Aplicacao.Clientes.Obter;
+using Jurify.Advogados.Api.Aplicacao.Clientes.Obter.Models;
+using Jurify.Advogados.Api.Aplicacao.Clientes.Remover;
 using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverEndereco;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;

@@ -1,8 +1,8 @@
-﻿using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.CadastrarProcessoJuridico;
-using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ListarProcessosJuridicos;
-using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridico;
-using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.ObterProcessoJuridico.Models;
-using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.RemoverProcessoJuridico;
+﻿using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Cadastrar;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Listar;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter.Models;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Remover;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
