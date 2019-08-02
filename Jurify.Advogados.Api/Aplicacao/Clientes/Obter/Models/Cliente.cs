@@ -1,4 +1,8 @@
 ﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Aplicacao.Clientes.Obter.Models
 {

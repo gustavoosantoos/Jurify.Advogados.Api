@@ -2,6 +2,8 @@
 using Jurify.Advogados.Api.Dominio.Enums;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
+using MediatR;
+using System;
 
 namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Cadastrar
 {

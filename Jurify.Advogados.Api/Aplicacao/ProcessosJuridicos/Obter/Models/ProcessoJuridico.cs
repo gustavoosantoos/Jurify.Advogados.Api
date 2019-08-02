@@ -1,4 +1,5 @@
 ﻿using Jurify.Advogados.Api.Dominio.Enums;
+using System;
 
 namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter.Models
 {
