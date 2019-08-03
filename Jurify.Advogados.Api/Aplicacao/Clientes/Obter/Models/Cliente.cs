@@ -25,20 +25,25 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.Obter.Models
         {
             var usuarioUltimaAlteracao = await servico.ObterInformacoesDeUsuario(entidade.CodigoUsuarioUltimaAlteracao);
 
-            var enderecos = entidade.Enderecos.Select(e => new Endereco
+            var enderecos = entidade.Enderecos.Select(async e =>
             {
-                Codigo = e.Codigo,
-                Rua = e.Rua,
-                Numero = e.Numero,
-                Complemento = e.Complemento,
-                Cidade = e.Cidade,
-                Estado = e.Estado,
-                Pais = e.Pais,
-                Cep = e.Cep,
-                Observacoes = e.Observacoes,
-                Tipo = e.Tipo,
-                DataCriacao = e.DataCriacao,
-                DataUltimaAlteracao = e.DataUltimaAlteracao
+                var usuario = await servico.ObterInformacoesDeUsuario(e.CodigoUsuarioUltimaAlteracao);
+                return new Endereco
+                {
+                    Codigo = e.Codigo,
+                    Rua = e.Rua,
+                    Numero = e.Numero,
+                    Complemento = e.Complemento,
+                    Cidade = e.Cidade,
+                    Estado = e.Estado,
+                    Pais = e.Pais,
+                    Cep = e.Cep,
+                    Observacoes = e.Observacoes,
+                    Tipo = e.Tipo,
+                    DataCriacao = e.DataCriacao,
+                    DataUltimaAlteracao = e.DataUltimaAlteracao,
+                    NomeUsuarioUltimaAlteracao = usuario.ObterNomeCompleto()
+                };
             });
 
             return new Cliente
@@ -50,7 +55,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.Obter.Models
                 Email = entidade.Email.Endereco,
                 RG = entidade.RG.Numero,
                 CPF = entidade.CPF.Numero,
-                Enderecos = enderecos,
+                Enderecos = await Task.WhenAll(enderecos),
                 DataCriacao = entidade.DataCriacao,
                 DataUltimaAlteracao = entidade.DataUltimaAlteracao,
                 NomeUsuarioUltimaAlteracao = usuarioUltimaAlteracao.ObterNomeCompleto()
