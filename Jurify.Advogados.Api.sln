@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jurify.Advogados.Api", "Jurify.Advogados.Api\Jurify.Advogados.Api.csproj", "{8A932145-37E9-4734-A358-398896348621}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0E4770EE-DF1C-44B3-AA22-87D48246E38A}"
-	ProjectSection(SolutionItems) = preProject
-		readme.md = readme.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{FCC1589A-A67A-41FB-8C88-EB25BC6384DE}"
 	ProjectSection(SolutionItems) = preProject
