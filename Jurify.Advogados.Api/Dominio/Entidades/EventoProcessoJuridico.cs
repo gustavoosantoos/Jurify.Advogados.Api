@@ -10,9 +10,9 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         private readonly List<AnexoEventoProcessoJuridico> _anexos;
 
         public Guid CodigoProcesso { get; private set; }
+        public Descricao Descricao { get; private set; }
 
         public ProcessoJuridico Processo { get; private set; }
-        public Descricao Descricao { get; private set; }
         public IReadOnlyCollection<AnexoEventoProcessoJuridico> Anexos => _anexos;
 
         protected EventoProcessoJuridico()
@@ -29,7 +29,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         protected override void Validar()
         {
-
+            AddNotifications(Descricao);
         }
     }
 }

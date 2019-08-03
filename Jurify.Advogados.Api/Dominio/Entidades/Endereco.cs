@@ -9,6 +9,18 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 {
     public class Endereco : Entidade
     {
+        public string Rua { get; private set; }
+        public string Numero { get; private set; }
+        public string Cidade { get; private set; }
+        public string Estado { get; private set; }
+        public string Pais { get; private set; }
+        public string Cep { get; private set; }
+        public string Complemento { get; private set; }
+        public string Observacoes { get; private set; }
+        public ETipoEndereco Tipo { get; private set; }
+
+        public Guid CodigoCliente { get; private set; }
+
         protected Endereco()
         {
         }
@@ -36,18 +48,6 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
             Validar();
         }
-
-        public string Rua { get; private set; }
-        public string Numero { get; private set; }
-        public string Cidade { get; private set; }
-        public string Estado { get; private set; }
-        public string Pais { get; private set; }
-        public string Cep { get; private set; }
-        public string Complemento { get; private set; }
-        public string Observacoes { get; private set; }
-        public ETipoEndereco Tipo { get; private set; }
-
-        public Guid CodigoCliente { get; private set; }
 
         protected override void Validar()
         {

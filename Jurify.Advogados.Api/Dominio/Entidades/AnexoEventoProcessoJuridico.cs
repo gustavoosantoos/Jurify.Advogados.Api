@@ -7,11 +7,11 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
 {
     public class AnexoEventoProcessoJuridico : Entidade
     {
-        public Guid CodigoEvento { get; private set; }
-
-        public EventoProcessoJuridico Evento { get; private set; }
         public string NomeArquivo { get; private set; }
         public string Url { get; private set; }
+
+        public Guid CodigoEvento { get; private set; }
+        public EventoProcessoJuridico Evento { get; private set; }
 
         protected AnexoEventoProcessoJuridico()
         {
