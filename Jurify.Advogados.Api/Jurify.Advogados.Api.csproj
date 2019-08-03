@@ -30,9 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Aplicacao\Clientes\Remover\" />
-    <Folder Include="Aplicacao\ProcessosJuridicos\AdicionarEvento\" />
-    <Folder Include="Aplicacao\ProcessosJuridicos\AtualizarEvento\" />
-    <Folder Include="Aplicacao\ProcessosJuridicos\RemoverEvento\" />
     <Folder Include="Infraestrutura\Mensageria\" />
     <Folder Include="Infraestrutura\Logging\" />
   </ItemGroup>
