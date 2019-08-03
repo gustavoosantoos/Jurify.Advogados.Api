@@ -25,16 +25,22 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         {
         }
 
-        public Endereco(
-            string rua,
-            string numero,
-            string cidade,
-            string estado,
-            string pais,
-            string cep,
-            string complemento,
-            string observacoes,
-            ETipoEndereco tipo)
+        public Endereco(string rua, string numero, string cidade, string estado, string pais, string cep, string complemento, string observacoes, ETipoEndereco tipo)
+        {
+            Rua = rua;
+            Numero = numero;
+            Cidade = cidade;
+            Estado = estado;
+            Pais = pais;
+            Cep = cep;
+            Complemento = complemento;
+            Observacoes = observacoes;
+            Tipo = tipo;
+
+            Validar();
+        }
+
+        public void Atualizar(string rua, string numero, string cidade, string estado, string pais, string cep, string complemento, string observacoes, ETipoEndereco tipo)
         {
             Rua = rua;
             Numero = numero;

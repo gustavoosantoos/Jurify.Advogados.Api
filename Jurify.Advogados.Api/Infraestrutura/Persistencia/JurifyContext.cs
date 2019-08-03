@@ -1,5 +1,6 @@
 ﻿using Jurify.Advogados.Api.Dominio.Base;
 using Jurify.Advogados.Api.Dominio.Entidades;
+using Jurify.Advogados.Api.Dominio.Exceptions;
 using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +27,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
         public DbSet<Cliente> Clientes { get; private set; }
         public DbSet<Endereco> Enderecos { get; private set; }
         public DbSet<ProcessoJuridico> ProcessosJuridicos { get; private set; }
-        //public DbSet<EventoCasoJuridico> EventosCasoJuridico { get; private set; }
+        public DbSet<EventoProcessoJuridico> EventosProcessoJuridico { get; private set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -57,12 +58,14 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
             var codigoUsuarioAtual = _provedor.UsuarioAtual.Codigo;
             var codigoEscritorioAtual = _provedor.EscritorioAtual.Codigo;
 
-            foreach (var entrada in ChangeTracker.Entries())
+            foreach (var entrada in ChangeTracker.Entries<Entidade>())
             {
                 var now = DateTime.UtcNow;
 
-                if (!(entrada.Entity is Entidade))
-                    continue;
+                if (entrada.Entity.Invalid)
+                {
+                    throw new DomainException(entrada.Entity);
+                }
 
                 switch (entrada.State)
                 {
