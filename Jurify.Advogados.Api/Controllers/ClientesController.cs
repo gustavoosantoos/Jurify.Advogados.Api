@@ -1,4 +1,5 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.Clientes.AdicionarEndereco;
+using Jurify.Advogados.Api.Aplicacao.Clientes.Atualizar;
 using Jurify.Advogados.Api.Aplicacao.Clientes.AtualizarEndereco;
 using Jurify.Advogados.Api.Aplicacao.Clientes.Cadastrar;
 using Jurify.Advogados.Api.Aplicacao.Clientes.Listar;
@@ -65,6 +66,24 @@ namespace Jurify.Advogados.Api.Controllers
         [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Post(CadastrarClienteCommand command)
         {
+            return RespostaCasoDeUso(await _mediator.Send(command));
+        }
+
+        /// <summary>
+        /// Atualiza um cliente
+        /// </summary>
+        /// <param name="codigo">Código do cliente</param>
+        /// <param name="command">Dados do cliente</param>
+        /// <response code="200">Código do cliente atualizado</response>
+        /// <response code="400">Dados inválidos</response>
+        /// <response code="404">Cliente não encontrado</response>
+        [HttpPut("{codigo:guid}")]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> PutEndereco([FromRoute] Guid codigo, AtualizarClienteCommand command)
+        {
+            command.Codigo = codigo;
             return RespostaCasoDeUso(await _mediator.Send(command));
         }
 

@@ -40,11 +40,31 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public void AdicionarEndereco(Endereco endereco)
         {
             AddNotifications(endereco);
-
-            if (Invalid)
-                throw new DomainException(this);
-
             _enderecos.Add(endereco);
+        }
+
+        public void AtualizarNome(Nome nome)
+        {
+            AddNotifications(nome);
+            Nome = nome;
+        }
+
+        public void AtualizarNascimento(DataNascimento dataNascimento)
+        {
+            AddNotifications(dataNascimento);
+            DataNascimento = dataNascimento;
+        }
+
+        public void AtualizarRG(RG rg)
+        {
+            AddNotifications(rg);
+            RG = rg;
+        }
+
+        public void AtualizarCPF(CPF cpf)
+        {
+            AddNotifications(cpf);
+            CPF = cpf;
         }
 
         protected override void Validar()
