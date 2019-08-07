@@ -81,7 +81,7 @@ namespace Jurify.Advogados.Api.Controllers
         [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> PutEndereco([FromRoute] Guid codigo, AtualizarClienteCommand command)
+        public async Task<ActionResult> Put([FromRoute] Guid codigo, AtualizarClienteCommand command)
         {
             command.Codigo = codigo;
             return RespostaCasoDeUso(await _mediator.Send(command));
