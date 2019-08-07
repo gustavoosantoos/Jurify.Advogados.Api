@@ -2,7 +2,8 @@
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
-using System;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,9 +15,24 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.AdicionarEvento
         {
         }
 
-        public Task<RespostaCasoDeUso> Handle(AdicionarEventoCommand request, CancellationToken cancellationToken)
+        public async Task<RespostaCasoDeUso> Handle(AdicionarEventoCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var processo = await Context.ProcessosJuridicos
+                .FirstOrDefaultAsync(c => c.Codigo == request.CodigoProcessoJuridico &&
+                                          c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
+                                          !c.Apagado);
+
+            if (processo == null)
+                return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
+
+            var evento = request.AsEntity();
+            processo.AdicionarEvento(evento);
+
+            if (processo.Invalid)
+                return RespostaCasoDeUso.ComFalha(processo.Notifications);
+
+            await Context.SaveChangesAsync();
+            return RespostaCasoDeUso.ComSucesso(evento.Codigo);
         }
     }
 }
