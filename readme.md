@@ -36,7 +36,7 @@ Para obter um token e realizar as operações, seguir os seguintes passos:
 |Campo|Valor|
 |-----|-----|
 |Método|POST|
-|URL|http://jurify-autenticador.azurewebsites.net/connect/token|
+|URL|https://jurify-autenticador.azurewebsites.net/connect/token|
 |Tipo do corpo|x-www-form-urlencoded|
 |scope|jurify.api.lawyers|
 |grant_type|password|
