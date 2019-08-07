@@ -1,9 +1,11 @@
-﻿using System.Threading;
+﻿using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.RemoverEvento
 {
@@ -13,9 +15,21 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.RemoverEvento
         {
         }
 
-        public Task<RespostaCasoDeUso> Handle(RemoverEventoCommand request, CancellationToken cancellationToken)
+        public async Task<RespostaCasoDeUso> Handle(RemoverEventoCommand request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var evento = await Context.EventosProcessoJuridico
+                .FirstOrDefaultAsync(c => c.Codigo == request.CodigoEvento &&
+                                          c.CodigoProcesso == request.CodigoProcesso &&
+                                          c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
+                                          !c.Apagado);
+
+            if (evento == null)
+                return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
+
+            Context.EventosProcessoJuridico.Remove(evento);
+            await Context.SaveChangesAsync();
+
+            return RespostaCasoDeUso.ComSucesso();
         }
     }
 }

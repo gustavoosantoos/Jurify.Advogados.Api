@@ -18,6 +18,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Listar
         public async Task<RespostaCasoDeUso> Handle(ListarProcessosJuridicosQuery request, CancellationToken cancellationToken)
         {
             var processos = await Context.ProcessosJuridicos
+                .AsNoTracking()
                 .Where(p => p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo && !p.Apagado)
                 .Select(p => new ProcessoJuridicoPreview
                 {

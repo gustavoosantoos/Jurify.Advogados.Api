@@ -1,5 +1,7 @@
 ﻿using Jurify.Advogados.Api.Dominio.Enums;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter.Models
 {
@@ -18,6 +20,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter.Models
         public string NomeUsuarioUltimaAlteracao { get; set; }
 
         public Cliente Cliente { get; set; }
+        public IEnumerable<Evento> Eventos { get; set; }
 
         public static ProcessoJuridico FromEntity(Dominio.Entidades.ProcessoJuridico entidade)
         {
@@ -28,6 +31,18 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter.Models
                 CPF = entidade.Cliente.CPF.Numero,
                 Idade = entidade.Cliente.DataNascimento.ObterIdade()
             };
+
+            var eventos = entidade.Eventos.Select(e => new Evento
+            {
+                Codigo = e.Codigo,
+                Descricao = e.Descricao.Valor,
+                Anexos = e.Anexos.Select(a => new Anexo
+                {
+                    Codigo = a.Codigo,
+                    NomeArquivo = a.NomeArquivo,
+                    Url = a.Url
+                })
+            });
 
             return new ProcessoJuridico
             {
@@ -40,7 +55,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter.Models
                 Status = entidade.Status,
                 TipoDePapel = entidade.TipoDePapel,
                 DataCriacao = entidade.DataCriacao,
-                DataUltimaAlteracao = entidade.DataUltimaAlteracao
+                DataUltimaAlteracao = entidade.DataUltimaAlteracao,
+                Eventos = eventos
             };
         }
     }

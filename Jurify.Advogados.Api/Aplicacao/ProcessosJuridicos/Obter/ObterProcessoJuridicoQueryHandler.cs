@@ -19,7 +19,10 @@ namespace Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter
         public async Task<RespostaCasoDeUso> Handle(ObterProcessoJuridicoQuery request, CancellationToken cancellationToken)
         {
             var processo = await Context.ProcessosJuridicos
+                .AsNoTracking()
                 .Include(p => p.Cliente)
+                .Include(p => p.Eventos)
+                    .ThenInclude(e => e.Anexos)
                 .FirstOrDefaultAsync(p => p.Codigo == request.Codigo &&
                                      p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
                                      !p.Apagado);

@@ -5,6 +5,7 @@ using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Listar;
 using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter;
 using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter.Models;
 using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Remover;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.RemoverEvento;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -114,6 +115,21 @@ namespace Jurify.Advogados.Api.Controllers
         {
             command.CodigoProcessoJuridico = codigo;
             return RespostaCasoDeUso(await _mediator.Send(command));
+        }
+
+        /// <summary>
+        /// Remove um evento no processo jurídico
+        /// </summary>
+        /// <param name="codigo">Código do processo</param>
+        /// <param name="codigoEvento">Código do evento</param>
+        /// <response code="204">Evento removido</response>
+        /// <response code="404">Processo e/ou evento não encontrado</response>
+        [HttpDelete("{codigo:guid}/eventos/{codigoEvento:guid}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> DeleteEvento(Guid codigo, Guid codigoEvento)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new RemoverEventoCommand(codigo, codigoEvento)));
         }
     }
 }
