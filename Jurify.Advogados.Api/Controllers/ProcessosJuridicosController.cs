@@ -1,4 +1,5 @@
-﻿using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Cadastrar;
+﻿using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Atualizar;
+using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Cadastrar;
 using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Listar;
 using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter;
 using Jurify.Advogados.Api.Aplicacao.ProcessosJuridicos.Obter.Models;
@@ -61,6 +62,24 @@ namespace Jurify.Advogados.Api.Controllers
         [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Post(CadastrarProcessoJuridicoCommand command)
         {
+            return RespostaCasoDeUso(await _mediator.Send(command));
+        }
+
+        /// <summary>
+        /// Atualiza os dados básicos de um processo jurídico
+        /// </summary>
+        /// <param name="codigo">Código do processo</param>
+        /// <param name="command">Dados do processo</param>
+        /// <response code="200">Processo atualizado com sucesso</response>
+        /// <response code="400">Dados inválidos</response>
+        /// <response code="404">Processo não encontrado</response>
+        [HttpPut("{codigo:guid}")]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Put(Guid codigo, AtualizarProcessoJuridicoCommand command)
+        {
+            command.Codigo = codigo;
             return RespostaCasoDeUso(await _mediator.Send(command));
         }
 

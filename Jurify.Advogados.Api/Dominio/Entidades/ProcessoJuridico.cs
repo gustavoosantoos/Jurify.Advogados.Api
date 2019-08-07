@@ -50,14 +50,51 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         protected override void Validar()
         {
             AddNotifications(Numero, Titulo, Descricao);
+            AddNotifications(_eventos.ToArray());
         }
 
         public void AdicionarEvento(EventoProcessoJuridico evento)
         {
+            AddNotifications(evento);
             _eventos.Add(evento);
+        }
 
-            if (Invalid)
-                throw new DomainException(this);
+        public void AtualizarCliente(Guid codigoCliente)
+        {
+            CodigoCliente = codigoCliente;
+        }
+
+        public void AtualizarAdvogadoResponsavel(Guid? codigoAdvogadoResponsavel)
+        {
+            CodigoAdvogadoResponsavel = codigoAdvogadoResponsavel;
+        }
+
+        public void AtualizarNumero(NumeroProcessoJuridico numero)
+        {
+            AddNotifications(numero);
+            Numero = numero;
+        }
+
+        public void AtualizarTitulo(DescricaoCurta titulo)
+        {
+            AddNotifications(titulo);
+            Titulo = titulo;
+        }
+
+        public void AtualizarDescricao(Descricao descricao)
+        {
+            AddNotifications(descricao);
+            Descricao = descricao;
+        }
+
+        public void AtualizarStatus(EStatusProcessoJuridico status)
+        {
+            Status = status;
+        }
+
+        public void AtualizarTipo(ETipoDePapelProcessoJuridico tipo)
+        {
+            TipoDePapel = tipo;
         }
     }
 }
