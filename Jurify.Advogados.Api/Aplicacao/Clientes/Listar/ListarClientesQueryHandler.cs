@@ -19,7 +19,6 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.Listar
         public async Task<RespostaCasoDeUso> Handle(ListarClientesQuery request, CancellationToken cancellationToken)
         {
             var clientes = await Context.Clientes
-                .AsNoTracking()
                 .Where(c => c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo && !c.Apagado)
                 .Select(c => new ClientePreview()
                 {

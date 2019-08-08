@@ -21,7 +21,6 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.Obter
         public async Task<RespostaCasoDeUso> Handle(ObterClienteQuery request, CancellationToken cancellationToken)
         {
             var cliente = await Context.Clientes
-                .AsNoTracking()
                 .IncludeFilter(c => c.Enderecos.Where(e => !e.Apagado))
                 .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
                                      c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
