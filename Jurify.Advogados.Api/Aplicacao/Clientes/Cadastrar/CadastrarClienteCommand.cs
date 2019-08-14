@@ -30,7 +30,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.Cadastrar
                 e.Cidade,
                 e.Estado,
                 e.Pais,
-                e.Cep,
+                e.Cep?.Replace("-", string.Empty),
                 e.Complemento,
                 e.Observacoes,
                 e.Tipo

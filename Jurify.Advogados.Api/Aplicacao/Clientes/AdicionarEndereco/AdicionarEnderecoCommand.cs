@@ -27,7 +27,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.AdicionarEndereco
                 Cidade,
                 Estado,
                 Pais,
-                Cep,
+                Cep?.Replace("-", string.Empty),
                 Complemento,
                 Observacoes,
                 Tipo
