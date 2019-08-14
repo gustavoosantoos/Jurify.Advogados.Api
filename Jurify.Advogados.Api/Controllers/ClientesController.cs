@@ -9,8 +9,10 @@ using Jurify.Advogados.Api.Aplicacao.Clientes.Obter.Models;
 using Jurify.Advogados.Api.Aplicacao.Clientes.Remover;
 using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverEndereco;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
+using Jurify.Advogados.Api.Infraestrutura.Configuracoes;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,6 +22,7 @@ namespace Jurify.Advogados.Api.Controllers
 {
     [Authorize]
     [ApiController]
+    [EnableCors(Cors.POLICY_NAME)]
     [Route("api/[controller]")]
     public class ClientesController : BaseController
     {
