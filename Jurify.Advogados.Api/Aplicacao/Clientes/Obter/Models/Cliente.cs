@@ -9,7 +9,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.Obter.Models
     public class Cliente
     {
         public Guid Codigo { get; set; }
-        public string PrimeiroNome { get; set; }
+        public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public DateTime? DataNascimento { get; set; }
         public string Email { get; set; }
@@ -49,7 +49,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.Obter.Models
             return new Cliente
             {
                 Codigo = entidade.Codigo,
-                PrimeiroNome = entidade.Nome.PrimeiroNome,
+                Nome = entidade.Nome.PrimeiroNome,
                 Sobrenome = entidade.Nome.Sobrenome,
                 DataNascimento = entidade.DataNascimento.Data,
                 Email = entidade.Email.Endereco,
