@@ -67,6 +67,12 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             CPF = cpf;
         }
 
+        public void AtualizarEmail(Email email)
+        {
+            AddNotifications(email);
+            Email = email;
+        }
+
         protected override void Validar()
         {
             AddNotifications(Nome, CPF, RG, DataNascimento, Email);

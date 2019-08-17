@@ -30,6 +30,7 @@ namespace Jurify.Advogados.Api.Aplicacao.Clientes.Atualizar
             cliente.AtualizarNascimento(new DataNascimento(request.DataNascimento));
             cliente.AtualizarRG(new RG(request.RG));
             cliente.AtualizarCPF(new CPF(request.CPF));
+            cliente.AtualizarEmail(new Email(request.Email));
 
             if (cliente.Invalid)
                 return RespostaCasoDeUso.ComFalha(cliente.Notifications);
