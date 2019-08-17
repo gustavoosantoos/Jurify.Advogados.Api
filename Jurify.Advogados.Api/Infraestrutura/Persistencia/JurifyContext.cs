@@ -67,6 +67,11 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
                     throw new DomainException(entrada.Entity);
                 }
 
+                if (entrada.State == EntityState.Unchanged)
+                {
+                    entrada.State = EntityState.Modified;
+                }
+
                 switch (entrada.State)
                 {
                     case EntityState.Added:
