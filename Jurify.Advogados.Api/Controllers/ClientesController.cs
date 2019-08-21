@@ -156,5 +156,19 @@ namespace Jurify.Advogados.Api.Controllers
         {
             return RespostaCasoDeUso(await _mediator.Send(new RemoverEnderecoCommand(codigoEndereco, codigo)));
         }
+
+        [HttpGet("{codigo:guid}/anexos")]
+        public async Task<ActionResult> GetAnexos(Guid codigo)
+        {
+            // TO-DO: disparar comando 
+            return Ok();
+        }
+
+        [HttpPost("{codigo:guid}/anexos")]
+        public async Task<ActionResult> PostAnexo(IFormFileCollection files)
+        {
+            // TO-DO: disparar comando 
+            return Ok();
+        }
     }
 }
