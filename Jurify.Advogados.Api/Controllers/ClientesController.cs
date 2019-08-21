@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Controllers
@@ -165,10 +167,19 @@ namespace Jurify.Advogados.Api.Controllers
         }
 
         [HttpPost("{codigo:guid}/anexos")]
-        public async Task<ActionResult> PostAnexo(IFormFileCollection files)
+        public async Task<ActionResult> PostAnexo(ICollection<IFormFile> files)
         {
             // TO-DO: disparar comando 
             return Ok();
         }
+
+        [HttpGet("{codigo:guid}/anexos/{codigoAnexo:guid}")]
+        public async Task<ActionResult> GetAnexo(Guid codigo, Guid codigoAnexo)
+        {
+            // TO-DO: disparar comando
+            // Esse método deve retornar o arquivo a ser baixado, ou seja, ao chamar essa api, começa o download no client
+            return File(Stream.Null, "application/octet-stream");
+        }
+
     }
 }
