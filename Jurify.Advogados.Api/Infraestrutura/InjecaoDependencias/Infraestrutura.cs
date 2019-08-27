@@ -22,7 +22,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.InjecaoDependencias
 
             services.AddHttpClient("AUTENTICADOR_API", config =>
             {
-                config.BaseAddress = new Uri($"{configuration["Authentication:Authority"]}/api/lawyers/");
+                config.BaseAddress = new Uri($"{configuration["Authentication:Authority"]}/api/advogados/");
             });
 
             services.AddScoped<ServicoUsuarios>();
