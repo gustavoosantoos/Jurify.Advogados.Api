@@ -162,7 +162,16 @@ namespace Jurify.Advogados.Api.Controllers
             return RespostaCasoDeUso(await _mediator.Send(new RemoverEnderecoCommand(codigo, codigoEndereco)));
         }
 
+        /// <summary>
+        /// Obtem um anexo do cliente e inicia o download
+        /// </summary>
+        /// <param name="codigo">Código do cliente</param>
+        /// <param name="codigoAnexo">Código do anexo</param>
+        /// <response code="200">Arquivo a ser baixado</response>
+        /// <response code="404">Cliente ou anexo não encontrado</response>
         [HttpGet("{codigo:guid}/anexos/{codigoAnexo:guid}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetAnexo(Guid codigo, Guid codigoAnexo)
         {
             var query = new BaixarAnexoQuery(codigo, codigoAnexo);
@@ -177,8 +186,18 @@ namespace Jurify.Advogados.Api.Controllers
             return RespostaCasoDeUso(response);
         }
 
-
+        /// <summary>
+        /// Recebe um arquivo para anexar ao cliente
+        /// </summary>
+        /// <param name="codigo">Código do cliente</param>
+        /// <param name="file">Arquivo</param>
+        /// <response code="200">Código do anexo inserido</response>
+        /// <response code="404">Cliente não encontrado</response>
+        /// <response code="500">Erro ao fazer upload do anexo</response>
         [HttpPost("{codigo:guid}/anexos")]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> PostAnexo(Guid codigo, IFormFile file)
         {
             using (var stream = new MemoryStream())
@@ -189,7 +208,18 @@ namespace Jurify.Advogados.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove um anexo do cliente
+        /// </summary>
+        /// <param name="codigo">Código do cliente</param>
+        /// <param name="codigoAnexo">Código do anexo</param>
+        /// <response code="204">Anexo removido com sucesso</response>
+        /// <response code="404">Cliente ou anexo não encontrado</response>
+        /// <response code="500">Erro ao remover anexo</response>
         [HttpDelete("{codigo:guid}/anexos/{codigoAnexo:guid}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteAnexo(Guid codigo, Guid codigoAnexo)
         {
             return RespostaCasoDeUso(await _mediator.Send(new RemoverAnexoCommand(codigo, codigoAnexo)));

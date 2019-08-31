@@ -37,10 +37,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloClientes.Anexos.RemoverAnexo
 
             if (!removeuArquivo)
             {
-                return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.InternalServerError, new
-                {
-                    Mensagem = "Falha ao remover anexo do cliente"
-                });
+                return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.InternalServerError);
             }
 
             Context.AnexosClientes.Remove(anexo);
