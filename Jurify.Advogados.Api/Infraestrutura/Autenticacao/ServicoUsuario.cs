@@ -39,7 +39,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
             var response = await _clientFactory.CreateClient("AUTENTICADOR_API").GetStringAsync(url);
             var dados = JsonConvert.DeserializeObject<ModeloAutenticador.Usuario>(response);
 
-            return new Usuario(dados.Id, dados.PersonalInfo.FirstName, dados.PersonalInfo.LastName);
+            return new Usuario(dados.Codigo, dados.InformacoesPessoais.PrimeiroNome, dados.InformacoesPessoais.UltimoNome);
         }
     }
 }

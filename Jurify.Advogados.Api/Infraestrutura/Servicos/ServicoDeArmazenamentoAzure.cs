@@ -25,6 +25,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Servicos
             {
                 CloudBlobContainer container = _client.GetContainerReference("crm-files");
                 CloudBlockBlob arquivoCloud = container.GetBlockBlobReference(nomeArquivo);
+                arquivo.Seek(0, SeekOrigin.Begin);
                 await arquivoCloud.UploadFromStreamAsync(arquivo);
                 return arquivoCloud.Uri.AbsoluteUri;
             }
@@ -42,8 +43,15 @@ namespace Jurify.Advogados.Api.Infraestrutura.Servicos
             CloudBlockBlob arquivoCloud = container.GetBlockBlobReference(nomeArquivo);
             MemoryStream memStream = new MemoryStream();
             await arquivoCloud.DownloadToStreamAsync(memStream);
-
+            memStream.Seek(0, SeekOrigin.Begin);
             return memStream;
+        }
+
+        public async Task<bool> RemoverArquivo(string nomeArquivo)
+        {
+            CloudBlobContainer container = _client.GetContainerReference("crm-files");
+            CloudBlockBlob arquivoCloud = container.GetBlockBlobReference(nomeArquivo);
+            return await arquivoCloud.DeleteIfExistsAsync();
         }
     }
 }

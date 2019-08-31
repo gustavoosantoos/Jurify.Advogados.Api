@@ -9,6 +9,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
     {
         private readonly List<Endereco> _enderecos;
         private readonly List<ProcessoJuridico> _processos;
+        private readonly List<AnexoCliente> _anexos;
 
         public Nome Nome { get; private set; }
         public RG RG { get; private set; }
@@ -18,11 +19,13 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         public IReadOnlyCollection<Endereco> Enderecos => _enderecos;
         public IReadOnlyCollection<ProcessoJuridico> Processos => _processos;
+        public IReadOnlyCollection<AnexoCliente> Anexos => _anexos;
 
         protected Cliente()
         {
             _enderecos = new List<Endereco>();
             _processos = new List<ProcessoJuridico>();
+            _anexos = new List<AnexoCliente>();
         }
 
         public Cliente(Nome nome, RG rg, CPF cpf, DataNascimento dataNascimento, Email email, List<Endereco> enderecos)
@@ -72,6 +75,12 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             AddNotifications(email);
             Email = email;
         }
+
+        public void AdicionarAnexo(AnexoCliente novoAnexo)
+        {
+            AddNotifications(novoAnexo);
+            _anexos.Add(novoAnexo);
+        } 
 
         protected override void Validar()
         {

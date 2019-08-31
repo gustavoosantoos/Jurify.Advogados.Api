@@ -26,6 +26,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
 
         public DbSet<Cliente> Clientes { get; private set; }
         public DbSet<Endereco> Enderecos { get; private set; }
+        public DbSet<AnexoCliente> AnexosClientes { get; private set; }
         public DbSet<ProcessoJuridico> ProcessosJuridicos { get; private set; }
         public DbSet<EventoProcessoJuridico> EventosProcessoJuridico { get; private set; }
 

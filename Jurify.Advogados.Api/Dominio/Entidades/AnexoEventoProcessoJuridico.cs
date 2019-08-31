@@ -24,15 +24,15 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
             NomeArquivo = nomeArquivo;
             Url = url;
 
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(NomeArquivo, "AnexoCasoJuridico.NomeArquivo", "Nome do arquivo não deve ser vazio")
-                .IsUrl(Url, "AnexoCasoJuridico.NomeArquivo", "Url do arquivo inválida")
-            );
+            Validar();
         }
 
         protected override void Validar()
         {
-
+            AddNotifications(new Contract()
+              .IsNotNullOrEmpty(NomeArquivo, "AnexoCasoJuridico.NomeArquivo", "Nome do arquivo não deve ser vazio")
+              .IsUrl(Url, "AnexoCasoJuridico.NomeArquivo", "Url do arquivo inválida")
+            );
         }
     }
 }

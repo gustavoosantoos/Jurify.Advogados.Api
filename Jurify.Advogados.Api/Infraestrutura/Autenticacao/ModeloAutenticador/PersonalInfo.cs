@@ -2,7 +2,7 @@
 {
     public partial class PersonalInfo
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string PrimeiroNome { get; set; }
+        public string UltimoNome { get; set; }
     }
 }

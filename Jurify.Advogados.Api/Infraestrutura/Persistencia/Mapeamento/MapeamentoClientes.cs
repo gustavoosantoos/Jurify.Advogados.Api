@@ -51,6 +51,9 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
             builder.HasMany(e => e.Processos).WithOne(p => p.Cliente).HasForeignKey(p => p.CodigoCliente);
             builder.Metadata.FindNavigation(nameof(Cliente.Processos)).SetPropertyAccessMode(PropertyAccessMode.Field);
 
+            builder.HasMany(e => e.Anexos).WithOne().HasForeignKey(a => a.CodigoCliente);
+            builder.Metadata.FindNavigation(nameof(Cliente.Anexos)).SetPropertyAccessMode(PropertyAccessMode.Field);
+
             builder.Property(e => e.DataCriacao).HasColumnName("data_criacao");
             builder.Property(e => e.DataUltimaAlteracao).HasColumnName("data_ultima_alteracao");
             builder.Property(e => e.CodigoUsuarioUltimaAlteracao).HasColumnName("codigo_usuario_ultima_alteracao");

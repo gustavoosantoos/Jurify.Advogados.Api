@@ -1,13 +1,16 @@
-﻿using Jurify.Advogados.Api.Aplicacao.Clientes.AdicionarEndereco;
-using Jurify.Advogados.Api.Aplicacao.Clientes.Atualizar;
-using Jurify.Advogados.Api.Aplicacao.Clientes.AtualizarEndereco;
-using Jurify.Advogados.Api.Aplicacao.Clientes.Cadastrar;
-using Jurify.Advogados.Api.Aplicacao.Clientes.Listar;
-using Jurify.Advogados.Api.Aplicacao.Clientes.Listar.Models;
-using Jurify.Advogados.Api.Aplicacao.Clientes.Obter;
-using Jurify.Advogados.Api.Aplicacao.Clientes.Obter.Models;
-using Jurify.Advogados.Api.Aplicacao.Clientes.Remover;
-using Jurify.Advogados.Api.Aplicacao.Clientes.RemoverEndereco;
+﻿using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Anexos.AdicionarAnexo;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Anexos.BaixarAnexo;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Anexos.RemoverAnexo;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Atualizar;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Cadastrar;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Listar;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Listar.Models;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Obter;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Obter.Models;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Remover;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Enderecos.AdicionarEndereco;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Enderecos.AtualizarEndereco;
+using Jurify.Advogados.Api.Aplicacao.ModuloClientes.Enderecos.RemoverEndereco;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Configuracoes;
 using MediatR;
@@ -156,30 +159,40 @@ namespace Jurify.Advogados.Api.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteEndereco(Guid codigo, Guid codigoEndereco)
         {
-            return RespostaCasoDeUso(await _mediator.Send(new RemoverEnderecoCommand(codigoEndereco, codigo)));
-        }
-
-        [HttpGet("{codigo:guid}/anexos")]
-        public async Task<ActionResult> GetAnexos(Guid codigo)
-        {
-            // TO-DO: disparar comando 
-            return Ok();
-        }
-
-        [HttpPost("{codigo:guid}/anexos")]
-        public async Task<ActionResult> PostAnexo(ICollection<IFormFile> files)
-        {
-            // TO-DO: disparar comando 
-            return Ok();
+            return RespostaCasoDeUso(await _mediator.Send(new RemoverEnderecoCommand(codigo, codigoEndereco)));
         }
 
         [HttpGet("{codigo:guid}/anexos/{codigoAnexo:guid}")]
         public async Task<ActionResult> GetAnexo(Guid codigo, Guid codigoAnexo)
         {
-            // TO-DO: disparar comando
-            // Esse método deve retornar o arquivo a ser baixado, ou seja, ao chamar essa api, começa o download no client
-            return File(Stream.Null, "application/octet-stream");
+            var query = new BaixarAnexoQuery(codigo, codigoAnexo);
+            var response = await _mediator.Send(query);
+
+            if (response.Sucesso)
+            {
+                var anexo = (Aplicacao.ModuloClientes.Anexos.BaixarAnexo.Anexo) response.Dados;
+                return File(anexo.Arquivo, "application/octet-stream", anexo.NomeDoArquivo);
+            }
+
+            return RespostaCasoDeUso(response);
         }
 
+
+        [HttpPost("{codigo:guid}/anexos")]
+        public async Task<ActionResult> PostAnexo(Guid codigo, IFormFile file)
+        {
+            using (var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                var command = new AdicionarAnexoCommand(codigo, file.FileName, stream);
+                return RespostaCasoDeUso(await _mediator.Send(command));
+            }
+        }
+
+        [HttpDelete("{codigo:guid}/anexos/{codigoAnexo:guid}")]
+        public async Task<ActionResult> DeleteAnexo(Guid codigo, Guid codigoAnexo)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new RemoverAnexoCommand(codigo, codigoAnexo)));
+        }
     }
 }

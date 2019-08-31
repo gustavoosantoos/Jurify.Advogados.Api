@@ -23,7 +23,22 @@ create table clientes(
 	apagado boolean not null default false
 );
 
-create table enderecos(
+create table clientes_anexos(
+	codigo uuid primary key not null default gen_random_uuid(),
+	codigo_escritorio uuid not null,
+	codigo_cliente uuid not null references clientes(codigo),
+
+	nome_arquivo text not null,
+	identificador text not null,
+	url text not null,
+
+	data_criacao timestamp not null default now(),
+	data_ultima_alteracao timestamp not null default now(),
+	codigo_usuario_ultima_alteracao uuid not null,
+	apagado boolean not null default false
+);
+
+create table clientes_enderecos(
 	codigo uuid primary key not null default gen_random_uuid(),
 	codigo_escritorio uuid not null,
 	codigo_cliente uuid not null references clientes(codigo),

@@ -8,7 +8,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
     {
         public void Configure(EntityTypeBuilder<Endereco> builder)
         {
-            builder.ToTable("enderecos");
+            builder.ToTable("clientes_enderecos");
             builder.HasKey(e => e.Codigo);
             builder.Property(e => e.Codigo).HasColumnName("codigo");
             builder.Property(e => e.CodigoEscritorio).HasColumnName("codigo_escritorio");

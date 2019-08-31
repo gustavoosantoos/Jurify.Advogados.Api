@@ -7,5 +7,6 @@ namespace Jurify.Advogados.Api.Dominio.Servicos
     {
         Task<string> SalvarArquivo(string nomeArquivo, Stream arquivo);
         Task<Stream> ObterArquivo(string nomeArquivo);
+        Task<bool> RemoverArquivo(string nomeArquivo);
     }
 }
