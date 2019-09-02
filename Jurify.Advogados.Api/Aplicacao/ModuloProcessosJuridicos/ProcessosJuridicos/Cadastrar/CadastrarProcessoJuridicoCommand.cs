@@ -12,6 +12,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
         public Guid CodigoCliente { get; set; }
         public Guid? CodigoAdvogadoResponsavel { get; set; }
         public string NumeroProcesso { get; set; }
+        public int CodigoUF { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public EStatusProcessoJuridico Status { get; set; }
@@ -25,6 +26,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
                 new NumeroProcessoJuridico(NumeroProcesso),
                 new DescricaoCurta(Titulo),
                 new Descricao(Descricao),
+                EEstadoBrasileiro.ObterPorCodigo(CodigoUF),
                 Status,
                 TipoDePapel
             );

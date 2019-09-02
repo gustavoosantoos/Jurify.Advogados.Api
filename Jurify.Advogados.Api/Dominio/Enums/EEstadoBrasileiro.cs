@@ -1,13 +1,12 @@
 ﻿using Jurify.Advogados.Api.Dominio.Base;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Dominio.Enums
 {
     public class EEstadoBrasileiro : ObjetoDeValor
     {
+        public static readonly EEstadoBrasileiro NAO_INFORMADO = new EEstadoBrasileiro(0, "Não informado", string.Empty);
         public static readonly EEstadoBrasileiro ACRE = new EEstadoBrasileiro(1, "Acre", "AC");
         public static readonly EEstadoBrasileiro ALAGOAS = new EEstadoBrasileiro(2, "Alagoas", "AL");
         public static readonly EEstadoBrasileiro AMAPA = new EEstadoBrasileiro(3, "Amapá", "AP");
@@ -51,6 +50,7 @@ namespace Jurify.Advogados.Api.Dominio.Enums
         {
             return new List<EEstadoBrasileiro>
             {
+                NAO_INFORMADO,
                 ACRE,
                 ALAGOAS,
                 AMAPA,
@@ -83,12 +83,12 @@ namespace Jurify.Advogados.Api.Dominio.Enums
 
         public static EEstadoBrasileiro ObterPorUF(string uf)
         {
-            return ObterTodos().FirstOrDefault(e => e.UF == uf);
+            return ObterTodos().FirstOrDefault(e => e.UF == uf) ?? NAO_INFORMADO;
         }
 
         public static EEstadoBrasileiro ObterPorCodigo(int codigo)
         {
-            return ObterTodos().FirstOrDefault(e => e.Codigo == codigo);
+            return ObterTodos().FirstOrDefault(e => e.Codigo == codigo) ?? NAO_INFORMADO;
         }
 
         protected override IEnumerable<object> ObterComponentesIgualdade()

@@ -1,4 +1,5 @@
-﻿using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
+﻿using Jurify.Advogados.Api.Dominio.Enums;
+using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
@@ -30,7 +31,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
             processo.AtualizarAdvogadoResponsavel(request.CodigoAdvogadoResponsavel);
             processo.AtualizarTitulo(new DescricaoCurta(request.Titulo));
             processo.AtualizarDescricao(new Descricao(request.Descricao));
-            processo.AtualizarNumero(new NumeroProcessoJuridico(request.NumeroProcesso));
+            processo.AtualizarNumero(new NumeroProcessoJuridico(request.NumeroProcesso), EEstadoBrasileiro.ObterPorCodigo(request.CodigoUF));
             processo.AtualizarStatus(request.Status);
             processo.AtualizarTipo(request.TipoDePapel);
 
