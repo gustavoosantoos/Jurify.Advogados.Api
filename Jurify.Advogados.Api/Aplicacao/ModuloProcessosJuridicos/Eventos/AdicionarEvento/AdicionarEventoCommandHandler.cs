@@ -1,8 +1,12 @@
-﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
+﻿using Jurify.Advogados.Api.Dominio.Entidades;
+using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
+using Jurify.Advogados.Api.Dominio.Servicos;
+using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,8 +15,14 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Adicio
 {
     public class AdicionarEventoCommandHandler : BaseHandler, IRequestHandler<AdicionarEventoCommand, RespostaCasoDeUso>
     {
-        public AdicionarEventoCommandHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
+        private readonly IServicoDeArmazenamento _servicoDeArmazenamento;
+
+        public AdicionarEventoCommandHandler(
+            JurifyContext context,
+            ServicoUsuarios provedor,
+            IServicoDeArmazenamento servicoDeArmazenamento) : base(context, provedor)
         {
+            _servicoDeArmazenamento = servicoDeArmazenamento;
         }
 
         public async Task<RespostaCasoDeUso> Handle(AdicionarEventoCommand request, CancellationToken cancellationToken)

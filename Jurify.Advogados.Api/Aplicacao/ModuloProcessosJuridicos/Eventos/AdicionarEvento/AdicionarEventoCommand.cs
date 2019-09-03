@@ -10,25 +10,10 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Adicio
     {
         public Guid CodigoProcessoJuridico { get; set; }
         public string Descricao { get; set; }
-        public AnexoEventoProcessoJuridico[] Anexos { get; set; }
 
         public EventoProcessoJuridico AsEntity()
         {
-            var evento = new EventoProcessoJuridico(
-                CodigoProcessoJuridico,
-                new Descricao(Descricao)
-            );
-
-            foreach (var anexo in Anexos)
-            {
-                evento.AdicionarAnexo(new Dominio.Entidades.AnexoEventoProcessoJuridico(
-                    evento.Codigo,
-                    anexo.NomeArquivo,
-                    anexo.Url
-                ));
-            }
-
-            return evento;
+            return new EventoProcessoJuridico(CodigoProcessoJuridico, new Descricao(Descricao));
         }
     }
 }

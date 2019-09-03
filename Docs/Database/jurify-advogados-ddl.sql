@@ -99,6 +99,7 @@ create table processos_juridicos_eventos_anexos(
 	codigo_evento uuid not null references processos_juridicos_eventos(codigo),
 
 	nome varchar(200) not null,
+	identificador text not null,
 	url varchar(500) not null,
 
 	data_criacao timestamp not null default now(),
