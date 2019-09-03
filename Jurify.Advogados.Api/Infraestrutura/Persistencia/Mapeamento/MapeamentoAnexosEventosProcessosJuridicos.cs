@@ -1,10 +1,6 @@
-﻿using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
+﻿using Jurify.Advogados.Api.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
 {

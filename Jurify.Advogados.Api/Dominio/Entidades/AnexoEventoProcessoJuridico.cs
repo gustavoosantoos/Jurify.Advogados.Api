@@ -1,9 +1,8 @@
 ﻿using Flunt.Validations;
 using Jurify.Advogados.Api.Dominio.Base;
-using Jurify.Advogados.Api.Dominio.Entidades;
 using System;
 
-namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
+namespace Jurify.Advogados.Api.Dominio.Entidades
 {
     public class AnexoEventoProcessoJuridico : Entidade
     {

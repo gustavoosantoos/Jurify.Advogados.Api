@@ -21,7 +21,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Adicio
 
             foreach (var anexo in Anexos)
             {
-                evento.AdicionarAnexo(new Dominio.ObjetosDeValor.AnexoEventoProcessoJuridico(
+                evento.AdicionarAnexo(new Dominio.Entidades.AnexoEventoProcessoJuridico(
                     evento.Codigo,
                     anexo.NomeArquivo,
                     anexo.Url
