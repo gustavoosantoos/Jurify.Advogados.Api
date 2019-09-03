@@ -39,13 +39,14 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
             {
                 Codigo = e.Codigo,
                 Descricao = e.Descricao.Valor,
+                DataCriacao = e.DataCriacao,
                 Anexos = e.Anexos.Select(a => new Anexo
                 {
                     Codigo = a.Codigo,
                     NomeArquivo = a.NomeArquivo,
                     Url = a.Url
                 })
-            });
+            }).OrderByDescending(e => e.DataCriacao);
 
             return new ProcessoJuridico
             {

@@ -27,6 +27,12 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             _anexos = new List<AnexoEventoProcessoJuridico>();
         }
 
+        public void AtualizarDescricao(Descricao novaDescricao)
+        {
+            AddNotifications(novaDescricao);
+            Descricao = novaDescricao;
+        }
+
         public void AdicionarAnexo(AnexoEventoProcessoJuridico anexo)
         {
             AddNotifications(anexo);
