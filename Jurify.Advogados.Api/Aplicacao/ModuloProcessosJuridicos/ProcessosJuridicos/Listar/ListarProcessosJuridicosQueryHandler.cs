@@ -26,6 +26,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
                     NumeroProcesso = p.Numero.Numero,
                     Titulo = p.Titulo.Valor,
                     Status = p.Status,
+                    UF = p.UF,
                     TipoDePapel = p.TipoDePapel,
                     DataCriacao = p.DataCriacao,
                     DataUltimaAtualizacao = p.DataUltimaAlteracao

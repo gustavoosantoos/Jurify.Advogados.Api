@@ -14,6 +14,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
         public int CodigoUF { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
+        public string JuizResponsavel { get; set; }
         public EStatusProcessoJuridico Status { get; set; }
         public ETipoDePapelProcessoJuridico TipoDePapel { get; set; }
 

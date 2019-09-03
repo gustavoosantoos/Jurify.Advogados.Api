@@ -4,6 +4,7 @@ using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
 using System;
+using System.Linq;
 
 namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJuridicos.Cadastrar
 {
@@ -12,6 +13,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
         public Guid CodigoCliente { get; set; }
         public Guid? CodigoAdvogadoResponsavel { get; set; }
         public string NumeroProcesso { get; set; }
+        public string JuizResponsavel { get; set; }
         public int CodigoUF { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
@@ -26,6 +28,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
                 new NumeroProcessoJuridico(NumeroProcesso),
                 new DescricaoCurta(Titulo),
                 new Descricao(Descricao),
+                JuizResponsavel,
                 EEstadoBrasileiro.ObterPorCodigo(CodigoUF),
                 Status,
                 TipoDePapel

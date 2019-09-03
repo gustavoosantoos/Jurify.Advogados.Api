@@ -1,4 +1,5 @@
 ﻿using Jurify.Advogados.Api.Dominio.Entidades;
+using Jurify.Advogados.Api.Dominio.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -34,6 +35,12 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
                 descricao.Ignore(d => d.Notifications);
             });
 
+            builder.Property(e => e.UF).HasColumnName("codigo_uf").HasConversion(
+                v => v.Codigo,
+                v => EEstadoBrasileiro.ObterPorCodigo(v)
+            );
+
+            builder.Property(e => e.JuizResponsavel).HasColumnName("juiz_responsavel");
             builder.Property(e => e.Status).HasColumnName("status");
             builder.Property(e => e.TipoDePapel).HasColumnName("tipo_papel");
 

@@ -1,4 +1,5 @@
 ﻿using Jurify.Advogados.Api.Dominio.Enums;
+using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
         public string Numero { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
+        public string JuizResponsavel { get; set; }
+        public EEstadoBrasileiro UF { get; set; }
         public EStatusProcessoJuridico Status { get; set; }
         public ETipoDePapelProcessoJuridico TipoDePapel { get; set; }
         public DateTime DataCriacao { get; set; }
@@ -51,7 +54,9 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
                 Numero = entidade.Numero.Numero,
                 Titulo = entidade.Titulo.Valor,
                 Descricao = entidade.Descricao.Valor,
+                JuizResponsavel = entidade.JuizResponsavel,
                 Cliente = cliente,
+                UF = entidade.UF,
                 Status = entidade.Status,
                 TipoDePapel = entidade.TipoDePapel,
                 DataCriacao = entidade.DataCriacao,

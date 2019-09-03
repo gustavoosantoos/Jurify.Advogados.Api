@@ -69,6 +69,7 @@ create table processos_juridicos(
 	codigo_uf numeric(2) null,
 	descricao_curta varchar(100) not null,
 	descricao varchar(3000) null,
+	juiz_responsavel text null,
 	tipo_papel numeric(2) not null,
 	status numeric(2) not null,
 

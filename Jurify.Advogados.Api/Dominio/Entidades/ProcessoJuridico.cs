@@ -14,6 +14,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public NumeroProcessoJuridico Numero { get; private set; }
         public DescricaoCurta Titulo { get; private set; }
         public Descricao Descricao { get; private set; }
+        public string JuizResponsavel { get; private set; }
         public EEstadoBrasileiro UF { get; private set; }
         public EStatusProcessoJuridico Status { get; private set; }
         public ETipoDePapelProcessoJuridico TipoDePapel { get; private set; }
@@ -33,6 +34,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
                                 NumeroProcessoJuridico numero,
                                 DescricaoCurta titulo,
                                 Descricao descricao,
+                                string juizResponsavel,
                                 EEstadoBrasileiro uf,
                                 EStatusProcessoJuridico status,
                                 ETipoDePapelProcessoJuridico tipoDePapel)
@@ -43,6 +45,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             UF = uf;
             Titulo = titulo;
             Descricao = descricao;
+            JuizResponsavel = juizResponsavel;
             Status = status;
             TipoDePapel = tipoDePapel;
 
@@ -89,6 +92,11 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         {
             AddNotifications(descricao);
             Descricao = descricao;
+        }
+
+        public void AtualizarJuizResponsavel(string novoJuiz)
+        {
+            JuizResponsavel = novoJuiz;
         }
 
         public void AtualizarStatus(EStatusProcessoJuridico status)
