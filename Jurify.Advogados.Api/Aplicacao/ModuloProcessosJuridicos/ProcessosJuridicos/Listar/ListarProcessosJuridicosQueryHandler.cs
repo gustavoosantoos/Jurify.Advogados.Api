@@ -18,15 +18,18 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
         public async Task<RespostaCasoDeUso> Handle(ListarProcessosJuridicosQuery request, CancellationToken cancellationToken)
         {
             var processos = await Context.ProcessosJuridicos
+                .Include(p => p.Cliente)
                 .Where(p => p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo && !p.Apagado)
                 .Select(p => new ProcessoJuridicoPreview
                 {
                     Codigo = p.Codigo,
                     CodigoAdvogadoResponsavel = p.CodigoAdvogadoResponsavel,
+                    CodigoCliente = p.CodigoCliente,
+                    NomeCliente = p.Cliente.Nome.PrimeiroNome,
                     NumeroProcesso = p.Numero.Numero,
                     Titulo = p.Titulo.Valor,
                     Status = p.Status,
-                    UF = p.UF,
+                    UF = p.UF.UF,
                     TipoDePapel = p.TipoDePapel,
                     DataCriacao = p.DataCriacao,
                     DataUltimaAtualizacao = p.DataUltimaAlteracao
