@@ -1,10 +1,6 @@
-﻿using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
+﻿using Jurify.Advogados.Api.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
 {
@@ -20,6 +16,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
 
             builder.Property(e => e.NomeArquivo).HasColumnName("nome");
             builder.Property(e => e.Url).HasColumnName("url");
+            builder.Property(e => e.Identificador).HasColumnName("identificador");
 
             builder.Property(e => e.DataCriacao).HasColumnName("data_criacao");
             builder.Property(e => e.DataUltimaAlteracao).HasColumnName("data_ultima_alteracao");

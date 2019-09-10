@@ -35,9 +35,9 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
                 descricao.Ignore(d => d.Notifications);
             });
 
-            builder.Property(e => e.UF).HasColumnName("codigo_uf").HasConversion(
-                v => v.Codigo,
-                v => EEstadoBrasileiro.ObterPorCodigo(v)
+            builder.Property(e => e.UF).HasColumnName("uf").HasConversion(
+                v => v.UF,
+                v => EEstadoBrasileiro.ObterPorUF(v)
             );
 
             builder.Property(e => e.JuizResponsavel).HasColumnName("juiz_responsavel");

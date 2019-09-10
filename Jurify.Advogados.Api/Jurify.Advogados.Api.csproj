@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Aplicacao\ModuloProcessosJuridicos\EventosAnexos\" />
     <Folder Include="Infraestrutura\Mensageria\" />
     <Folder Include="Infraestrutura\Logging\" />
   </ItemGroup>

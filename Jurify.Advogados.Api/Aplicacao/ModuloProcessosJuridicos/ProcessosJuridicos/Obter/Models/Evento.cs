@@ -9,5 +9,6 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
         public Guid Codigo { get; set; }
         public string Descricao { get; set; }
         public IEnumerable<Anexo> Anexos { get; set; }
+        public DateTime DataCriacao { get; set; }
     }
 }

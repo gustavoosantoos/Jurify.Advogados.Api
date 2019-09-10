@@ -1,4 +1,5 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.AdicionarEvento;
+using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.AtualizarEvento;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.RemoverEvento;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJuridicos.Atualizar;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJuridicos.Cadastrar;
@@ -119,6 +120,27 @@ namespace Jurify.Advogados.Api.Controllers
             command.CodigoProcessoJuridico = codigo;
             return RespostaCasoDeUso(await _mediator.Send(command));
         }
+
+        /// <summary>
+        /// Atualiza um evento de um processo jurídico
+        /// </summary>
+        /// <param name="codigo">Código do processo</param>
+        /// <param name="codigoEvento">Código do evento</param>
+        /// <param name="command">Dados do evento</param>
+        /// <response code="200">Evento atualizado com sucesso</response>
+        /// <response code="400">Dados inválidos</response>
+        /// <response code="404">Processo e/ou evento não encontrado</response>
+        [HttpPut("{codigo:guid}/eventos/{codigoEvento:guid}")]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> PutEvento(Guid codigo, Guid codigoEvento, AtualizarEventoCommand command)
+        {
+            command.CodigoProcessoJuridico = codigo;
+            command.CodigoEvento = codigoEvento;
+            return RespostaCasoDeUso(await _mediator.Send(command));
+        }
+
 
         /// <summary>
         /// Remove um evento no processo jurídico
