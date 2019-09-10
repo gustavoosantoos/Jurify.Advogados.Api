@@ -26,34 +26,37 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloClientes.Anexos.AdicionarAnexo
 
         public async Task<RespostaCasoDeUso> Handle(AdicionarAnexoCommand request, CancellationToken cancellationToken)
         {
-            var cliente = await Context.Clientes
-                .FirstOrDefaultAsync(c => c.Codigo == request.CodigoCliente &&
-                                          c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
-                                          !c.Apagado);
+            Cliente cliente = await ObterCliente(request.CodigoCliente);
 
             if (cliente == null)
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
 
-            var identificadorArquivo = ConstruirNomeArquivo();
-            var urlArquivo = await _servicoDeArmazenamento.SalvarArquivo(identificadorArquivo, request.Arquivo);
+            AnexoCliente anexo = await SalvarAnexoNaCloud(request);
+            cliente.AdicionarAnexo(anexo);
 
-            var anexo = new AnexoCliente(request.CodigoCliente, request.NomeArquivo, identificadorArquivo, urlArquivo);
-
-            if (anexo.Invalid)
+            if (cliente.Invalid)
             {
-                await _servicoDeArmazenamento.RemoverArquivo(urlArquivo);
+                await _servicoDeArmazenamento.RemoverArquivo(anexo.Identificador);
                 return RespostaCasoDeUso.ComFalha(cliente.Notifications);
             }
 
-            cliente.AdicionarAnexo(anexo);
             await Context.SaveChangesAsync();
-
             return RespostaCasoDeUso.ComSucesso(anexo.Codigo);
         }
 
-        private string ConstruirNomeArquivo()
+        private async Task<Cliente> ObterCliente(Guid id)
         {
-            return $"anexos-clientes-{Guid.NewGuid()}";
+            return await Context.Clientes
+               .FirstOrDefaultAsync(c => c.Codigo == id &&
+                                         c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
+                                         !c.Apagado);
+        }
+
+        private async Task<AnexoCliente> SalvarAnexoNaCloud(AdicionarAnexoCommand command)
+        {
+            var identificadorArquivo = $"anexos-clientes-{Guid.NewGuid()}";
+            var urlArquivo = await _servicoDeArmazenamento.SalvarArquivo(identificadorArquivo, command.Arquivo);
+            return new AnexoCliente(command.CodigoCliente, command.NomeArquivo, identificadorArquivo, urlArquivo);
         }
     }
 }
