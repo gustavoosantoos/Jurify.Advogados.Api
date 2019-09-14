@@ -20,6 +20,12 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
                 descricao.Ignore(d => d.Notifications);
             });
 
+            builder.OwnsOne(e => e.DataHora, dataHora =>
+            {
+                dataHora.Property(d => d.Valor).HasColumnName("data_hora_evento");
+                dataHora.Ignore(d => d.Notifications);
+            });
+
             builder.HasMany(e => e.Anexos).WithOne(a => a.Evento).HasForeignKey(a => a.CodigoEvento);
 
             builder.Property(e => e.DataCriacao).HasColumnName("data_criacao");
