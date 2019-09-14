@@ -4,6 +4,7 @@ using Jurify.Advogados.Api.Dominio.Exceptions;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Jurify.Advogados.Api.Dominio.Entidades
 {
@@ -22,7 +23,10 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public Guid? CodigoAdvogadoResponsavel { get; private set; }
         public Guid CodigoCliente { get; private set; }
         public Cliente Cliente { get; private set; }
-        public IReadOnlyCollection<EventoProcessoJuridico> Eventos => _eventos;
+
+        public IReadOnlyCollection<EventoProcessoJuridico> Eventos => _eventos
+            .OrderByDescending(e => e.DataHora.Valor)
+            .ToArray();
 
         protected ProcessoJuridico()
         {
