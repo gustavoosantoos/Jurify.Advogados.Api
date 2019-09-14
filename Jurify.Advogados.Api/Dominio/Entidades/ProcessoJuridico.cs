@@ -26,7 +26,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         public IReadOnlyCollection<EventoProcessoJuridico> Eventos => _eventos
             .OrderByDescending(e => e.DataHora.Valor)
-            .ToArray();
+            .ToList();
 
         protected ProcessoJuridico()
         {

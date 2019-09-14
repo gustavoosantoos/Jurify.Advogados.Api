@@ -11,12 +11,16 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
     {
         public DateTime Valor { get; set; }
 
+        protected DataHoraEventoProcessoJuridico()
+        {
+        }
+
         public DataHoraEventoProcessoJuridico(DateTime dataHoraEvento)
         {
             Valor = dataHoraEvento;
 
             AddNotifications(new Contract()
-                .AreNotEquals(Valor, default, "DataHoraEvento", "A data/hora do evento deve possuir um valor")
+                .AreNotEquals(Valor, default(DateTime), "DataHoraEvento", "A data/hora do evento deve possuir um valor")
             );
         }
 
