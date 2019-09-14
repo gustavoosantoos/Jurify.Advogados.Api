@@ -11,6 +11,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         public Guid CodigoProcesso { get; private set; }
         public Descricao Descricao { get; private set; }
+        public DataHoraEventoProcessoJuridico DataHora { get; private set; }
 
         public ProcessoJuridico Processo { get; private set; }
         public IReadOnlyCollection<AnexoEventoProcessoJuridico> Anexos => _anexos;
@@ -20,11 +21,14 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             _anexos = new List<AnexoEventoProcessoJuridico>();
         }
 
-        public EventoProcessoJuridico(Guid codigoProcesso, Descricao descricao)
+        public EventoProcessoJuridico(Guid codigoProcesso, Descricao descricao, DataHoraEventoProcessoJuridico dataHora)
         {
             CodigoProcesso = codigoProcesso;
             Descricao = descricao;
+            DataHora = dataHora;
             _anexos = new List<AnexoEventoProcessoJuridico>();
+
+            Validar();
         }
 
         public void AtualizarDescricao(Descricao novaDescricao)
@@ -41,7 +45,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         protected override void Validar()
         {
-            AddNotifications(Descricao);
+            AddNotifications(Descricao, DataHora);
         }
     }
 }

@@ -10,10 +10,14 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Adicio
     {
         public Guid CodigoProcessoJuridico { get; set; }
         public string Descricao { get; set; }
+        public DateTime DataHoraEvento { get; set; }
 
         public EventoProcessoJuridico AsEntity()
         {
-            return new EventoProcessoJuridico(CodigoProcessoJuridico, new Descricao(Descricao));
+            return new EventoProcessoJuridico(
+                CodigoProcessoJuridico,
+                new Descricao(Descricao),
+                new DataHoraEventoProcessoJuridico(DataHoraEvento));
         }
     }
 }
