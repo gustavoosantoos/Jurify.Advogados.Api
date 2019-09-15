@@ -9,15 +9,20 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Adicio
     public class AdicionarEventoCommand : IRequest<RespostaCasoDeUso>
     {
         public Guid CodigoProcessoJuridico { get; set; }
+        public string Titulo { get; set; }
         public string Descricao { get; set; }
         public DateTime DataHoraEvento { get; set; }
 
         public EventoProcessoJuridico AsEntity()
         {
-            return new EventoProcessoJuridico(
-                CodigoProcessoJuridico,
-                new Descricao(Descricao),
-                new DataHoraEventoProcessoJuridico(DataHoraEvento));
+            var descricao = string.IsNullOrEmpty(Descricao) ? 
+                Dominio.ObjetosDeValor.Descricao.CriarDescricaoVazia() :
+                new Descricao(Descricao);
+
+            var titulo = new DescricaoCurta(Titulo);
+            var dataHoraEvento = new DataHoraEventoProcessoJuridico(DataHoraEvento);
+
+            return new EventoProcessoJuridico(CodigoProcessoJuridico, titulo, descricao, dataHoraEvento);
         }
     }
 }

@@ -85,7 +85,8 @@ create table processos_juridicos_eventos(
 	codigo_escritorio uuid not null,
 	codigo_processo_juridico uuid not null references processos_juridicos(codigo),
 
-	descricao varchar(3000) not null,
+	titulo varchar(300) not null,
+	descricao varchar(3000) null,
 	data_hora_evento timestamp not null default now(),
 
 	data_criacao timestamp not null default now(),

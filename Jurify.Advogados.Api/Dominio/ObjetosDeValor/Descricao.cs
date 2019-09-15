@@ -8,15 +8,22 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
     {
         public string Valor { get; private set; }
 
+        private Descricao()
+        {
+            Valor = string.Empty;
+        }
+
         public Descricao(string valor)
         {
             Valor = valor;
 
             AddNotifications(new Contract()
                 .IsNotNullOrWhiteSpace(Valor, "Descricao", "A descrição não deve ser vazia")
-                .HasMaxLen(Valor, 3000, "Descricao", "A descrição deve ter ao máximo 3000 caracteres")
+                .HasMaxLengthIfNotNullOrEmpty(Valor, 3000, "Descricao", "A descrição deve ter ao máximo 3000 caracteres")
             );
         }
+
+        public static Descricao CriarDescricaoVazia() => new Descricao();
 
         protected override IEnumerable<object> ObterComponentesIgualdade()
         {

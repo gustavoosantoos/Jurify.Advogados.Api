@@ -14,6 +14,12 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
             builder.Property(e => e.CodigoEscritorio).HasColumnName("codigo_escritorio");
             builder.Property(e => e.CodigoProcesso).HasColumnName("codigo_processo_juridico");
 
+            builder.OwnsOne(e => e.Titulo, titulo =>
+            {
+                titulo.Property(t => t.Valor).HasColumnName("titulo");
+                titulo.Ignore(t => t.Notifications);
+            });
+
             builder.OwnsOne(e => e.Descricao, descricao => 
             {
                 descricao.Property(d => d.Valor).HasColumnName("descricao");
@@ -27,6 +33,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
             });
 
             builder.HasMany(e => e.Anexos).WithOne(a => a.Evento).HasForeignKey(a => a.CodigoEvento);
+            builder.Metadata.FindNavigation(nameof(EventoProcessoJuridico.Anexos)).SetPropertyAccessMode(PropertyAccessMode.Field);
 
             builder.Property(e => e.DataCriacao).HasColumnName("data_criacao");
             builder.Property(e => e.DataUltimaAlteracao).HasColumnName("data_ultima_alteracao");

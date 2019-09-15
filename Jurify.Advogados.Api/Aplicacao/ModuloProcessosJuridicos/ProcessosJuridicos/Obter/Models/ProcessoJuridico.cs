@@ -15,7 +15,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public string JuizResponsavel { get; set; }
-        public EEstadoBrasileiro UF { get; set; }
+        public int CodigoUF { get; set; }
         public EStatusProcessoJuridico Status { get; set; }
         public ETipoDePapelProcessoJuridico TipoDePapel { get; set; }
         public DateTime DataCriacao { get; set; }
@@ -38,7 +38,9 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
             var eventos = entidade.Eventos.Select(e => new Evento
             {
                 Codigo = e.Codigo,
+                Titulo = e.Titulo.Valor,
                 Descricao = e.Descricao.Valor,
+                DataHoraEvento = e.DataHora.Valor,
                 DataCriacao = e.DataCriacao,
                 Anexos = e.Anexos.Select(a => new Anexo
                 {
@@ -46,7 +48,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
                     NomeArquivo = a.NomeArquivo,
                     Url = a.Url
                 })
-            }).OrderByDescending(e => e.DataCriacao);
+            }).OrderByDescending(e => e.DataHoraEvento);
 
             return new ProcessoJuridico
             {
@@ -57,7 +59,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
                 Descricao = entidade.Descricao.Valor,
                 JuizResponsavel = entidade.JuizResponsavel,
                 Cliente = cliente,
-                UF = entidade.UF,
+                CodigoUF = entidade.UF.Codigo,
                 Status = entidade.Status,
                 TipoDePapel = entidade.TipoDePapel,
                 DataCriacao = entidade.DataCriacao,
