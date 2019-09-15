@@ -2,6 +2,7 @@
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Jurify.Advogados.Api.Dominio.Entidades
 {
@@ -15,7 +16,9 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public DataHoraEventoProcessoJuridico DataHora { get; private set; }
 
         public ProcessoJuridico Processo { get; private set; }
-        public IReadOnlyCollection<AnexoEventoProcessoJuridico> Anexos => _anexos;
+        public IReadOnlyCollection<AnexoEventoProcessoJuridico> Anexos => _anexos
+            .Where(a => !a.Apagado)
+            .ToList();
 
         protected EventoProcessoJuridico()
         {

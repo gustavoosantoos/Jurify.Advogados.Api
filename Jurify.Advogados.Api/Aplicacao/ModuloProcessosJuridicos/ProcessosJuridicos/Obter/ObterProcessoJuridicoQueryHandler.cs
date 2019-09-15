@@ -4,9 +4,11 @@ using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Z.EntityFramework.Plus;
 
 namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJuridicos.Obter
 {
@@ -23,8 +25,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
                 .Include(p => p.Eventos)
                     .ThenInclude(e => e.Anexos)
                 .FirstOrDefaultAsync(p => p.Codigo == request.Codigo &&
-                                     p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
-                                     !p.Apagado);
+                                          p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
+                                          !p.Apagado);
 
             if (processo == null)
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);

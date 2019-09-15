@@ -1,6 +1,9 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.AdicionarEvento;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.AtualizarEvento;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.RemoverEvento;
+using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.EventosAnexos.AdicionarAnexo;
+using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.EventosAnexos.BaixarAnexo;
+using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.EventosAnexos.RemoverAnexo;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJuridicos.Atualizar;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJuridicos.Cadastrar;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJuridicos.Listar;
@@ -10,16 +13,15 @@ using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJuridicos
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Configuracoes;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Jurify.Advogados.Api.Controllers
 {
-    [Authorize]
     [ApiController]
     [EnableCors(Cors.POLICY_NAME)]
     [Route("api/[controller]")]
@@ -155,6 +157,72 @@ namespace Jurify.Advogados.Api.Controllers
         public async Task<ActionResult> DeleteEvento(Guid codigo, Guid codigoEvento)
         {
             return RespostaCasoDeUso(await _mediator.Send(new RemoverEventoCommand(codigo, codigoEvento)));
+        }
+
+        /// <summary>
+        /// Obtem um anexo de um evento e inicia o download
+        /// </summary>
+        /// <param name="codigo">Código do processo</param>
+        /// <param name="codigoEvento">Código do evento</param>
+        /// <param name="codigoAnexo">Código do anexo</param>
+        /// <response code="200">Arquivo a ser baixado</response>
+        /// <response code="404">Evento ou anexo não encontrado</response>
+        [HttpGet("{codigo:guid}/eventos/{codigoEvento:guid}/anexos/{codigoAnexo:guid}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> GetAnexo(Guid codigo, Guid codigoEvento, Guid codigoAnexo)
+        {
+            var query = new BaixarAnexoQuery(codigo, codigoEvento, codigoAnexo);
+            var response = await _mediator.Send(query);
+
+            if (response.Sucesso)
+            {
+                var anexo = (Aplicacao.ModuloProcessosJuridicos.EventosAnexos.BaixarAnexo.Anexo)response.Dados;
+                return File(anexo.Arquivo, "application/octet-stream", anexo.NomeDoArquivo);
+            }
+
+            return RespostaCasoDeUso(response);
+        }
+
+        /// <summary>
+        /// Recebe um arquivo para anexar a um evento
+        /// </summary>
+        /// <param name="codigo">Código do processo</param>
+        /// <param name="codigoEvento">Código do evento</param>
+        /// <param name="file">Arquivo</param>
+        /// <response code="200">Código do anexo inserido</response>
+        /// <response code="404">Evento não encontrado</response>
+        /// <response code="500">Erro ao fazer upload do anexo</response>
+        [HttpPost("{codigo:guid}/eventos/{codigoEvento:guid}/anexos")]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> PostAnexo(Guid codigo, Guid codigoEvento, IFormFile file)
+        {
+            using (var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                var command = new AdicionarAnexoCommand(codigo, codigoEvento, file.FileName, stream);
+                return RespostaCasoDeUso(await _mediator.Send(command));
+            }
+        }
+
+        /// <summary>
+        /// Remove um anexo de um evento de um processo jurídico
+        /// </summary>
+        /// <param name="codigo">Código do processo</param>
+        /// <param name="codigoEvento">Código do evento</param>
+        /// <param name="codigoAnexo">Código do anexo</param>
+        /// <response code="204">Anexo removido com sucesso</response>
+        /// <response code="404">Evento ou anexo não encontrado</response>
+        /// <response code="500">Erro ao remover anexo</response>
+        [HttpDelete("{codigo:guid}/eventos/{codigoEvento:guid}/anexos/{codigoAnexo:guid}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> DeleteAnexo(Guid codigo, Guid codigoEvento, Guid codigoAnexo)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new RemoverAnexoCommand(codigo, codigoEvento, codigoAnexo)));
         }
     }
 }

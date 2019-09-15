@@ -2,6 +2,7 @@
 using Jurify.Advogados.Api.Dominio.Exceptions;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Jurify.Advogados.Api.Dominio.Entidades
 {
@@ -17,9 +18,9 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public DataNascimento DataNascimento { get; private set; }
         public Email Email { get; private set; }
 
-        public IReadOnlyCollection<Endereco> Enderecos => _enderecos;
-        public IReadOnlyCollection<ProcessoJuridico> Processos => _processos;
-        public IReadOnlyCollection<AnexoCliente> Anexos => _anexos;
+        public IReadOnlyCollection<Endereco> Enderecos => _enderecos.Where(e => !e.Apagado).ToList();
+        public IReadOnlyCollection<ProcessoJuridico> Processos => _processos.Where(p => !p.Apagado).ToList();
+        public IReadOnlyCollection<AnexoCliente> Anexos => _anexos.Where(a => !a.Apagado).ToList();
 
         protected Cliente()
         {
