@@ -110,6 +110,23 @@ create table processos_juridicos_eventos_anexos(
 	apagado boolean not null default false
 );
 
+create table agenda_compromissos(
+	codigo uuid primary key not null default gen_random_uuid(),
+	codigo_escritorio uuid not null,
+	codigo_advogado uuid not null,
+	codigo_cliente uuid null references clientes(codigo),
+
+	titulo varchar(200) not null, 
+	descricao varchar(3000) null,
+	data_hora_inicio_compromisso timestamp not null default now(),
+	data_hora_final_compromisso timestamp null,
+
+	data_criacao timestamp not null default now(),
+	data_ultima_alteracao timestamp not null default now(),
+	codigo_usuario_ultima_alteracao uuid not null,
+	apagado boolean not null default false
+);
+
 create index idx_clientes_multitenancy on clientes(codigo, codigo_escritorio, apagado); 
 create index idx_enderecos_multitenancy on enderecos(codigo, codigo_escritorio, apagado);
 create index idx_processosjuridicos_multitenancy on processos_juridicos(codigo, codigo_escritorio, apagado);

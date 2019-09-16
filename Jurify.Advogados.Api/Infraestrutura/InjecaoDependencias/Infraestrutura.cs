@@ -17,8 +17,9 @@ namespace Jurify.Advogados.Api.Infraestrutura.InjecaoDependencias
                 config.ClearProviders();
                 config.AddDebug();
             });
-
+            
             services.AddDbContext<JurifyContext>();
+            services.AddScoped<UnitOfWork>();
 
             services.AddHttpClient("AUTENTICADOR_API", config =>
             {
