@@ -12,6 +12,8 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
             builder.HasKey(e => e.Codigo);
             builder.Property(e => e.Codigo).HasColumnName("codigo");
             builder.Property(e => e.CodigoEscritorio).HasColumnName("codigo_escritorio");
+            builder.Property(e => e.CodigoAdvogado).HasColumnName("codigo_advogado");
+            builder.Property(e => e.CodigoCliente).HasColumnName("codigo_cliente");
 
             builder.OwnsOne(e => e.Titulo, titulo =>
             {
@@ -31,6 +33,8 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
                 horario.Property(h => h.Final).HasColumnName("data_hora_final_compromisso");
                 horario.Ignore(h => h.Notifications);
             });
+
+            builder.HasOne(e => e.Cliente).WithMany().HasForeignKey(e => e.CodigoCliente);
 
             builder.Property(e => e.DataCriacao).HasColumnName("data_criacao");
             builder.Property(e => e.DataUltimaAlteracao).HasColumnName("data_ultima_alteracao");

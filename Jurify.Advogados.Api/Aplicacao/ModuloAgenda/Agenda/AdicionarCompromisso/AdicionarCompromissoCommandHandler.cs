@@ -21,7 +21,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloAgenda.Agenda.AdicionarCompromiss
         {
             var entity = new CompromissoAgenda(
                 new DescricaoCurta(request.Titulo),
-                new Descricao(request.Descricao),
+                string.IsNullOrEmpty(request.Descricao) ? Descricao.CriarDescricaoVazia() : new Descricao(request.Descricao),
                 new HorarioCompromisso(request.Inicio, request.Final),
                 request.CodigoCliente,
                 ServicoUsuarios.UsuarioAtual.Codigo

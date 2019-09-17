@@ -21,8 +21,8 @@ namespace Jurify.Advogados.Api.Dominio.ObjetosDeValor
 
             AddNotifications(new Contract()
                 .IsTrue(Inicio > DateTime.Now, "InicioCompromisso", "O início do compromisso deve ser no futuro")
-                .IsTrue(!Final.HasValue || Final > Inicio, "FinalCompromisso", "O final do compromisso deve ser após o início")
-                .IsTrue(!Final.HasValue || Inicio.Date != Final?.Date, "Compromisso", "O final do compromisso deve estar no mesmo dia do início")
+                .IsTrue(!Final.HasValue || Final.Value > Inicio, "FinalCompromisso", "O final do compromisso deve ser após o início")
+                .IsTrue(!Final.HasValue || Inicio.Date == Final?.Date, "Compromisso", "O final do compromisso deve estar no mesmo dia do início")
             );
         }
 
