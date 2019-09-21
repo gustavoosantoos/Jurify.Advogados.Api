@@ -12,6 +12,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Adicio
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public DateTime DataHoraEvento { get; set; }
+        public bool AdicionarNaAgenda { get; set; }
 
         public EventoProcessoJuridico AsEntity()
         {

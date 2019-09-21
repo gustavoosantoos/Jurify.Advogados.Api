@@ -1,5 +1,4 @@
-﻿using Jurify.Advogados.Api.Dominio.Entidades;
-using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
+﻿using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using MediatR;
 using System;
 
