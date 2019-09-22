@@ -1,5 +1,6 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.AdicionarEvento;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.AtualizarEvento;
+using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.NotificarClienteSobreEvento;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.RemoverEvento;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.EventosAnexos.AdicionarAnexo;
 using Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.EventosAnexos.BaixarAnexo;
@@ -223,6 +224,23 @@ namespace Jurify.Advogados.Api.Controllers
         public async Task<ActionResult> DeleteAnexo(Guid codigo, Guid codigoEvento, Guid codigoAnexo)
         {
             return RespostaCasoDeUso(await _mediator.Send(new RemoverAnexoCommand(codigo, codigoEvento, codigoAnexo)));
+        }
+
+        /// <summary>
+        /// Notifica o cliente do processo sobre o evento
+        /// </summary>
+        /// <param name="codigo">Código do processo</param>
+        /// <param name="codigoEvento">Código do evento</param>
+        /// <response code="204">Cliente notificado com sucesso</response>
+        /// <response code="404">Processo e/ou evento não encontrados</response>
+        /// <response code="500">Falha ao notificar cliente</response>
+        [HttpPost("{codigo:guid}/eventos/{codigoEvento:guid}/notificar-cliente")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> NotificarCliente(Guid codigo, Guid codigoEvento)
+        {
+            return RespostaCasoDeUso(await _mediator.Send(new NotificarClienteSobreEventoCommand(codigo, codigoEvento)));
         }
     }
 }

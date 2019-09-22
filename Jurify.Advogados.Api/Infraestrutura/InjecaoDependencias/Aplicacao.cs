@@ -9,6 +9,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.InjecaoDependencias
         public static void AdicionarServicosDaAplicacao(this IServiceCollection services)
         {
             services.AddScoped<IServicoDeArmazenamento, ServicoDeArmazenamentoAzure>();
+            services.AddScoped<IServicoDeEmail, ServicoDeEmail>();
         }
     }
 }
