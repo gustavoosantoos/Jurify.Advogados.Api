@@ -80,6 +80,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Notifi
 
 <strong>Evento:</strong> {evento.Titulo.Valor} <br /><br />
 
+<strong>Dia e horário:</strong> {evento.DataHora.Valor.ToString("dd/MM/yyyy HH:mm")} <br/><br/>
+
 {evento.Descricao.Valor} <br /><br />
 
 Entre em contato com o seu advogado para maiores informações. <br /><br/>
