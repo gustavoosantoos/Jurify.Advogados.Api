@@ -30,7 +30,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.ListarMensagens
                 })
                 .ToListAsync();
 
-            Parallel.ForEach(mensagens, m =>
+            foreach (var m in mensagens)
             {
                 var cliente = Context.Clientes.FirstOrDefault(c => c.CPF.Numero == m.CpfCliente);
                 
@@ -39,7 +39,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.ListarMensagens
                     m.CodigoCliente = cliente.Codigo;
                     m.NomeCliente = cliente.Nome.ObterNomeCompleto();
                 }
-            });
+            }
 
             return RespostaCasoDeUso.ComSucesso(mensagens);
         }
