@@ -2,6 +2,8 @@
 using Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.AdicionarNovaMensagem;
 using Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.ListarMensagens;
 using Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.RemoverMensagem;
+using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
+using Jurify.Advogados.Api.Infraestrutura.Autenticacao.Modelo;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Configuracoes;
 using MediatR;
@@ -21,10 +23,12 @@ namespace Jurify.Advogados.Api.Controllers
     public class EscritoriosController : BaseController
     {
         private readonly IMediator _mediator;
+        private readonly ServicoUsuarios _servicoUsuarios;
 
-        public EscritoriosController(IMediator mediator)
+        public EscritoriosController(IMediator mediator, ServicoUsuarios servicoUsuarios)
         {
             _mediator = mediator;
+            _servicoUsuarios = servicoUsuarios;
         }
 
         /// <summary>
@@ -79,6 +83,10 @@ namespace Jurify.Advogados.Api.Controllers
         [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> PostMensagem(Guid codigo, AdicionarNovaMensagemCommand command)
         {
+            var usuario = new Usuario(Guid.Empty, "Aplicação", "CRM");
+            var escritorio = new Escritorio(codigo, string.Empty);
+            _servicoUsuarios.AtualizarUsuario(usuario, escritorio);
+
             command.CodigoEscritorio = codigo;
             return RespostaCasoDeUso(await _mediator.Send(command));
         }

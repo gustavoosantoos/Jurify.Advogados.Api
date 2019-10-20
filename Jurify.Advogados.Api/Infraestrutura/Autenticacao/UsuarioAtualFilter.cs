@@ -1,6 +1,7 @@
 ﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao.Modelo;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
+using System.Linq;
 
 namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
 {
@@ -16,6 +17,11 @@ namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
         public void OnActionExecuting(ActionExecutingContext context)
         {
             var claims = context.HttpContext.User;
+
+            if (!claims.Claims.Any())
+            {
+                return;
+            }
 
             var usuario = new Usuario(
                 Guid.Parse(claims.FindFirst("user_id").Value),
