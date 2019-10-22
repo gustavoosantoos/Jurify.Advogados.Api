@@ -23,6 +23,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Obter
             var cliente = await Context.Clientes
                 .IncludeFilter(c => c.Enderecos.Where(e => !e.Apagado))
                 .IncludeFilter(c => c.Anexos.Where(a => !a.Apagado))
+                .IncludeFilter(c => c.Processos.Where(a => !a.Apagado))
                 .FirstOrDefaultAsync(c => c.Codigo == request.Codigo &&
                                      c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
                                      !c.Apagado);
