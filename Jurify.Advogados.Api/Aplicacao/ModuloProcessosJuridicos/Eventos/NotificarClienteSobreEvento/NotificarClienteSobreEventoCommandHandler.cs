@@ -6,6 +6,7 @@ using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -30,42 +31,49 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Notifi
 
         public async Task<RespostaCasoDeUso> Handle(NotificarClienteSobreEventoCommand request, CancellationToken cancellationToken)
         {
-            var processo = await Context
-                .ProcessosJuridicos
-                .Include(p => p.Eventos)
-                .Include(p => p.Cliente)
-                .FirstOrDefaultAsync(p =>
-                    p.Codigo == request.CodigoProcesso &&
-                    p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
-                    !p.Apagado
+            try
+            {
+                var processo = await Context
+                    .ProcessosJuridicos
+                    .Include(p => p.Eventos)
+                    .Include(p => p.Cliente)
+                    .FirstOrDefaultAsync(p =>
+                        p.Codigo == request.CodigoProcesso &&
+                        p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
+                        !p.Apagado
+                    );
+
+                var evento = processo?.Eventos?.FirstOrDefault(e => e.Codigo == request.CodigoEvento);
+
+                if (processo == null || evento == null)
+                {
+                    return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
+                }
+
+                if (processo.Cliente.Email == null)
+                {
+                    return RespostaCasoDeUso.ComFalha("O cliente não possui e-mail cadastrado");
+                }
+
+                bool sucessoNoEnvioDeEmail = await _servicoEmail.EnviarEmail(
+                    _configuration["Email:Remetente"],
+                    _configuration["Email:Senha"],
+                    processo.Cliente.Email.Endereco,
+                    ConstruirAssuntoEmail(),
+                    ConstruirCorpoEmail(processo, evento)
                 );
 
-            var evento = processo?.Eventos?.FirstOrDefault(e => e.Codigo == request.CodigoEvento);
+                if (!sucessoNoEnvioDeEmail)
+                {
+                    return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.InternalServerError);
+                }
 
-            if (processo == null || evento == null)
-            {
-                return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
+                return RespostaCasoDeUso.ComSucesso();
             }
-
-            if (processo.Cliente.Email == null)
+            catch (Exception ex)
             {
-                return RespostaCasoDeUso.ComFalha("O cliente não possui e-mail cadastrado");
+                return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.InternalServerError, ex.Message);
             }
-
-            bool sucessoNoEnvioDeEmail = await _servicoEmail.EnviarEmail(
-                _configuration["Email:Remetente"],
-                _configuration["Email:Senha"],
-                processo.Cliente.Email.Endereco,
-                ConstruirAssuntoEmail(),
-                ConstruirCorpoEmail(processo, evento)
-            );
-
-            if (!sucessoNoEnvioDeEmail)
-            {
-                return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.InternalServerError);
-            }
-
-            return RespostaCasoDeUso.ComSucesso();
         }
 
         private string ConstruirAssuntoEmail()
