@@ -31,6 +31,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia
         public DbSet<EventoProcessoJuridico> EventosProcessoJuridico { get; private set; }
         public DbSet<AnexoEventoProcessoJuridico> AnexosEventosProcessoJuridico { get; private set; }
         public DbSet<CompromissoAgenda> CompromissosAgenda { get; private set; }
+        public DbSet<MensagemRecebida> MensagensRecebidas { get; private set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

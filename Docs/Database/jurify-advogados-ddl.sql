@@ -127,6 +127,21 @@ create table agenda_compromissos(
 	apagado boolean not null default false
 );
 
+create table mensagens_recebidas(
+	codigo uuid primary key not null default gen_random_uuid(),
+	codigo_escritorio uuid not null,
+
+	nome_cliente varchar(400) not null,
+	contato_cliente varchar(30) not null,
+	cpf_cliente varchar(11) not null,
+	mensagem text not null,
+
+	data_criacao timestamp not null default now(),
+	data_ultima_alteracao timestamp not null default now(),
+	codigo_usuario_ultima_alteracao uuid not null,
+	apagado boolean not null default false
+);
+
 create index idx_clientes_multitenancy on clientes(codigo, codigo_escritorio, apagado); 
 create index idx_enderecos_multitenancy on enderecos(codigo, codigo_escritorio, apagado);
 create index idx_processosjuridicos_multitenancy on processos_juridicos(codigo, codigo_escritorio, apagado);

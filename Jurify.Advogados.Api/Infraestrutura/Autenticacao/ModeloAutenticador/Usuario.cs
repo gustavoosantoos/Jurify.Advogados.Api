@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao.ModeloAutenticador
 {
@@ -10,7 +11,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao.ModeloAutenticador
         public string Username { get; set; }
         public string Senha { get; set; }
         public PersonalInfo InformacoesPessoais { get; set; }
-        public object[] Permissoes { get; set; }
+        public List<Permissao> Permissoes { get;  set; }
         public bool Apagado { get; set; }
     }
 }
