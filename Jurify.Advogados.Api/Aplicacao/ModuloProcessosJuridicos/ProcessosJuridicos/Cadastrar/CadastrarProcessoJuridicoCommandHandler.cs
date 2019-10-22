@@ -17,9 +17,17 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
 
         public async Task<RespostaCasoDeUso> Handle(CadastrarProcessoJuridicoCommand request, CancellationToken cancellationToken)
         {
+            var usuarioAtual = await ServicoUsuarios.ObterInformacoesDeUsuario(ServicoUsuarios.UsuarioAtual.Codigo);
+
             var processo = request.AsEntity();
             if (processo.Invalid)
                 return RespostaCasoDeUso.ComFalha(processo.Notifications);
+            
+            if (usuarioAtual.EhAdministrador)
+                processo.AtualizarAdvogadoResponsavel(null);
+            else
+                processo.AtualizarAdvogadoResponsavel(ServicoUsuarios.UsuarioAtual.Codigo);
+                
 
             var clienteExiste = await Context.Clientes
                 .AnyAsync(c => c.Codigo == request.CodigoCliente &&
