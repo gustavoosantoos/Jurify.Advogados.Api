@@ -6,6 +6,7 @@ using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -34,6 +35,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Notifi
                 .ProcessosJuridicos
                 .Include(p => p.Eventos)
                 .Include(p => p.Cliente)
+                    .ThenInclude(c => c.Email)
                 .FirstOrDefaultAsync(p =>
                     p.Codigo == request.CodigoProcesso &&
                     p.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
@@ -47,7 +49,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.Eventos.Notifi
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
             }
 
-            if (processo.Cliente.Email == null)
+            if (processo.Cliente.Email == null || processo.Cliente.Email.Endereco == null)
             {
                 return RespostaCasoDeUso.ComFalha("O cliente não possui e-mail cadastrado");
             }
