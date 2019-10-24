@@ -23,7 +23,9 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.AdicionarClient
         {
             var mensagem = await Context
                 .MensagensRecebidas
-                .FirstOrDefaultAsync(m => m.Codigo == request.CodigoMensagem);   
+                .FirstOrDefaultAsync(m => m.Codigo == request.CodigoMensagem &&
+                                          m.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
+                                          !m.Apagado);   
 
             if (mensagem == null)
             {
