@@ -34,7 +34,9 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.ListarMensagens
             {
                 var cliente = await Context
                     .Clientes
-                    .FirstOrDefaultAsync(c => c.CPF.Numero == m.CpfCliente);
+                    .FirstOrDefaultAsync(c => c.CPF.Numero == m.CpfCliente && 
+                                              c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
+                                              !c.Apagado);
                 
                 if (cliente != null)
                 {
