@@ -43,7 +43,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Listar
                 Clientes = clientes
             };
 
-            return RespostaCasoDeUso.ComSucesso(clientes);
+            return RespostaCasoDeUso.ComSucesso(listagem);
         }
     }
 }

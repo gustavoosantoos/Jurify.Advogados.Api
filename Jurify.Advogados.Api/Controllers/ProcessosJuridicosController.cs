@@ -40,7 +40,7 @@ namespace Jurify.Advogados.Api.Controllers
         /// </summary>
         /// <response code="200">Listagem de processos jurídicos.</response>
         [HttpGet]
-        [ProducesResponseType(typeof(ProcessoJuridicoPreview[]), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ListagemProcessos), StatusCodes.Status200OK)]
         public async Task<ActionResult> Get()
         {
             return RespostaCasoDeUso(await _mediator.Send(new ListarProcessosJuridicosQuery()));

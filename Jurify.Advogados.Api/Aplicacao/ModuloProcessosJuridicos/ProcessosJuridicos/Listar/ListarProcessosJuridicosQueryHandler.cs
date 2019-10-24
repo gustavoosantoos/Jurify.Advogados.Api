@@ -1,4 +1,5 @@
-﻿using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
+﻿using Jurify.Advogados.Api.Dominio.Enums;
+using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
@@ -47,7 +48,14 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloProcessosJuridicos.ProcessosJurid
                                                    .ObterNomeCompleto();
             }).ToArray());
 
-            return RespostaCasoDeUso.ComSucesso(processos);
+            var listagem = new ListagemProcessos
+            {
+                QuantidadeProcessos = processos.Count,
+                QuantidadeProcessosAtivos = processos.Count(p => p.Status != EStatusProcessoJuridico.Finalizado),
+                Processos = processos
+            };
+
+            return RespostaCasoDeUso.ComSucesso(listagem);
         }
     }
 }
