@@ -32,7 +32,9 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.AdicionarClient
 
             var clienteExiste = await Context
                 .Clientes
-                .AnyAsync(c => c.CPF == mensagem.CpfCliente);
+                .AnyAsync(c => c.CPF == mensagem.CpfCliente &&
+                               c.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
+                               !c.Apagado);
 
             if (clienteExiste)
             {
