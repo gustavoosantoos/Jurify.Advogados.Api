@@ -36,7 +36,7 @@ namespace Jurify.Advogados.Api.Controllers
         /// </summary>
         /// <response code="200">Listagem de mensagens.</response>
         [HttpGet("mensagens")]
-        [ProducesResponseType(typeof(Mensagem[]), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ListagemMensagens), StatusCodes.Status200OK)]
         public async Task<ActionResult> Get()
         {
             return RespostaCasoDeUso(await _mediator.Send(new ListarMensagensQuery()));

@@ -32,7 +32,9 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.ListarMensagens
 
             foreach (var m in mensagens)
             {
-                var cliente = Context.Clientes.FirstOrDefault(c => c.CPF.Numero == m.CpfCliente);
+                var cliente = await Context
+                    .Clientes
+                    .FirstOrDefaultAsync(c => c.CPF.Numero == m.CpfCliente);
                 
                 if (cliente != null)
                 {
@@ -41,7 +43,19 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.Mensagens.ListarMensagens
                 }
             }
 
-            return RespostaCasoDeUso.ComSucesso(mensagens);
+            var mensagensApagadas = await Context
+                .MensagensRecebidas
+                .CountAsync(m => m.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
+                                 m.Apagado);
+
+            var listagem = new ListagemMensagens
+            {
+                MensagensLidas = mensagensApagadas,
+                MensagensPendentes = mensagens.Count,
+                Mensagens = mensagens
+            };
+
+            return RespostaCasoDeUso.ComSucesso(listagem);
         }
     }
 }
