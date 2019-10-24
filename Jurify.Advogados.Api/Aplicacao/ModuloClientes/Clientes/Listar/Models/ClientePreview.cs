@@ -9,5 +9,6 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloClientes.Clientes.Listar.Models
         public string Sobrenome { get; set; }
         public DateTime? DataNascimento { get; set; }
         public string Email { get; set; }
+        public int QuantidadeProcessosAtivos { get; set; }
     }
 }
