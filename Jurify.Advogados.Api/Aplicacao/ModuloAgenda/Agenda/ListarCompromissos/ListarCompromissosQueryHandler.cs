@@ -25,7 +25,9 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloAgenda.Agenda.ListarCompromissos
                     !c.Apagado
                 ).Select(c => new Compromisso {
                     Codigo = c.Codigo,
+                    CodigoCliente = c.CodigoCliente,
                     Titulo = c.Titulo.Valor,
+                    Descricao = c.Descricao.Valor,
                     Inicio = c.Horario.Inicio,
                     Final  = c.Horario.Final
                 }).ToListAsync();
