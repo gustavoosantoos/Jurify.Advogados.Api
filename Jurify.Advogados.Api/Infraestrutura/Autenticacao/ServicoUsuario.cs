@@ -24,6 +24,13 @@ namespace Jurify.Advogados.Api.Infraestrutura.Autenticacao
             _configuration = configuration;
         }
 
+        public void AtualizarComoUsuarioSistema(Escritorio escritorio = null, Usuario usuario = null)
+        {
+            escritorio ??= new Escritorio(Guid.Empty, "Jurify");
+            usuario ??= new Usuario(Guid.Empty, "Aplicação", "CRM");
+            AtualizarUsuario(usuario, escritorio);
+        }
+
         public void AtualizarUsuario(Usuario usuario, Escritorio escritorio)
         {
             if (UsuarioAtual != null || usuario == null || EscritorioAtual != null || escritorio == null)

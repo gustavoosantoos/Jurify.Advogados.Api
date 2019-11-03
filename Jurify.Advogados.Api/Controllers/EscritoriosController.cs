@@ -83,11 +83,19 @@ namespace Jurify.Advogados.Api.Controllers
         [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> PostMensagem(Guid codigo, AdicionarNovaMensagemCommand command)
         {
-            var usuario = new Usuario(Guid.Empty, "Aplicação", "CRM");
             var escritorio = new Escritorio(codigo, string.Empty);
-            _servicoUsuarios.AtualizarUsuario(usuario, escritorio);
+            _servicoUsuarios.AtualizarComoUsuarioSistema(escritorio);
 
             command.CodigoEscritorio = codigo;
+            return RespostaCasoDeUso(await _mediator.Send(command));
+        }
+
+        
+        [AllowAnonymous]
+        [HttpPost("casos-juridicos")]
+        public async Task<ActionResult> PostCasoJuridico(AdicionarNovaMensagemCommand command)
+        {
+            _servicoUsuarios.AtualizarComoUsuarioSistema();
             return RespostaCasoDeUso(await _mediator.Send(command));
         }
     }
