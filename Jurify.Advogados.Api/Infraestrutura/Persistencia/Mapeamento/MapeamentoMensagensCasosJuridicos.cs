@@ -5,9 +5,9 @@ using System;
 
 namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
 {
-    public class MapeamentoMensagensCasosJuridicos : IEntityTypeConfiguration<MensagemCasoJuridico>
+    public class MapeamentoMensagensCasosJuridicos : IEntityTypeConfiguration<MensagemPublica>
     {
-        public void Configure(EntityTypeBuilder<MensagemCasoJuridico> builder)
+        public void Configure(EntityTypeBuilder<MensagemPublica> builder)
         {
             builder.ToTable("mensagens_processos_juridicos");
             builder.HasKey(e => e.Codigo);

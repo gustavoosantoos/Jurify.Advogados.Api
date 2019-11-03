@@ -92,7 +92,7 @@ namespace Jurify.Advogados.Api.Controllers
 
         
         [AllowAnonymous]
-        [HttpPost("casos-juridicos")]
+        [HttpPost("processos-juridicos")]
         public async Task<ActionResult> PostCasoJuridico(AdicionarNovaMensagemCommand command)
         {
             _servicoUsuarios.AtualizarComoUsuarioSistema();

@@ -4,7 +4,7 @@ using System;
 
 namespace Jurify.Advogados.Api.Dominio.Entidades
 {
-    public class MensagemCasoJuridico : Entidade
+    public class MensagemPublica : Entidade
     {
         public string NomeCliente { get; private set; }
         public Email ContatoCliente { get; private set; }
@@ -13,12 +13,12 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         public bool EmAnalise { get; private set; }
         public string Token { get; private set; }
 
-        protected MensagemCasoJuridico()
+        protected MensagemPublica()
         {
 
         }
 
-        public MensagemCasoJuridico(Guid codigoEscritorio,
+        public MensagemPublica(Guid codigoEscritorio,
                                     string nomeCliente,
                                     Email contatoCliente,
                                     CPF cpfCliente,
@@ -35,7 +35,7 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
 
         protected override void Validar()
         {
-            AddNotifications(CpfCliente, Mensagem);
+            AddNotifications(ContatoCliente, CpfCliente, Mensagem);
         }
     }
 }
