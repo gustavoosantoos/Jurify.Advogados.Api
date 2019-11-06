@@ -1,4 +1,7 @@
-﻿using Jurify.Advogados.Api.Dominio.Base;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+using Jurify.Advogados.Api.Dominio.Base;
+using Jurify.Advogados.Api.Dominio.Exceptions;
 using Jurify.Advogados.Api.Dominio.ObjetosDeValor;
 using System;
 
@@ -19,10 +22,10 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
         }
 
         public MensagemPublica(Guid codigoEscritorio,
-                                    string nomeCliente,
-                                    Email contatoCliente,
-                                    CPF cpfCliente,
-                                    Descricao mensagem)
+                               string nomeCliente,
+                               Email contatoCliente,
+                               CPF cpfCliente,
+                               Descricao mensagem)
         {
             CodigoEscritorio = codigoEscritorio;
             NomeCliente = nomeCliente;
@@ -31,6 +34,34 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             Mensagem = mensagem;
 
             Validar();
+        }
+
+        public void IniciarAnalise(string token)
+        {
+            Validar();
+
+            Token = token;
+            EmAnalise = true;
+        }
+
+        public void AssociarEscritorio(Guid codigoEscritorio, string tokenReativacao)
+        {
+            CodigoEscritorio = codigoEscritorio;
+            Token = tokenReativacao;
+        }
+
+        public void ReativarMensagem()
+        {
+            CodigoEscritorio = Guid.Empty;
+            EmAnalise = false;
+            Token = null;
+        }
+
+        public void EncerrarProcesso()
+        {
+            Validar();
+            EmAnalise = false;
+            Apagado = true;
         }
 
         protected override void Validar()

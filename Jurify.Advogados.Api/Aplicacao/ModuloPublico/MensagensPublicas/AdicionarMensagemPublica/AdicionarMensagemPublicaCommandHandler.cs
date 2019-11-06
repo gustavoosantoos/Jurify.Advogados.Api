@@ -13,9 +13,19 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.Adicion
         {
         }
 
-        public Task<RespostaCasoDeUso> Handle(AdicionarMensagemPublicaCommand request, CancellationToken cancellationToken)
+        public async Task<RespostaCasoDeUso> Handle(AdicionarMensagemPublicaCommand request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var mensagem = request.AsEntity();
+
+            if (mensagem.Invalid)
+            {
+                return RespostaCasoDeUso.ComFalha(mensagem.Notifications);
+            }
+
+            await Context.MensagensPublicas.AddAsync(mensagem);
+            await Context.SaveChangesAsync();
+
+            return RespostaCasoDeUso.ComSucesso(mensagem.Codigo);
         }
     }
 }
