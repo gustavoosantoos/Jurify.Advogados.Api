@@ -36,17 +36,10 @@ namespace Jurify.Advogados.Api.Dominio.Entidades
             Validar();
         }
 
-        public void IniciarAnalise(string token)
-        {
-            Validar();
-
-            Token = token;
-            EmAnalise = true;
-        }
-
         public void AssociarEscritorio(Guid codigoEscritorio, string tokenReativacao)
         {
             CodigoEscritorio = codigoEscritorio;
+            EmAnalise = true;
             Token = tokenReativacao;
         }
 

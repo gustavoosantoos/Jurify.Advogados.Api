@@ -5,5 +5,6 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.Reativa
 {
     public class ReativarMensagemPublicaCommand : IRequest<RespostaCasoDeUso>
     {
+        public string Token { get; set; }
     }
 }
