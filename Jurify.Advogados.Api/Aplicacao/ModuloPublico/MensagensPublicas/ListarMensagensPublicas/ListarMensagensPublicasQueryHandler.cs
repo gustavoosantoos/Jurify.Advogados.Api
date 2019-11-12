@@ -1,4 +1,5 @@
 ﻿using Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.ListarMensagensPublicas.Models;
+using Jurify.Advogados.Api.Dominio.Enums;
 using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
@@ -31,9 +32,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.ListarM
             return await Context
                 .MensagensPublicas
                 .Where(m => m.CodigoEscritorio == Guid.Empty &&
-                            m.Token == null &&
-                            !m.EmAnalise &&
-                            !m.Apagado)
+                            m.Status == EStatusMensagemPublica.Publica &&
+                            m.Apagado == false)
                 .Select(m => new Mensagem
                 {
                     Codigo = m.Codigo,
@@ -48,9 +48,10 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.ListarM
         {
             return await Context
                 .MensagensPublicas
-                .Where(m => m.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo &&
-                            m.EmAnalise &&
-                            !m.Apagado)
+                .Where(m => m.CodigoEscritorio == ServicoUsuarios.EscritorioAtual.Codigo && 
+                            m.Apagado == false &&
+                            (m.Status == EStatusMensagemPublica.EscritorioInteressado || m.Status == EStatusMensagemPublica.ConfirmadaPeloCliente)
+                      )
                 .Select(m => new Mensagem
                 {
                     Codigo = m.Codigo,

@@ -1,4 +1,5 @@
-﻿using Jurify.Advogados.Api.Dominio.Servicos;
+﻿using Jurify.Advogados.Api.Dominio.Enums;
+using Jurify.Advogados.Api.Dominio.Servicos;
 using Jurify.Advogados.Api.Infraestrutura.Autenticacao;
 using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
@@ -13,15 +14,12 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.MarcarI
 {
     public class MarcarInteresseCommandHandler : BaseHandler, IRequestHandler<MarcarInteresseCommand, RespostaCasoDeUso>
     {
-        private readonly IServicoHash _servicoHash;
         private readonly IServicoDeEmail _servicoDeEmail;
 
         public MarcarInteresseCommandHandler(JurifyContext context,
                                              ServicoUsuarios provedor,
-                                             IServicoHash servicoHash,
                                              IServicoDeEmail servicoDeEmail) : base(context, provedor)
         {
-            _servicoHash = servicoHash;
             _servicoDeEmail = servicoDeEmail;
         }
 
@@ -30,7 +28,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.MarcarI
             var mensagem = await Context
                 .MensagensPublicas
                 .FirstOrDefaultAsync(m => m.Codigo == request.CodigoMensagem &&
-                                          m.EmAnalise == false &&
+                                          m.Status == EStatusMensagemPublica.Publica &&
+                                          m.CodigoEscritorio == Guid.Empty &&
                                           m.Apagado == false);
 
             if (mensagem == null)
@@ -38,8 +37,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.MarcarI
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
             }
 
-            string token = _servicoHash.GerarHash(Guid.NewGuid().ToString());
-            mensagem.AssociarEscritorio(ServicoUsuarios.EscritorioAtual.Codigo, token);
+            mensagem.AssociarEscritorio(ServicoUsuarios.EscritorioAtual.Codigo);
 
             await Context.SaveChangesAsync();
             NoticicarCliente();

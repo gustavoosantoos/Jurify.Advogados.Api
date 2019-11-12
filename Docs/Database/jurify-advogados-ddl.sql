@@ -150,8 +150,7 @@ create table mensagens_processos_juridicos(
 	contato_cliente varchar(30) not null,
 	cpf_cliente varchar(11) not null,
 	mensagem text not null,
-	em_analise boolean not null default false,
-	token text not null,
+	status numeric(3) not null,
 
 	data_criacao timestamp not null default now(),
 	data_ultima_alteracao timestamp not null default now(),

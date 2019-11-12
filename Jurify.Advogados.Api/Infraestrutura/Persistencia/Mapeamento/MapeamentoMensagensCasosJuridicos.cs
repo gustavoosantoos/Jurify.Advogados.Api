@@ -34,8 +34,7 @@ namespace Jurify.Advogados.Api.Infraestrutura.Persistencia.Mapeamento
                 mensagem.Ignore(m => m.Notifications);
             });
 
-            builder.Property(e => e.EmAnalise).HasColumnName("em_analise");
-            builder.Property(e => e.Token).HasColumnName("token");
+            builder.Property(e => e.Status).HasColumnName("status");
 
             builder.Property(e => e.DataCriacao).HasColumnName("data_criacao");
             builder.Property(e => e.DataUltimaAlteracao).HasColumnName("data_ultima_alteracao");
