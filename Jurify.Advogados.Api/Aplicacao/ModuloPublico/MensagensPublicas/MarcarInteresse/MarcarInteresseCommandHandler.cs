@@ -27,7 +27,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.MarcarI
         {
             var mensagem = await Context
                 .MensagensPublicas
-                .FirstOrDefaultAsync(m => m.Codigo == request.CodigoMensagem &&
+                .FirstOrDefaultAsync(m => m.Codigo == request.Codigo &&
                                           m.Status == EStatusMensagemPublica.Publica &&
                                           m.CodigoEscritorio == Guid.Empty &&
                                           m.Apagado == false);
@@ -40,12 +40,12 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.MarcarI
             mensagem.AssociarEscritorio(ServicoUsuarios.EscritorioAtual.Codigo);
 
             await Context.SaveChangesAsync();
-            NoticicarCliente();
+            NotificarCliente();
 
             return RespostaCasoDeUso.ComSucesso(mensagem.Codigo);
         }
 
-        private void NoticicarCliente()
+        private void NotificarCliente()
         {
             // TO-DO: Enviar e-mail para o cliente notificando o interesse do escritório
             //_servicoDeEmail.EnviarEmail();

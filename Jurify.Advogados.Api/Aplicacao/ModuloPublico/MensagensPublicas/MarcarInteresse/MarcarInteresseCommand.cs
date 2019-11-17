@@ -6,6 +6,11 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.MarcarI
 {
     public class MarcarInteresseCommand : IRequest<RespostaCasoDeUso>
     {
-        public Guid CodigoMensagem { get; set; }
+        public MarcarInteresseCommand(Guid codigo)
+        {
+            Codigo = codigo;
+        }
+
+        public Guid Codigo { get; set; }
     }
 }

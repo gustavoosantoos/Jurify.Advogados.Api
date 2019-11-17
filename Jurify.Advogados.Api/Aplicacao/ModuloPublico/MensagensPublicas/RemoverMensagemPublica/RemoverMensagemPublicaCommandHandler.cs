@@ -4,26 +4,24 @@ using Jurify.Advogados.Api.Infraestrutura.CasosDeUso.Comum;
 using Jurify.Advogados.Api.Infraestrutura.Persistencia;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.ReativarMensagemPublica
+namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.RemoverMensagemPublica
 {
-    public class ReativarMensagemPublicaCommandHandler : BaseHandler, IRequestHandler<ReativarMensagemPublicaCommand, RespostaCasoDeUso>
+    public class RemoverMensagemPublicaCommandHandler : BaseHandler, IRequestHandler<RemoverMensagemPublicaCommand, RespostaCasoDeUso>
     {
-        public ReativarMensagemPublicaCommandHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
+        public RemoverMensagemPublicaCommandHandler(JurifyContext context, ServicoUsuarios provedor) : base(context, provedor)
         {
         }
 
-        public async Task<RespostaCasoDeUso> Handle(ReativarMensagemPublicaCommand request, CancellationToken cancellationToken)
+        public async Task<RespostaCasoDeUso> Handle(RemoverMensagemPublicaCommand request, CancellationToken cancellationToken)
         {
             var mensagem = await Context
                 .MensagensPublicas
                 .FirstOrDefaultAsync(m => m.Codigo == request.Codigo &&
-                                          m.Status == EStatusMensagemPublica.EscritorioInteressado &&
-                                          m.CodigoEscritorio != Guid.Empty &&
+                                          m.Status != EStatusMensagemPublica.ConfirmadaPeloCliente &&
                                           m.Apagado == false);
 
             if (mensagem == null)
@@ -31,7 +29,7 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.Reativa
                 return RespostaCasoDeUso.ComStatusCode(HttpStatusCode.NotFound);
             }
 
-            mensagem.RejeitarEscritorio();
+            Context.MensagensPublicas.Remove(mensagem);
             await Context.SaveChangesAsync();
 
             return RespostaCasoDeUso.ComSucesso(mensagem.Codigo);

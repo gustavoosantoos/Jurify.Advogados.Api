@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aplicacao\ModuloPublico\MensagensPublicas\RemoverMensagemPublica\" />
     <Folder Include="Infraestrutura\Mensageria\" />
     <Folder Include="Infraestrutura\Logging\" />
   </ItemGroup>
