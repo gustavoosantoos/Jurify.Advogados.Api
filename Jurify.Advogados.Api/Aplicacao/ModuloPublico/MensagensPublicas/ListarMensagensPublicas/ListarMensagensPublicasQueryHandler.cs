@@ -39,7 +39,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.ListarM
                     Codigo = m.Codigo,
                     CPF = m.CpfCliente.Numero,
                     Nome = m.NomeCliente,
-                    Email = m.ContatoCliente.Endereco
+                    Email = m.ContatoCliente.Endereco,
+                    Texto = m.Mensagem.Valor
                 })
                 .ToListAsync();
         }
@@ -57,7 +58,8 @@ namespace Jurify.Advogados.Api.Aplicacao.ModuloPublico.MensagensPublicas.ListarM
                     Codigo = m.Codigo,
                     CPF = m.CpfCliente.Numero,
                     Nome = m.NomeCliente,
-                    Email = m.ContatoCliente.Endereco
+                    Email = m.ContatoCliente.Endereco,
+                    Texto = m.Mensagem.Valor
                 })
                 .ToListAsync();
         }
